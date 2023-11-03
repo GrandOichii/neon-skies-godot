@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Gun" load_steps=3 format=3 uid="uid://csgtohmosead8"]
+
+[ext_resource type="PackedScene" uid="uid://yrtoohk0vmqp" path="res://bullets/Bullet1.tscn" id="1_iu5a5"]
+[ext_resource type="Script" path="res://resources/guns/Gun.gd" id="2_wmuml"]
+
+[resource]
+script = ExtResource("2_wmuml")
+name = "Gun1"
+description = "Simple pistol, can't really hold up to a real firearm, but could save your life in a pinch."
+bullet_template = ExtResource("1_iu5a5")
+fire_mode = 1
+fire_interval = 0.1
+magazine_size = 15
+max_deviation = 60.0
+deviation_decrease_per_second = 20.0
+deviation_per_bullet = 5.0
+eject_time = 0.3
+reload_time = 1.0
+hot_reload_interval_start = 0.6
+hot_reload_interval_end = 0.8
+min_pellets_per_shot = 1.0
+max_pellets_per_shot = 1.0
+pellet_deviation = 0.0

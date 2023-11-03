@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgh7skii2sbu"]
+
+[ext_resource type="Script" path="res://player/AttackController.gd" id="1_vcbc6"]
+
+[node name="AttackController" type="Node2D"]
+script = ExtResource("1_vcbc6")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(53, 15)
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="FirerateTimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="Timers/FirerateTimer" to="." method="_on_firerate_timer_timeout"]

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Gun" load_steps=3 format=3 uid="uid://xwt8g2o1o5le"]
+
+[ext_resource type="Script" path="res://resources/guns/Gun.gd" id="1_4o7gd"]
+[ext_resource type="PackedScene" uid="uid://yrtoohk0vmqp" path="res://bullets/Bullet1.tscn" id="1_kwkb8"]
+
+[resource]
+script = ExtResource("1_4o7gd")
+name = "PumpAction1"
+description = "Test for pump action weapons."
+bullet_template = ExtResource("1_kwkb8")
+fire_mode = 2
+fire_interval = 0.4
+magazine_size = 5
+max_deviation = 90.0
+deviation_decrease_per_second = 20.0
+deviation_per_bullet = 1.0
+eject_time = 0.0
+reload_time = 0.9
+hot_reload_interval_start = 0.4
+hot_reload_interval_end = 0.6
+min_pellets_per_shot = 3.0
+max_pellets_per_shot = 4.0
+pellet_deviation = 18.0

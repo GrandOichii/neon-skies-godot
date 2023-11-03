@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://yrtoohk0vmqp"]
+
+[ext_resource type="PackedScene" uid="uid://80h73va24xgc" path="res://bullets/Bullet.tscn" id="1_g4lnx"]
+
+[node name="Bullet1" instance=ExtResource("1_g4lnx")]
+speed = 3000.0
+dissapear_after = 0.5
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=3 uid="uid://p6q12ih3nf8"]
+
+[ext_resource type="PackedScene" uid="uid://bfuudjqoq0ecq" path="res://player/Player.tscn" id="1_5647x"]
+[ext_resource type="Script" path="res://ui/AmmoCountDisplay.gd" id="1_rtbvn"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_idtn1"]
+
+[node name="Root" type="Node"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Control" type="Control" parent="UI/MarginContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="UI/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 60.0
+grow_vertical = 0
+
+[node name="AmmoCountDisplay" type="HBoxContainer" parent="UI/MarginContainer/Control/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rtbvn")
+
+[node name="Magazine" type="Label" parent="UI/MarginContainer/Control/Control/AmmoCountDisplay"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "15"
+horizontal_alignment = 1
+
+[node name="Separator" type="Label" parent="UI/MarginContainer/Control/Control/AmmoCountDisplay"]
+layout_mode = 2
+text = "/"
+horizontal_alignment = 1
+
+[node name="Total" type="Label" parent="UI/MarginContainer/Control/Control/AmmoCountDisplay"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "60"
+horizontal_alignment = 1
+
+[node name="Floor" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(1012, 705)
+texture = SubResource("PlaceholderTexture2D_idtn1")
+
+[node name="Player" parent="." instance=ExtResource("1_5647x")]
+speed = 500.0
+
+[node name="AttackController" parent="Player/Sprite" index="0"]
+initial_total_ammo = 10
+
+[connection signal="magazine_ammo_count_changed" from="Player/Sprite/AttackController" to="UI/MarginContainer/Control/Control/AmmoCountDisplay" method="_on_attack_controller_magazine_ammo_count_changed"]
+[connection signal="total_ammo_count_changed" from="Player/Sprite/AttackController" to="UI/MarginContainer/Control/Control/AmmoCountDisplay" method="_on_attack_controller_total_ammo_count_changed"]
+
+[editable path="Player"]
