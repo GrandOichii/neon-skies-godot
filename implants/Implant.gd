@@ -11,13 +11,3 @@ enum Slot { Head, Torso, Arms, Legs }
 @export_multiline var desciption: String
 @export var slot: Slot
 @export var ablities: Array[PackedScene]
-
-#
-# methods
-#
-#
-#func install():
-#	pass
-#
-#func uninstall():
-#	pass

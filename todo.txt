@@ -1,0 +1,6 @@
+- add implant manager
+- add implant for speeding up toxin decrease
+- add walls
+- add enemies
+- add implant for ammo printing
+- create resource for implants like healer1 and other

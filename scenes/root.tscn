@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://p6q12ih3nf8"]
+[gd_scene load_steps=8 format=3 uid="uid://p6q12ih3nf8"]
 
+[ext_resource type="PackedScene" uid="uid://3dho52n5hbjn" path="res://ui/implant_manager/ImplantManager.tscn" id="1_3nm73"]
 [ext_resource type="Script" path="res://ui/AmmoCountDisplay.gd" id="1_es5oo"]
 [ext_resource type="PackedScene" uid="uid://bfuudjqoq0ecq" path="res://player/Player.tscn" id="2_3b45f"]
 [ext_resource type="Script" path="res://ui/HealthDisplay.gd" id="2_v3rxo"]
@@ -156,6 +157,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "100"
 
+[node name="ImplantManager" parent="UI" instance=ExtResource("1_3nm73")]
+
 [node name="Floor" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_7exxo")
 
@@ -165,7 +168,7 @@ speed = 500.0
 [node name="AttackController" parent="Player/Sprite" index="0"]
 initial_total_ammo = 10
 
-[node name="Heat" parent="Player" index="7"]
+[node name="Heat" parent="Player" index="6"]
 heat_reduction = 10.0
 
 [connection signal="magazine_ammo_count_changed" from="Player/Sprite/AttackController" to="UI/MarginContainer/Control/Control/AmmoCountDisplay" method="_on_attack_controller_magazine_ammo_count_changed"]

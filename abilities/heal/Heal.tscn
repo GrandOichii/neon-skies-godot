@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnw1sj3p6xgnq"]
+
+[ext_resource type="Script" path="res://abilities/heal/Heal.gd" id="1_efv3h"]
+
+[node name="Heal" type="Node"]
+script = ExtResource("1_efv3h")
+player_input = "a-heal"
+use_heat = 60.0
+
+[node name="HealAfterTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="HealAfterTimer" to="." method="_on_heal_after_timer_timeout"]

@@ -6,6 +6,7 @@ extends Node
 
 @export var camera: Camera
 
+# TODO? use the gun to figure out these values
 @export_group('Player shooting')
 @export var player_fired_duration: float
 @export var player_fired_frequency: float

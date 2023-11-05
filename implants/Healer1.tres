@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Implant" load_steps=3 format=3 uid="uid://qbo6ovg2hus0"]
+
+[ext_resource type="PackedScene" uid="uid://cnw1sj3p6xgnq" path="res://abilities/heal/Heal.tscn" id="1_s3pgw"]
+[ext_resource type="Script" path="res://implants/Implant.gd" id="1_ujvlk"]
+
+[resource]
+script = ExtResource("1_ujvlk")
+name = "Healer1"
+desciption = "Allows user to use <insert resource name here> to heal damaged tissue."
+slot = 1
+ablities = Array[PackedScene]([ExtResource("1_s3pgw")])
