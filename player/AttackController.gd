@@ -5,6 +5,7 @@ extends Node2D
 #
 signal magazine_ammo_count_changed(new_value: int)
 signal total_ammo_count_changed(new_value: int)
+signal gun_fired
 
 #
 # exports
@@ -89,6 +90,7 @@ func _fire():
 	_can_fire = false
 	
 	magazine_ammo_count -= 1
+	gun_fired.emit()
 	firerate_timer.start()
 	
 func _process(delta):
