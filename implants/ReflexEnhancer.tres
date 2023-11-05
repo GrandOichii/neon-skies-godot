@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Implant" load_steps=3 format=3 uid="uid://6wcg2mcfqe1a"]
+
+[ext_resource type="Script" path="res://implants/Implant.gd" id="1_by14n"]
+[ext_resource type="PackedScene" uid="uid://c4ihogqltryv2" path="res://abilities/time-scale-mod/TimeScaleMod.tscn" id="1_i5fvx"]
+
+[resource]
+script = ExtResource("1_by14n")
+name = "ReflexEnhancer"
+desciption = "Allows the user to enhance their reflexes for a short period of time."
+slot = 0
+ablities = Array[PackedScene]([ExtResource("1_i5fvx")])

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4ihogqltryv2"]
+
+[ext_resource type="Script" path="res://abilities/time-scale-mod/TimeScaleMod.gd" id="1_wxcwm"]
+
+[node name="TimeScaleMod" type="Node"]
+script = ExtResource("1_wxcwm")
+set_time_scale_to = 0.3
+duration = 1.0
+player_input = "a-timescalemod"
+
+[node name="EndTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="EndTimer" to="." method="_on_end_timer_timeout"]

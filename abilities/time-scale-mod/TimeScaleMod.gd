@@ -4,7 +4,7 @@ extends ActivatedAbility
 # exports
 #
 
-@export var speed_mod: float
+@export var set_time_scale_to: float
 @export var duration: float
 
 #
@@ -23,12 +23,12 @@ func _ready():
 func start_ability():
 	super.start_ability()
 	# TODO bad, can't use with AI, think of something different
-	(parent as Player).speed += speed_mod
+	Engine.time_scale = set_time_scale_to
 	end_timer_node.start()
 	
 func end_ability():
 	super.end_ability()
-	(parent as Player).speed -= speed_mod	
+	Engine.time_scale = 1
 	
 #
 # signal connections
