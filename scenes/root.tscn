@@ -86,13 +86,49 @@ text = "5"
 
 [node name="HeatDisplay" type="Control" parent="UI/MarginContainer/Control"]
 layout_mode = 1
-anchors_preset = 12
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -204.0
+offset_top = -45.0
+offset_right = 204.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("3_sk1cx")
+
+[node name="Control" type="Control" parent="UI/MarginContainer/Control/HeatDisplay"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 282.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Progress" type="ColorRect" parent="UI/MarginContainer/Control/HeatDisplay/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -690.0
+offset_right = -690.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.207843)
+
+[node name="Main" type="ColorRect" parent="UI/MarginContainer/Control/HeatDisplay"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.160784)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/Control/HeatDisplay"]
 layout_mode = 1
