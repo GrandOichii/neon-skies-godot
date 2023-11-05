@@ -5,6 +5,7 @@ class_name ImplantsController
 # signals
 #
 
+signal slots_initialized
 signal implant_installed(slot: Implant.Slot, implant: Implant)
 signal implant_uninstalled(slot: Implant.Slot, implant: Implant)
 signal ability_added(ability: Ability)
@@ -24,10 +25,14 @@ signal ability_removed(ability: Ability)
 @onready var abilities_node: Node = %Abilities
 
 #
+# vars
+#
+var slots: Dictionary = {}
+
+#
 # private vars
 #
 
-var _slots: Dictionary = {}
 var _implant_abilities: Dictionary = {}
 
 #
@@ -37,11 +42,13 @@ var _implant_abilities: Dictionary = {}
 func _ready():
 	# initial install
 	for slot in implant_slots:
+		slots[slot.slot] = null
 		if slot.implant == null: continue
 		install(slot.slot, slot.implant)
+	slots_initialized.emit()
 		
 func install(slot: Implant.Slot, implant: Implant):
-	_slots[slot] = implant
+	slots[slot] = implant
 	
 	# add abilities
 	var ability_arr = []
@@ -58,15 +65,15 @@ func install(slot: Implant.Slot, implant: Implant):
 	implant_installed.emit(slot, implant)
 	
 func uninstall(slot: Implant.Slot):
-	var implant = _slots[slot]
+	var implant = slots[slot]
 	if implant == null:
 		push_warning('Tried to uninstall from empty slot ' + str(slot))
 		return
-	_slots[slot] = null
+	slots[slot] = null
 	
 	# remove abilities
 	for ability in _implant_abilities[implant]:
-		ability.deactivate(parent)
+		ability.deactivate()
 		ability.queue_free()
 	_implant_abilities.erase(implant)
 	

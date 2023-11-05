@@ -1,10 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://p6q12ih3nf8"]
+[gd_scene load_steps=12 format=3 uid="uid://p6q12ih3nf8"]
 
 [ext_resource type="PackedScene" uid="uid://3dho52n5hbjn" path="res://ui/implant_manager/ImplantManager.tscn" id="1_3nm73"]
 [ext_resource type="Script" path="res://ui/AmmoCountDisplay.gd" id="1_es5oo"]
 [ext_resource type="PackedScene" uid="uid://bfuudjqoq0ecq" path="res://player/Player.tscn" id="2_3b45f"]
 [ext_resource type="Script" path="res://ui/HealthDisplay.gd" id="2_v3rxo"]
 [ext_resource type="Script" path="res://ui/HeatDisplay.gd" id="3_sk1cx"]
+[ext_resource type="Resource" uid="uid://b5xixbmjqm6cf" path="res://implants/CoreEnhancer.tres" id="5_wvaef"]
+[ext_resource type="Resource" uid="uid://q217aef3wn82" path="res://implants/Dash1.tres" id="6_onblf"]
+[ext_resource type="Resource" uid="uid://qbo6ovg2hus0" path="res://implants/Healer1.tres" id="7_a87b3"]
+[ext_resource type="Resource" uid="uid://6wcg2mcfqe1a" path="res://implants/ReflexEnhancer.tres" id="8_fgjfq"]
 
 [sub_resource type="Gradient" id="Gradient_p146t"]
 
@@ -157,7 +161,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "100"
 
-[node name="ImplantManager" parent="UI" instance=ExtResource("1_3nm73")]
+[node name="ImplantManager" parent="UI" node_paths=PackedStringArray("implants") instance=ExtResource("1_3nm73")]
+stored_implants = Array[Resource("res://implants/Implant.gd")]([ExtResource("5_wvaef"), ExtResource("6_onblf"), ExtResource("7_a87b3"), ExtResource("8_fgjfq")])
+implants = NodePath("../../Player/Implants")
 
 [node name="Floor" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_7exxo")

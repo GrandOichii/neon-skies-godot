@@ -67,28 +67,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Head" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Left/Slots" instance=ExtResource("4_bguv8")]
-layout_mode = 1
-offset_left = 657.0
-offset_top = 24.0
-offset_right = 807.0
-offset_bottom = 204.0
-
 [node name="Torso" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Left/Slots" instance=ExtResource("4_bguv8")]
 layout_mode = 1
-offset_left = 47.0
-offset_top = 242.0
-offset_right = 197.0
-offset_bottom = 422.0
+offset_left = 79.0
+offset_top = 64.0
+offset_right = 229.0
+offset_bottom = 214.0
 slot = 1
-
-[node name="Legs" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Left/Slots" instance=ExtResource("4_bguv8")]
-layout_mode = 1
-offset_left = 55.0
-offset_top = 726.0
-offset_right = 205.0
-offset_bottom = 906.0
-slot = 3
 
 [node name="Right" type="Control" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2

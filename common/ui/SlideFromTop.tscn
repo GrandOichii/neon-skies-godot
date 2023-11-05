@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://crkkcer1lctc5"]
+
+[ext_resource type="Script" path="res://common/ui/SlideFromTop.gd" id="1_b4hu0"]
+
+[node name="SlideFromTop" type="Node"]
+script = ExtResource("1_b4hu0")
