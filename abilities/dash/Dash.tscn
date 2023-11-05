@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmuicgl05pfvr"]
+
+[ext_resource type="Script" path="res://abilities/dash/Dash.gd" id="1_uhti1"]
+
+[node name="Dash" type="Node"]
+script = ExtResource("1_uhti1")
+speed_mod = 700.0
+duration = 0.5
+player_input = "a-dash"
+
+[node name="EndTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="EndTimer" to="." method="_on_end_timer_timeout"]

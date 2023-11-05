@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://fe4ct6svmhih"]
+
+[ext_resource type="Script" path="res://abilities/max-health-increase/MaxHealthIncrease.gd" id="1_o31su"]
+
+[node name="MaxHealthIncrease" type="Node"]
+script = ExtResource("1_o31su")
+increase = 1

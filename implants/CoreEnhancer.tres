@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Implant" load_steps=3 format=3 uid="uid://b5xixbmjqm6cf"]
+
+[ext_resource type="Script" path="res://implants/Implant.gd" id="1_7qkn7"]
+[ext_resource type="PackedScene" uid="uid://fe4ct6svmhih" path="res://abilities/max-health-increase/MaxHealthIncrease.tscn" id="1_uofcp"]
+
+[resource]
+script = ExtResource("1_7qkn7")
+name = "CoreEnhancer"
+desciption = "Enhancer the user's armor, allowing to survive one more hit before flatlining."
+slot = 1
+ablities = Array[PackedScene]([ExtResource("1_uofcp")])

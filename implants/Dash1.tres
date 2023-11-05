@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Implant" load_steps=3 format=3 uid="uid://q217aef3wn82"]
+
+[ext_resource type="Script" path="res://implants/Implant.gd" id="1_gkmmh"]
+[ext_resource type="PackedScene" uid="uid://bmuicgl05pfvr" path="res://abilities/dash/Dash.tscn" id="1_h1nni"]
+
+[resource]
+script = ExtResource("1_gkmmh")
+name = "Dash1"
+desciption = "Allows the user to enhance their movement speed for a very short amount of time."
+slot = 3
+ablities = Array[PackedScene]([ExtResource("1_h1nni")])
