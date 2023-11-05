@@ -1,4 +1,5 @@
 extends Node
+class_name HeatController
 
 #
 # signals
@@ -49,7 +50,7 @@ func _ready():
 	_heat = thresh
 	_max = max
 
-func _process(delta):
+func _physics_process(delta):
 	_heat -= delta * heat_reduction
 
 #

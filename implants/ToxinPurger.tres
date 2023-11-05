@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Implant" load_steps=3 format=3 uid="uid://cgmcdvyu2q6sv"]
+
+[ext_resource type="PackedScene" uid="uid://bdqv7qhy723u4" path="res://abilities/increase-heat-reduction/IncreaseHeatReduction.tscn" id="1_lkcqs"]
+[ext_resource type="Script" path="res://implants/Implant.gd" id="1_ngryo"]
+
+[resource]
+script = ExtResource("1_ngryo")
+name = "ToxinPurger"
+desciption = "An implant for increasing the speed of purging the toxins from the body of the user, which are accumulated when overusing implants."
+slot = 0
+ablities = Array[PackedScene]([ExtResource("1_lkcqs")])

@@ -1,5 +1,4 @@
 - add drag and drop to implant manager
-- add implant for speeding up toxin decrease
 - add walls
 - add enemies
 - add implant for ammo printing

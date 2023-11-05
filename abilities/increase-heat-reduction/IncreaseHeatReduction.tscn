@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdqv7qhy723u4"]
+
+[ext_resource type="Script" path="res://abilities/increase-heat-reduction/IncreaseHeatReduction.gd" id="1_kk36f"]
+
+[node name="IncreaseHeatReduction" type="Node"]
+script = ExtResource("1_kk36f")
+increase = 15
