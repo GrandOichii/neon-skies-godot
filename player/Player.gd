@@ -12,7 +12,7 @@ class_name Player
 #
 
 @onready var sprite_node: Sprite2D = %Sprite
-@onready var implants_node: ImplantController = %Implants
+@onready var implants_node: ImplantsController = %Implants
 
 #
 # methods

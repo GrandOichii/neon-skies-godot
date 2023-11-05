@@ -1,5 +1,5 @@
 extends Node
-class_name ImplantController
+class_name ImplantsController
 
 #
 # signals
@@ -7,6 +7,8 @@ class_name ImplantController
 
 signal implant_installed(slot: Implant.Slot, implant: Implant)
 signal implant_uninstalled(slot: Implant.Slot, implant: Implant)
+signal ability_added(ability: Ability)
+signal ability_removed(ability: Ability)
 
 #
 # exports
@@ -45,11 +47,12 @@ func install(slot: Implant.Slot, implant: Implant):
 	var ability_arr = []
 	for ability_template in implant.ablities:
 		var ability = ability_template.instantiate() as Ability
-		# TODO doesn't work
 		ability.parent = parent
 		ability.activate()
 		ability_arr.push_front(ability)
 		abilities_node.add_child(ability)
+		ability_added.emit(ability)
+
 	_implant_abilities[implant] = ability_arr
 	
 	implant_installed.emit(slot, implant)

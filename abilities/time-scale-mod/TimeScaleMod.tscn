@@ -7,6 +7,7 @@ script = ExtResource("1_wxcwm")
 set_time_scale_to = 0.3
 duration = 1.0
 player_input = "a-timescalemod"
+use_heat = 180.0
 
 [node name="EndTimer" type="Timer" parent="."]
 unique_name_in_owner = true

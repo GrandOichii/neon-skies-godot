@@ -13,6 +13,7 @@ signal ended
 #
 
 @export var player_input: String
+@export var use_heat: float
 
 #
 # private vars

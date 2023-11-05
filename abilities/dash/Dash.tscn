@@ -7,6 +7,7 @@ script = ExtResource("1_uhti1")
 speed_mod = 700.0
 duration = 0.5
 player_input = "a-dash"
+use_heat = 80.0
 
 [node name="EndTimer" type="Timer" parent="."]
 unique_name_in_owner = true
