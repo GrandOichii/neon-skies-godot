@@ -27,9 +27,6 @@ func _ready():
 	parent.hide()
 	parent.position.y = -parent.size.y
 	
-	# TODO remove
-	_toggle()
-	
 func _input(event):
 	if event.is_action_pressed('dev-im-toggle'):
 		_toggle()

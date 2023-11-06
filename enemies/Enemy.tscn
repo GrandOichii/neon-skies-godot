@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfcer7aeaep8x"]
+
+[ext_resource type="Script" path="res://enemies/Enemy.gd" id="1_6dtga"]
+[ext_resource type="Texture2D" uid="uid://vkxcq0dwbq7y" path="res://art/player.png" id="1_s5kqk"]
+[ext_resource type="Script" path="res://common/Health.gd" id="3_ysukb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uqfw4"]
+radius = 38.6394
+
+[node name="Enemy" type="CharacterBody2D" groups=["solid"]]
+script = ExtResource("1_6dtga")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_s5kqk")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_uqfw4")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_ysukb")
+
+[connection signal="lost_health" from="Health" to="." method="_on_health_lost_health"]
+[connection signal="reached_zero" from="Health" to="." method="_on_health_reached_zero"]

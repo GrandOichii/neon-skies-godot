@@ -1,14 +1,14 @@
-[gd_resource type="Resource" script_class="Gun" load_steps=3 format=3 uid="uid://csgtohmosead8"]
+[gd_resource type="Resource" script_class="Gun" load_steps=3 format=3 uid="uid://b0dbl1c8gyv82"]
 
-[ext_resource type="PackedScene" uid="uid://yrtoohk0vmqp" path="res://bullets/Bullet1.tscn" id="1_iu5a5"]
-[ext_resource type="Script" path="res://resources/guns/Gun.gd" id="2_wmuml"]
+[ext_resource type="Script" path="res://guns/Gun.gd" id="1_mbbnh"]
+[ext_resource type="PackedScene" uid="uid://yrtoohk0vmqp" path="res://bullets/Bullet1.tscn" id="1_yrkwm"]
 
 [resource]
-script = ExtResource("2_wmuml")
+script = ExtResource("1_mbbnh")
 name = "Gun1"
 description = "Simple pistol, can't really hold up to a real firearm, but could save your life in a pinch."
-bullet_template = ExtResource("1_iu5a5")
-fire_mode = 1
+bullet_template = ExtResource("1_yrkwm")
+fire_mode = 0
 fire_interval = 0.1
 magazine_size = 15
 max_deviation = 60.0

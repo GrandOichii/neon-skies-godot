@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://p6q12ih3nf8"]
+[gd_scene load_steps=17 format=3 uid="uid://p6q12ih3nf8"]
 
 [ext_resource type="PackedScene" uid="uid://3dho52n5hbjn" path="res://ui/implant_manager/ImplantManager.tscn" id="1_3nm73"]
 [ext_resource type="Script" path="res://ui/AmmoCountDisplay.gd" id="1_es5oo"]
@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://qbo6ovg2hus0" path="res://implants/Healer1.tres" id="7_a87b3"]
 [ext_resource type="Resource" uid="uid://6wcg2mcfqe1a" path="res://implants/ReflexEnhancer.tres" id="8_fgjfq"]
 [ext_resource type="Resource" uid="uid://cgmcdvyu2q6sv" path="res://implants/ToxinPurger.tres" id="9_m1tjj"]
+[ext_resource type="PackedScene" uid="uid://dxf6th6r4vs8s" path="res://enemies/variations/Turret.tscn" id="11_or1qc"]
 
 [sub_resource type="Gradient" id="Gradient_p146t"]
 
@@ -17,6 +18,14 @@
 gradient = SubResource("Gradient_p146t")
 width = 1124
 height = 629
+
+[sub_resource type="Gradient" id="Gradient_lds8k"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2610r"]
+gradient = SubResource("Gradient_lds8k")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryff5"]
+size = Vector2(53, 418)
 
 [node name="Root" type="Node"]
 
@@ -172,11 +181,28 @@ texture = SubResource("GradientTexture2D_7exxo")
 [node name="Player" parent="." instance=ExtResource("2_3b45f")]
 speed = 500.0
 
-[node name="AttackController" parent="Player/Sprite" index="0"]
-initial_total_ammo = 10
-
 [node name="Heat" parent="Player" index="6"]
 heat_reduction = 10.0
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls" groups=["solid"]]
+position = Vector2(-466, -240)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/StaticBody2D"]
+scale = Vector2(0.821885, 6.52927)
+texture = SubResource("GradientTexture2D_2610r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_ryff5")
+
+[node name="Turret1" parent="." instance=ExtResource("11_or1qc")]
+position = Vector2(-227, -398)
+
+[node name="Turret2" parent="." instance=ExtResource("11_or1qc")]
+position = Vector2(175, -327)
+rotation = -3.11473
 
 [connection signal="magazine_ammo_count_changed" from="Player/Sprite/AttackController" to="UI/MarginContainer/Control/Control/AmmoCountDisplay" method="_on_attack_controller_magazine_ammo_count_changed"]
 [connection signal="total_ammo_count_changed" from="Player/Sprite/AttackController" to="UI/MarginContainer/Control/Control/AmmoCountDisplay" method="_on_attack_controller_total_ammo_count_changed"]

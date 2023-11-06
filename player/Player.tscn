@@ -5,9 +5,9 @@
 [ext_resource type="Script" path="res://camera/Camera.gd" id="2_8e3uf"]
 [ext_resource type="Script" path="res://camera/Shake.gd" id="3_28gxs"]
 [ext_resource type="PackedScene" uid="uid://cgh7skii2sbu" path="res://player/AttackController.tscn" id="3_lt4x6"]
-[ext_resource type="Resource" uid="uid://xwt8g2o1o5le" path="res://resources/guns/PumpAction1.tres" id="4_b7a02"]
 [ext_resource type="Script" path="res://player/ReloadMeter.gd" id="5_q18yv"]
 [ext_resource type="PackedScene" uid="uid://deaspur4nhhwy" path="res://common/Health.tscn" id="6_d1hsl"]
+[ext_resource type="Resource" uid="uid://b0dbl1c8gyv82" path="res://guns/Gun1.tres" id="6_fp8fm"]
 [ext_resource type="Script" path="res://implants/ImplantController.gd" id="7_djh2f"]
 [ext_resource type="Script" path="res://implants/ImplantSlot.gd" id="8_hdkrs"]
 [ext_resource type="Resource" uid="uid://6wcg2mcfqe1a" path="res://implants/ReflexEnhancer.tres" id="8_sc4si"]
@@ -56,7 +56,7 @@ unique_name_in_owner = true
 texture = ExtResource("1_0ohj0")
 
 [node name="AttackController" parent="Sprite" node_paths=PackedStringArray("rotation_controller", "reload_meter") instance=ExtResource("3_lt4x6")]
-starting_gun = ExtResource("4_b7a02")
+starting_gun = ExtResource("6_fp8fm")
 rotation_controller = NodePath("..")
 initial_total_ammo = 60
 reload_meter = NodePath("../../ReloadMeter")
