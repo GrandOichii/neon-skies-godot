@@ -87,6 +87,11 @@ dev-quit={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="base"
+2d_physics/layer_2="sound"
+
 [rendering]
 
 renderer/rendering_method="mobile"

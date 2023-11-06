@@ -30,3 +30,6 @@ enum FireMode { AUTO, FULL_AUTO, PUMP_ACTION }
 @export var min_pellets_per_shot: float = 1
 @export var max_pellets_per_shot: float = 1
 @export var pellet_deviation: float = 0
+
+@export_group('Sound')
+@export var fire_sound_radius: float = 400

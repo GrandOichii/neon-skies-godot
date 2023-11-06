@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bfuudjqoq0ecq"]
+[gd_scene load_steps=20 format=3 uid="uid://bfuudjqoq0ecq"]
 
 [ext_resource type="Texture2D" uid="uid://vkxcq0dwbq7y" path="res://art/player.png" id="1_0ohj0"]
 [ext_resource type="Script" path="res://player/Player.gd" id="1_4g8ct"]
@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://6wcg2mcfqe1a" path="res://implants/ReflexEnhancer.tres" id="8_sc4si"]
 [ext_resource type="Resource" uid="uid://q217aef3wn82" path="res://implants/Dash1.tres" id="10_3px4w"]
 [ext_resource type="Script" path="res://player/HeatController.gd" id="12_eahqw"]
+[ext_resource type="Script" path="res://player/SoundController.gd" id="14_x1ewl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mom44"]
 radius = 38.6394
@@ -30,6 +31,8 @@ slot = 1
 script = ExtResource("8_hdkrs")
 slot = 3
 implant = ExtResource("10_3px4w")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3rtba"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_4g8ct")
@@ -127,8 +130,25 @@ implants_node = NodePath("../Implants")
 thresh = 100.0
 max = 200.0
 
+[node name="SoundController" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("14_x1ewl")
+
+[node name="DisableTimer" type="Timer" parent="SoundController"]
+unique_name_in_owner = true
+wait_time = 0.05
+one_shot = true
+
+[node name="GunFired" type="CollisionShape2D" parent="SoundController"]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_3rtba")
+
+[connection signal="gun_equipped" from="Sprite/AttackController" to="SoundController" method="_on_attack_controller_gun_equipped"]
 [connection signal="gun_fired" from="Sprite/AttackController" to="Camera/Shake" method="_on_attack_controller_gun_fired"]
+[connection signal="gun_fired" from="Sprite/AttackController" to="SoundController" method="_on_attack_controller_gun_fired"]
 [connection signal="ejected" from="ReloadMeter" to="Sprite/AttackController" method="_on_reload_meter_ejected"]
 [connection signal="reloaded" from="ReloadMeter" to="Sprite/AttackController" method="_on_reload_meter_reloaded"]
 [connection signal="lost_health" from="Health" to="Camera/Shake" method="_on_health_lost_health"]
 [connection signal="ability_added" from="Implants" to="Heat" method="_on_implants_ability_added"]
+[connection signal="timeout" from="SoundController/DisableTimer" to="SoundController" method="_on_disable_timer_timeout"]

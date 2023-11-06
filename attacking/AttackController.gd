@@ -7,6 +7,7 @@ class_name AttackController
 signal magazine_ammo_count_changed(new_value: int)
 signal total_ammo_count_changed(new_value: int)
 signal gun_fired
+signal gun_equipped(gun: Gun)
 
 #
 # exports
@@ -66,6 +67,7 @@ var gun: Gun :
 		firerate_timer.wait_time = gun.fire_interval
 		if reload_meter != null:
 			reload_meter.gun = gun
+		gun_equipped.emit(gun)
 		
 func _ready():
 	gun = starting_gun
@@ -113,6 +115,8 @@ func _check_fire():
 		fire()
 		
 func _input(event):
+	if not is_player: return
+	
 	if event.is_action_pressed('reload'):
 		_advance_reload()
 		

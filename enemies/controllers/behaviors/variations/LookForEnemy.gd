@@ -64,3 +64,10 @@ func _process(delta: float):
 			lost_target.emit()
 			_found = false
 			return
+
+#
+# signal connections
+#
+
+func _on_sound_listener_heard_sound(area: Area2D):
+	print('Huh?')

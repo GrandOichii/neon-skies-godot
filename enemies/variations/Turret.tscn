@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxf6th6r4vs8s"]
+[gd_scene load_steps=9 format=3 uid="uid://dxf6th6r4vs8s"]
 
 [ext_resource type="PackedScene" uid="uid://cfcer7aeaep8x" path="res://enemies/Enemy.tscn" id="1_nc50y"]
 [ext_resource type="Texture2D" uid="uid://8h2c4vsesupr" path="res://art/turret1.png" id="2_pgi6w"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://8m1veo8ognf3" path="res://enemies/controllers/behaviors/variations/LookAtEnemy.tscn" id="5_qe46v"]
 [ext_resource type="PackedScene" uid="uid://cgh7skii2sbu" path="res://attacking/AttackController.tscn" id="6_vl3fw"]
 [ext_resource type="Resource" uid="uid://b0dbl1c8gyv82" path="res://guns/Gun1.tres" id="7_aq118"]
+[ext_resource type="PackedScene" uid="uid://nkgl2h57gbmc" path="res://common/SoundListener.tscn" id="8_2nu6a"]
 
 [node name="Turret" instance=ExtResource("1_nc50y")]
 
@@ -41,7 +42,10 @@ starting_gun = ExtResource("7_aq118")
 rotation_controller = NodePath("..")
 initial_total_ammo = 50
 
+[node name="SoundListener" parent="." index="5" instance=ExtResource("8_2nu6a")]
+
 [connection signal="found_target" from="EnemyController/Behaviors/LookForEnemy" to="EnemyController/Behaviors/LookAtEnemy" method="_on_look_for_enemy_found_target"]
 [connection signal="lost_target" from="EnemyController/Behaviors/LookForEnemy" to="EnemyController/Behaviors/LookAtEnemy" method="_on_look_for_enemy_lost_target"]
+[connection signal="heard_sound" from="SoundListener" to="EnemyController/Behaviors/LookForEnemy" method="_on_sound_listener_heard_sound"]
 
 [editable path="EnemyController"]
