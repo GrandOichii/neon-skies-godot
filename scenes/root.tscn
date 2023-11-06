@@ -200,10 +200,6 @@ shape = SubResource("RectangleShape2D_ryff5")
 [node name="Turret1" parent="." instance=ExtResource("11_or1qc")]
 position = Vector2(-227, -398)
 
-[node name="Turret2" parent="." instance=ExtResource("11_or1qc")]
-position = Vector2(175, -327)
-rotation = -3.11473
-
 [connection signal="magazine_ammo_count_changed" from="Player/Sprite/AttackController" to="UI/MarginContainer/Control/Control/AmmoCountDisplay" method="_on_attack_controller_magazine_ammo_count_changed"]
 [connection signal="total_ammo_count_changed" from="Player/Sprite/AttackController" to="UI/MarginContainer/Control/Control/AmmoCountDisplay" method="_on_attack_controller_total_ammo_count_changed"]
 [connection signal="changed" from="Player/Health" to="UI/MarginContainer/Control/HealthDisplay" method="_on_health_changed"]

@@ -21,3 +21,4 @@ hot_reload_interval_end = 0.8
 min_pellets_per_shot = 1.0
 max_pellets_per_shot = 1.0
 pellet_deviation = 0.0
+fire_sound_radius = 400.0

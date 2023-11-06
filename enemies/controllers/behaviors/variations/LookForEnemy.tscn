@@ -13,3 +13,9 @@ default_color = Color(0.858824, 0, 0, 1)
 
 [node name="RayCast" type="RayCast2D" parent="."]
 unique_name_in_owner = true
+
+[node name="EndSoundTrackTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="EndSoundTrackTimer" to="." method="_on_end_sound_track_timer_timeout"]
