@@ -4,6 +4,7 @@ extends EnemyBehavior
 # exports
 #
 
+@export var attack_controller: AttackController
 @export var body: CharacterBody2D
 @export var lost_target_state: String
 @export var target_lost_timeout: float
@@ -46,6 +47,7 @@ func eb_process(delta: float):
 	if not _lost:
 		target = _enemy.position
 		_last_known_position = target
+		attack_controller.fire()
 	body.look_at(target)
 
 #

@@ -1,4 +1,5 @@
 extends Node2D
+class_name AttackController
 
 #
 # signals
@@ -11,6 +12,7 @@ signal gun_fired
 # exports
 # 
 
+@export var is_player: bool = false
 @export var starting_gun: Gun
 @export var rotation_controller: Node2D
 @export var initial_total_ammo: int
@@ -62,14 +64,15 @@ var gun: Gun :
 		gun = value
 		
 		firerate_timer.wait_time = gun.fire_interval
-		reload_meter.gun = gun
+		if reload_meter != null:
+			reload_meter.gun = gun
 		
 func _ready():
 	gun = starting_gun
 	magazine_ammo_count = gun.magazine_size
 	total_ammo_count = initial_total_ammo
 		
-func _fire():
+func fire():
 	if not _can_fire: return
 	
 	if magazine_ammo_count == 0: return
@@ -100,11 +103,14 @@ func _process(delta):
 	_deviation = max(0, _deviation)
 
 func _check_fire():
+	# TODO could be better, move the whole fire logic to Player.gd
+	if not is_player:
+		return
 	if gun.fire_mode == Gun.FireMode.FULL_AUTO and Input.is_action_pressed('fire'):
-		_fire()
+		fire()
 		return
 	if Input.is_action_just_pressed('fire'):
-		_fire()
+		fire()
 		
 func _input(event):
 	if event.is_action_pressed('reload'):

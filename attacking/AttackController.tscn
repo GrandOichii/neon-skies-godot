@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://cgh7skii2sbu"]
 
-[ext_resource type="Script" path="res://player/AttackController.gd" id="1_vcbc6"]
+[ext_resource type="Script" path="res://attacking/AttackController.gd" id="1_1i840"]
 
 [node name="AttackController" type="Node2D"]
-script = ExtResource("1_vcbc6")
+script = ExtResource("1_1i840")
 
 [node name="Muzzle" type="Marker2D" parent="."]
 unique_name_in_owner = true

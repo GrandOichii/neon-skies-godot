@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxf6th6r4vs8s"]
+[gd_scene load_steps=8 format=3 uid="uid://dxf6th6r4vs8s"]
 
 [ext_resource type="PackedScene" uid="uid://cfcer7aeaep8x" path="res://enemies/Enemy.tscn" id="1_nc50y"]
 [ext_resource type="Texture2D" uid="uid://8h2c4vsesupr" path="res://art/turret1.png" id="2_pgi6w"]
 [ext_resource type="PackedScene" uid="uid://b7txw2bq7igc2" path="res://enemies/controllers/EnemyController.tscn" id="2_x5jbr"]
 [ext_resource type="PackedScene" uid="uid://dcnujwx4a1qso" path="res://enemies/controllers/behaviors/variations/LookForEnemy.tscn" id="3_gr7tc"]
 [ext_resource type="PackedScene" uid="uid://8m1veo8ognf3" path="res://enemies/controllers/behaviors/variations/LookAtEnemy.tscn" id="5_qe46v"]
+[ext_resource type="PackedScene" uid="uid://cgh7skii2sbu" path="res://attacking/AttackController.tscn" id="6_vl3fw"]
+[ext_resource type="Resource" uid="uid://b0dbl1c8gyv82" path="res://guns/Gun1.tres" id="7_aq118"]
 
 [node name="Turret" instance=ExtResource("1_nc50y")]
 
@@ -27,11 +29,17 @@ body = NodePath("../../..")
 laser_pointer_start = NodePath("../../../Sprite2D/LaserPointerStart")
 state = "look-for-enemy"
 
-[node name="LookAtEnemy" parent="EnemyController/Behaviors" index="1" node_paths=PackedStringArray("body") instance=ExtResource("5_qe46v")]
+[node name="LookAtEnemy" parent="EnemyController/Behaviors" index="1" node_paths=PackedStringArray("attack_controller", "body") instance=ExtResource("5_qe46v")]
+attack_controller = NodePath("../../../AttackController")
 body = NodePath("../../..")
 lost_target_state = "look-for-enemy"
 target_lost_timeout = 2.0
 state = "look-at-enemy"
+
+[node name="AttackController" parent="." index="4" node_paths=PackedStringArray("rotation_controller") instance=ExtResource("6_vl3fw")]
+starting_gun = ExtResource("7_aq118")
+rotation_controller = NodePath("..")
+initial_total_ammo = 50
 
 [connection signal="found_target" from="EnemyController/Behaviors/LookForEnemy" to="EnemyController/Behaviors/LookAtEnemy" method="_on_look_for_enemy_found_target"]
 [connection signal="lost_target" from="EnemyController/Behaviors/LookForEnemy" to="EnemyController/Behaviors/LookAtEnemy" method="_on_look_for_enemy_lost_target"]
