@@ -14,6 +14,12 @@ class_name EnemyController
 @onready var behaviors_container: Node = %Behaviors
 
 #
+# vars
+#
+
+var data: Dictionary = {}
+
+#
 # private vars
 #
 

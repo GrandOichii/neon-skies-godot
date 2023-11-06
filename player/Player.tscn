@@ -31,7 +31,7 @@ script = ExtResource("8_hdkrs")
 slot = 3
 implant = ExtResource("10_3px4w")
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_4g8ct")
 
 [node name="Camera" type="Camera2D" parent="."]

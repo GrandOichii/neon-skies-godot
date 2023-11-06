@@ -212,3 +212,6 @@ rotation = -3.11473
 [connection signal="thresh_changed" from="Player/Heat" to="UI/MarginContainer/Control/HeatDisplay" method="_on_heat_thresh_changed"]
 
 [editable path="Player"]
+[editable path="Turret1"]
+[editable path="Turret1/EnemyController"]
+[editable path="Turret1/EnemyController/Behaviors/LookForEnemy"]
