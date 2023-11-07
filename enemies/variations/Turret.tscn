@@ -1,6 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxf6th6r4vs8s"]
+[gd_scene load_steps=15 format=3 uid="uid://dxf6th6r4vs8s"]
 
 [ext_resource type="PackedScene" uid="uid://cfcer7aeaep8x" path="res://enemies/Enemy.tscn" id="1_nc50y"]
+[ext_resource type="Script" path="res://items/tables/LootTableRow.gd" id="2_3r8lf"]
+[ext_resource type="Script" path="res://items/tables/LootTable.gd" id="2_8sr51"]
+[ext_resource type="Script" path="res://items/variations/Credits.gd" id="2_cfgi1"]
 [ext_resource type="Texture2D" uid="uid://8h2c4vsesupr" path="res://art/turret1.png" id="2_pgi6w"]
 [ext_resource type="PackedScene" uid="uid://b7txw2bq7igc2" path="res://enemies/controllers/EnemyController.tscn" id="2_x5jbr"]
 [ext_resource type="PackedScene" uid="uid://dcnujwx4a1qso" path="res://enemies/controllers/behaviors/variations/LookForEnemy.tscn" id="3_gr7tc"]
@@ -9,7 +12,23 @@
 [ext_resource type="Resource" uid="uid://b0dbl1c8gyv82" path="res://guns/Gun1.tres" id="7_aq118"]
 [ext_resource type="PackedScene" uid="uid://nkgl2h57gbmc" path="res://common/SoundListener.tscn" id="8_2nu6a"]
 
+[sub_resource type="Resource" id="Resource_7kuy7"]
+script = ExtResource("2_cfgi1")
+from = 5
+to = 10
+
+[sub_resource type="Resource" id="Resource_tuv5y"]
+script = ExtResource("2_3r8lf")
+item = SubResource("Resource_7kuy7")
+chance = 20
+
+[sub_resource type="Resource" id="Resource_1350l"]
+script = ExtResource("2_8sr51")
+chance_for_nothing = 100
+rows = Array[ExtResource("2_3r8lf")]([SubResource("Resource_tuv5y")])
+
 [node name="Turret" instance=ExtResource("1_nc50y")]
+drop_table = SubResource("Resource_1350l")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_pgi6w")

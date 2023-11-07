@@ -5,5 +5,5 @@ class_name LootTableRow
 # exports
 #
 
-@export var item: Node # TODO change type
+@export var item: Item
 @export var chance: int = 1

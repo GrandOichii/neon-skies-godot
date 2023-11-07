@@ -81,6 +81,8 @@ func _process(delta: float):
 	if raycast_node.is_colliding():
 		laser_line_node.set_point_position(1, raycast_node.get_collision_point())
 		var body = raycast_node.get_collider() as Node
+		if body == null:
+			return
 		var is_player = body.is_in_group('player')
 		if is_player and not _found:
 			controller.data['enemy'] = body
