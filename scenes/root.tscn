@@ -1,7 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://p6q12ih3nf8"]
+[gd_scene load_steps=19 format=3 uid="uid://p6q12ih3nf8"]
 
 [ext_resource type="PackedScene" uid="uid://3dho52n5hbjn" path="res://ui/implant_manager/ImplantManager.tscn" id="1_3nm73"]
+[ext_resource type="Script" path="res://ui/CreditsDisplay.gd" id="1_5n062"]
 [ext_resource type="Script" path="res://ui/AmmoCountDisplay.gd" id="1_es5oo"]
+[ext_resource type="Script" path="res://ui/PlayerDiedLabel.gd" id="1_o6chk"]
 [ext_resource type="PackedScene" uid="uid://bfuudjqoq0ecq" path="res://player/Player.tscn" id="2_3b45f"]
 [ext_resource type="Script" path="res://ui/HealthDisplay.gd" id="2_v3rxo"]
 [ext_resource type="Script" path="res://ui/HeatDisplay.gd" id="3_sk1cx"]
@@ -44,6 +46,45 @@ theme_override_constants/margin_bottom = 10
 
 [node name="Control" type="Control" parent="UI/MarginContainer"]
 layout_mode = 2
+
+[node name="PlayerDiedLabel" type="Label" parent="UI/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -950.0
+offset_top = -11.5
+offset_right = 950.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.662745, 0, 0, 1)
+theme_override_font_sizes/font_size = 90
+text = "You died!"
+horizontal_alignment = 1
+script = ExtResource("1_o6chk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -66.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="CreditsDisplay" type="Label" parent="UI/MarginContainer/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788235, 0.788235, 0, 1)
+theme_override_font_sizes/font_size = 72
+text = "3"
+horizontal_alignment = 1
+script = ExtResource("1_5n062")
 
 [node name="Control" type="Control" parent="UI/MarginContainer/Control"]
 layout_mode = 1
@@ -180,6 +221,10 @@ texture = SubResource("GradientTexture2D_7exxo")
 
 [node name="Player" parent="." instance=ExtResource("2_3b45f")]
 speed = 500.0
+initial_credits = 10
+
+[node name="Health" parent="Player" index="4"]
+immortal = true
 
 [node name="Heat" parent="Player" index="6"]
 heat_reduction = 10.0
@@ -197,9 +242,17 @@ texture = SubResource("GradientTexture2D_2610r")
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_ryff5")
 
-[node name="Turret1" parent="." instance=ExtResource("11_or1qc")]
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Turret1" parent="Enemies" instance=ExtResource("11_or1qc")]
 position = Vector2(-227, -398)
 
+[node name="Turret2" parent="Enemies" instance=ExtResource("11_or1qc")]
+position = Vector2(175, -327)
+rotation = -3.11473
+
+[connection signal="credits_changed" from="Player" to="UI/MarginContainer/Control/VBoxContainer/CreditsDisplay" method="_on_player_credits_changed"]
+[connection signal="died" from="Player" to="UI/MarginContainer/Control/PlayerDiedLabel" method="_on_player_died"]
 [connection signal="magazine_ammo_count_changed" from="Player/Sprite/AttackController" to="UI/MarginContainer/Control/Control/AmmoCountDisplay" method="_on_attack_controller_magazine_ammo_count_changed"]
 [connection signal="total_ammo_count_changed" from="Player/Sprite/AttackController" to="UI/MarginContainer/Control/Control/AmmoCountDisplay" method="_on_attack_controller_total_ammo_count_changed"]
 [connection signal="changed" from="Player/Health" to="UI/MarginContainer/Control/HealthDisplay" method="_on_health_changed"]
@@ -208,6 +261,6 @@ position = Vector2(-227, -398)
 [connection signal="thresh_changed" from="Player/Heat" to="UI/MarginContainer/Control/HeatDisplay" method="_on_heat_thresh_changed"]
 
 [editable path="Player"]
-[editable path="Turret1"]
-[editable path="Turret1/EnemyController"]
-[editable path="Turret1/EnemyController/Behaviors/LookForEnemy"]
+[editable path="Enemies/Turret1"]
+[editable path="Enemies/Turret1/EnemyController"]
+[editable path="Enemies/Turret1/EnemyController/Behaviors/LookForEnemy"]

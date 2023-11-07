@@ -150,5 +150,6 @@ shape = SubResource("CircleShape2D_3rtba")
 [connection signal="ejected" from="ReloadMeter" to="Sprite/AttackController" method="_on_reload_meter_ejected"]
 [connection signal="reloaded" from="ReloadMeter" to="Sprite/AttackController" method="_on_reload_meter_reloaded"]
 [connection signal="lost_health" from="Health" to="Camera/Shake" method="_on_health_lost_health"]
+[connection signal="reached_zero" from="Health" to="." method="_on_health_reached_zero"]
 [connection signal="ability_added" from="Implants" to="Heat" method="_on_implants_ability_added"]
 [connection signal="timeout" from="SoundController/DisableTimer" to="SoundController" method="_on_disable_timer_timeout"]

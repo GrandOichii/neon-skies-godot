@@ -6,6 +6,7 @@ class_name Enemy
 #
 
 @export var controller: EnemyController
+@export var drop_table: LootTable
 
 #
 # signal connections
@@ -17,3 +18,4 @@ func _on_health_lost_health(amount):
 
 func _on_health_reached_zero():
 	queue_free()
+	# TODO drop items
