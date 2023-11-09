@@ -14,11 +14,11 @@ class_name CreditsModLabel
 #
 
 func begin(amount: int):
-	var c = gain_color
-	var s = '+' + str(amount)
-	if amount < 0:
-		c = lose_color
-		s = '-' + str(amount)
+	var c = lose_color
+	var s = str(amount)
+	if amount > 0:
+		c = gain_color
+		s = '+' + s
 	text = s
 	modulate = Color(c, 1)
 	create_tween().tween_property(self, 'modulate', Color(c, 0), duration).finished.connect(_dissapear)
