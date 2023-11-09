@@ -26,7 +26,6 @@ func _create_drop(ih: ItemHolder, item: Item):
 func _on_health_lost_health(amount):
 	pass # Replace with function body.
 
-
 func _on_health_reached_zero():
 	# TODO add logic for multiple drops
 	# TODO choose item

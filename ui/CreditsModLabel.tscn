@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy1x6ypvpnhra"]
+
+[ext_resource type="Script" path="res://ui/CreditsModLabel.gd" id="1_qsyj1"]
+
+[node name="CreditsModLabel" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 48
+script = ExtResource("1_qsyj1")
+duration = 2.0
+gain_color = Color(0.592157, 0.592157, 0, 1)
+lose_color = Color(0.556863, 0, 0, 1)

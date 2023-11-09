@@ -24,7 +24,7 @@ chance = 20
 
 [sub_resource type="Resource" id="Resource_1350l"]
 script = ExtResource("2_8sr51")
-chance_for_nothing = 100
+chance_for_nothing = 5
 rows = Array[ExtResource("2_3r8lf")]([SubResource("Resource_tuv5y")])
 
 [node name="Turret" instance=ExtResource("1_nc50y")]

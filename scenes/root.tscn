@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://p6q12ih3nf8"]
+[gd_scene load_steps=21 format=3 uid="uid://p6q12ih3nf8"]
 
 [ext_resource type="PackedScene" uid="uid://3dho52n5hbjn" path="res://ui/implant_manager/ImplantManager.tscn" id="1_3nm73"]
 [ext_resource type="Script" path="res://ui/CreditsDisplay.gd" id="1_5n062"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://ui/PlayerDiedLabel.gd" id="1_o6chk"]
 [ext_resource type="PackedScene" uid="uid://bfuudjqoq0ecq" path="res://player/Player.tscn" id="2_3b45f"]
 [ext_resource type="Script" path="res://ui/HealthDisplay.gd" id="2_v3rxo"]
+[ext_resource type="PackedScene" uid="uid://cy1x6ypvpnhra" path="res://ui/CreditsModLabel.tscn" id="3_jg2lf"]
 [ext_resource type="Script" path="res://ui/HeatDisplay.gd" id="3_sk1cx"]
 [ext_resource type="Resource" uid="uid://b5xixbmjqm6cf" path="res://implants/CoreEnhancer.tres" id="5_wvaef"]
 [ext_resource type="Resource" uid="uid://q217aef3wn82" path="res://implants/Dash1.tres" id="6_onblf"]
@@ -79,6 +80,12 @@ offset_top = -66.0
 grow_horizontal = 0
 grow_vertical = 0
 
+[node name="CreditsModContainer" type="VBoxContainer" parent="UI/MarginContainer/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_direction = 3
+layout_mode = 2
+alignment = 1
+
 [node name="CreditsDisplay" type="Label" parent="UI/MarginContainer/Control/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.788235, 0.788235, 0, 1)
@@ -86,6 +93,7 @@ theme_override_font_sizes/font_size = 72
 text = "3"
 horizontal_alignment = 1
 script = ExtResource("1_5n062")
+credits_mod_label_ps = ExtResource("3_jg2lf")
 
 [node name="Control" type="Control" parent="UI/MarginContainer/Control"]
 layout_mode = 1

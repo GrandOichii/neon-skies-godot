@@ -19,6 +19,12 @@ signal reached_zero()
 @export var immortal: bool = false
 
 #
+# private vars
+#
+
+var _reached_zero: bool = false
+
+#
 # vars
 #
 
@@ -31,7 +37,9 @@ var health: int :
 		if health > max_health: health = max_health
 		if health <= 0 and not immortal:
 			health = 0
-			reached_zero.emit()
+			if not _reached_zero:
+				_reached_zero = true
+				reached_zero.emit()
 		changed.emit(health)
 		if prev > health: lost_health.emit(prev - health);
 		
