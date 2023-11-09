@@ -21,6 +21,7 @@ signal died
 
 @onready var sprite_node: Sprite2D = %Sprite
 @onready var implants_node: ImplantsController = %Implants
+@onready var attack_controller_node: AttackController = %AttackController
 
 #
 # vars

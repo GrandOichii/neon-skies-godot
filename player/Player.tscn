@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bfuudjqoq0ecq"]
+[gd_scene load_steps=22 format=3 uid="uid://bfuudjqoq0ecq"]
 
 [ext_resource type="Texture2D" uid="uid://vkxcq0dwbq7y" path="res://art/player.png" id="1_0ohj0"]
 [ext_resource type="Script" path="res://player/Player.gd" id="1_4g8ct"]
@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://6wcg2mcfqe1a" path="res://implants/ReflexEnhancer.tres" id="8_sc4si"]
 [ext_resource type="Resource" uid="uid://q217aef3wn82" path="res://implants/Dash1.tres" id="10_3px4w"]
 [ext_resource type="Script" path="res://player/HeatController.gd" id="12_eahqw"]
+[ext_resource type="Resource" uid="uid://cus0fgbon5bt2" path="res://implants/DeviationDisplay.tres" id="13_mmp3p"]
 [ext_resource type="Script" path="res://player/SoundController.gd" id="14_x1ewl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mom44"]
@@ -31,6 +32,11 @@ slot = 1
 script = ExtResource("8_hdkrs")
 slot = 3
 implant = ExtResource("10_3px4w")
+
+[sub_resource type="Resource" id="Resource_l0hmi"]
+script = ExtResource("8_hdkrs")
+slot = 2
+implant = ExtResource("13_mmp3p")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3rtba"]
 
@@ -59,6 +65,7 @@ unique_name_in_owner = true
 texture = ExtResource("1_0ohj0")
 
 [node name="AttackController" parent="Sprite" node_paths=PackedStringArray("rotation_controller", "reload_meter") instance=ExtResource("3_lt4x6")]
+unique_name_in_owner = true
 is_player = true
 starting_gun = ExtResource("6_fp8fm")
 rotation_controller = NodePath("..")
@@ -117,7 +124,7 @@ color = Color(0.176471, 1, 1, 1)
 [node name="Implants" type="Node" parent="." node_paths=PackedStringArray("parent")]
 unique_name_in_owner = true
 script = ExtResource("7_djh2f")
-implant_slots = Array[ExtResource("8_hdkrs")]([SubResource("Resource_q6rmd"), SubResource("Resource_68lif"), SubResource("Resource_xnqku")])
+implant_slots = Array[ExtResource("8_hdkrs")]([SubResource("Resource_q6rmd"), SubResource("Resource_68lif"), SubResource("Resource_xnqku"), SubResource("Resource_l0hmi")])
 parent = NodePath("..")
 
 [node name="Abilities" type="Node" parent="Implants"]

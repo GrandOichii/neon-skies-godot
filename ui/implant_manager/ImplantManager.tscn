@@ -90,6 +90,14 @@ offset_right = 205.0
 offset_bottom = 906.0
 slot = 3
 
+[node name="Arms" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Left/Slots" instance=ExtResource("4_bguv8")]
+layout_mode = 1
+offset_left = 717.0
+offset_top = 278.0
+offset_right = 867.0
+offset_bottom = 458.0
+slot = 2
+
 [node name="Right" type="Control" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw6rwschhmrhr"]
+
+[ext_resource type="Script" path="res://abilities/deviation-display/DeviationDisplay.gd" id="1_4paoc"]
+
+[node name="DeviationDisplay" type="Node"]
+script = ExtResource("1_4paoc")
+range = 2000
+lines_color = Color(0, 0.827451, 0, 1)
+
+[node name="Line1" type="Line2D" parent="."]
+unique_name_in_owner = true
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0
+
+[node name="Line2" type="Line2D" parent="."]
+unique_name_in_owner = true
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0

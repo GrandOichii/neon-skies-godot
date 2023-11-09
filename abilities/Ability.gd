@@ -5,7 +5,7 @@ class_name Ability
 # vars
 #
 
-var parent: Node
+var parent: Node2D
 
 #
 # methods

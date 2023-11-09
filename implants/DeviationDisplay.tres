@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Implant" load_steps=3 format=3 uid="uid://cus0fgbon5bt2"]
+
+[ext_resource type="PackedScene" uid="uid://cw6rwschhmrhr" path="res://abilities/deviation-display/DeviationDisplay.tscn" id="1_2teql"]
+[ext_resource type="Script" path="res://implants/Implant.gd" id="1_wgm60"]
+
+[resource]
+script = ExtResource("1_wgm60")
+name = "DeviationDisplay"
+desciption = "Displays the held gun's deviation cone, improving the user's accuracy."
+slot = 2
+ablities = Array[PackedScene]([ExtResource("1_2teql")])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://p6q12ih3nf8"]
+[gd_scene load_steps=20 format=3 uid="uid://p6q12ih3nf8"]
 
 [ext_resource type="PackedScene" uid="uid://3dho52n5hbjn" path="res://ui/implant_manager/ImplantManager.tscn" id="1_3nm73"]
 [ext_resource type="Script" path="res://ui/CreditsDisplay.gd" id="1_5n062"]
@@ -14,7 +14,6 @@
 [ext_resource type="Resource" uid="uid://6wcg2mcfqe1a" path="res://implants/ReflexEnhancer.tres" id="8_fgjfq"]
 [ext_resource type="Resource" uid="uid://cgmcdvyu2q6sv" path="res://implants/ToxinPurger.tres" id="9_m1tjj"]
 [ext_resource type="PackedScene" uid="uid://dxf6th6r4vs8s" path="res://enemies/variations/Turret.tscn" id="11_or1qc"]
-[ext_resource type="Resource" uid="uid://xwt8g2o1o5le" path="res://guns/PumpAction1.tres" id="13_7vuc5"]
 
 [sub_resource type="Gradient" id="Gradient_p146t"]
 
@@ -230,9 +229,6 @@ texture = SubResource("GradientTexture2D_7exxo")
 [node name="Player" parent="." instance=ExtResource("2_3b45f")]
 speed = 500.0
 initial_credits = 10
-
-[node name="AttackController" parent="Player/Sprite" index="0"]
-starting_gun = ExtResource("13_7vuc5")
 
 [node name="Health" parent="Player" index="4"]
 immortal = true

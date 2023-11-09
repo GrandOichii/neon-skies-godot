@@ -44,12 +44,13 @@ var magazine_ammo_count: int = 0 :
 		magazine_ammo_count = value
 		magazine_ammo_count_changed.emit(magazine_ammo_count)
 		
+var deviation: float = 0
+
 #
 # private vars
 #
 
 var _can_fire: bool = true
-var _deviation: float = 0
 var _rng = RandomNumberGenerator.new()
 var _loaded: bool = true
 var _can_advance_reload: bool = true
@@ -80,7 +81,7 @@ func fire():
 	if magazine_ammo_count == 0: return
 	
 	var pellets = _rng.randi_range(gun.min_pellets_per_shot, gun.max_pellets_per_shot)
-	var diff = deg_to_rad(_deviation / 2)
+	var diff = deg_to_rad(deviation / 2)
 	var dev = _rng.randf_range(-diff, diff)
 	var p_diff = deg_to_rad(gun.pellet_deviation / 2)
 	for i in pellets:
@@ -89,9 +90,8 @@ func fire():
 		bullet.position = muzzle.global_position
 		
 		bullet.rotation = rotation_controller.rotation + dev + _rng.randf_range(-p_diff, p_diff)
-	
-	_deviation += gun.deviation_per_bullet
-	_deviation = min(_deviation, gun.max_deviation)
+	deviation += gun.deviation_per_bullet
+	deviation = min(deviation, gun.max_deviation)
 	_can_fire = false
 	
 	magazine_ammo_count -= 1
@@ -101,8 +101,8 @@ func fire():
 func _process(delta):
 	_check_fire()
 	
-	_deviation -= gun.deviation_decrease_per_second * delta
-	_deviation = max(0, _deviation)
+	deviation -= gun.deviation_decrease_per_second * delta
+	deviation = max(0, deviation)
 
 func _check_fire():
 	# TODO could be better, move the whole fire logic to Player.gd
