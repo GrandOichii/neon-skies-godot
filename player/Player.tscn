@@ -11,10 +11,10 @@
 [ext_resource type="Script" path="res://implants/ImplantController.gd" id="7_djh2f"]
 [ext_resource type="Script" path="res://implants/ImplantSlot.gd" id="8_hdkrs"]
 [ext_resource type="Resource" uid="uid://6wcg2mcfqe1a" path="res://implants/ReflexEnhancer.tres" id="8_sc4si"]
-[ext_resource type="Resource" uid="uid://q217aef3wn82" path="res://implants/Dash1.tres" id="10_3px4w"]
 [ext_resource type="Resource" uid="uid://qbo6ovg2hus0" path="res://implants/Healer1.tres" id="12_a1nl1"]
 [ext_resource type="Script" path="res://player/HeatController.gd" id="12_eahqw"]
 [ext_resource type="Resource" uid="uid://cus0fgbon5bt2" path="res://implants/DeviationDisplay.tres" id="13_mmp3p"]
+[ext_resource type="Resource" uid="uid://dveunib7hfsyf" path="res://implants/Satchel.tres" id="13_n6ot2"]
 [ext_resource type="Script" path="res://player/SoundController.gd" id="14_x1ewl"]
 [ext_resource type="Script" path="res://common/ClampedValue.gd" id="16_ump4h"]
 
@@ -34,7 +34,7 @@ implant = ExtResource("12_a1nl1")
 [sub_resource type="Resource" id="Resource_xnqku"]
 script = ExtResource("8_hdkrs")
 slot = 3
-implant = ExtResource("10_3px4w")
+implant = ExtResource("13_n6ot2")
 
 [sub_resource type="Resource" id="Resource_l0hmi"]
 script = ExtResource("8_hdkrs")

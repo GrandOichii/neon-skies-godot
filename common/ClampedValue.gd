@@ -21,7 +21,7 @@ signal min_changed(to: int)
 # vars
 #
 
-var min_value : int :
+var min_value : int = 0 :
 	get:
 		return min_value
 	set(v):
@@ -29,7 +29,7 @@ var min_value : int :
 		min_changed.emit(max_value)
 		value = value
 
-var value: int :
+var value: int = 0 :
 	get:
 		return value
 	set(v):
@@ -39,7 +39,7 @@ var value: int :
 			return
 		changed.emit(value)
 		
-var max_value: int :
+var max_value: int = 0 :
 	get:
 		return max_value
 	set(v):
@@ -52,6 +52,6 @@ var max_value: int :
 #
 
 func _ready():
-	min_value = initial_min
-	max_value = initial_max
-	value = initial_value
+	min_value += initial_min
+	max_value += initial_max
+	value += initial_value

@@ -33,7 +33,7 @@ func _on_attack_controller_gun_fired():
 func _on_health_changed(to: int):
 	var diff = _prev - to
 	_prev = to
-	if diff < 0:
+	if diff <= 0:
 		return
 	camera.shake(player_hit_duration, player_hit_frequency, player_hit_amplitude)
 	

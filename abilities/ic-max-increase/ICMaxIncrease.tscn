@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddkedxe6m3k48"]
+
+[ext_resource type="Script" path="res://abilities/ic-max-increase/ICMaxIncrease.gd" id="1_1d4ox"]
+
+[node name="ICMaxIncrease" type="Node"]
+script = ExtResource("1_1d4ox")
+increase = 5

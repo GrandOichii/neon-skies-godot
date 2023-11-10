@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Implant" load_steps=3 format=3 uid="uid://dveunib7hfsyf"]
+
+[ext_resource type="Script" path="res://implants/Implant.gd" id="1_7hwxe"]
+[ext_resource type="PackedScene" uid="uid://ddkedxe6m3k48" path="res://abilities/ic-max-increase/ICMaxIncrease.tscn" id="1_phkfp"]
+
+[resource]
+script = ExtResource("1_7hwxe")
+name = "Satchel"
+desciption = "Allows the user to carry more implant charges."
+slot = 3
+ablities = Array[PackedScene]([ExtResource("1_phkfp")])
