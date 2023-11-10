@@ -14,6 +14,16 @@ class_name Enemy
 @export var controller: EnemyController
 @export var drop_table: LootTable
 
+#
+# private vars
+#
+
+var _reached_zero: bool = false
+
+#
+# methods
+#
+
 func _create_drop(ih: ItemHolder, item: Item):
 	get_tree().root.add_child(ih)
 	ih.global_position = global_position
@@ -23,12 +33,15 @@ func _create_drop(ih: ItemHolder, item: Item):
 # signal connections
 #
 
-func _on_health_lost_health(amount):
-	pass # Replace with function body.
-
-func _on_health_reached_zero():
+func _on_health_changed(to: int):
 	# TODO add logic for multiple drops
 	# TODO choose item
+	
+	if to > 0:
+		return
+	if _reached_zero:
+		return
+	_reached_zero = true
 	var item = drop_table.single()
 	if item == null:
 		queue_free()

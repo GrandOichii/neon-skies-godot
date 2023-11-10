@@ -8,10 +8,10 @@ extends StaticAbility
 
 func activate():
 	super.activate()
-	var health = parent.get_node('Health') as Health
+	var health = parent.get_node('Health') as ClampedValue
 	health.max_health += increase
 	
 func deactivate():
 	super.deactivate()
-	var health = parent.get_node('Health') as Health
+	var health = parent.get_node('Health') as ClampedValue
 	health.max_health -= increase

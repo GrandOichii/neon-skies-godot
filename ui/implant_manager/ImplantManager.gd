@@ -44,7 +44,7 @@ func _ready():
 				if implant == null: continue
 				
 				var slot_display = _slot_map[slot]
-				var display = _create_display(implant)
+				var display = _create_display()
 				slot_display.display_holder.add_child(display)
 				display.implant = implant
 				display.installed = true
@@ -52,11 +52,11 @@ func _ready():
 
 	# populate initial implants in grid
 	for implant in stored_implants:
-		var display = _create_display(implant)
+		var display = _create_display()
 		stored_node.add_child(display)
 		display.implant = implant
 
-func _create_display(implant: Implant):
+func _create_display():
 	var result = implant_display_ps.instantiate() as ImplantDisplay
 	result.pressed.connect(func _pressed(): _pressed_display(result))
 	return result
@@ -85,6 +85,7 @@ func _move_to_stored(display: ImplantDisplay):
 	display.installed = false
 	display.reparent(stored_node)
 	implants.uninstall(display.implant.slot)
+	
 #
 # signal connections
 #

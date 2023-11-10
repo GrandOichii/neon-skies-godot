@@ -31,9 +31,9 @@ func _process(delta):
 #
 
 func _on_body_entered(body):
-	var health = body.get_node_or_null('Health') as Health
+	var health = body.get_node_or_null('Health') as ClampedValue
 	if health != null:
-		health.health -= damage
+		health.value -= damage
 
 	var is_solid = body.is_in_group('solid')
 	if is_solid:

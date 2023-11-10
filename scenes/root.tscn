@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://p6q12ih3nf8"]
+[gd_scene load_steps=21 format=3 uid="uid://p6q12ih3nf8"]
 
 [ext_resource type="PackedScene" uid="uid://3dho52n5hbjn" path="res://ui/implant_manager/ImplantManager.tscn" id="1_3nm73"]
 [ext_resource type="Script" path="res://ui/CreditsDisplay.gd" id="1_5n062"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cy1x6ypvpnhra" path="res://ui/CreditsModLabel.tscn" id="3_jg2lf"]
 [ext_resource type="Script" path="res://ui/HeatDisplay.gd" id="3_sk1cx"]
 [ext_resource type="Resource" uid="uid://b5xixbmjqm6cf" path="res://implants/CoreEnhancer.tres" id="5_wvaef"]
+[ext_resource type="Script" path="res://ui/ConsumableDisplay.gd" id="6_hjjw8"]
 [ext_resource type="Resource" uid="uid://q217aef3wn82" path="res://implants/Dash1.tres" id="6_onblf"]
 [ext_resource type="Resource" uid="uid://qbo6ovg2hus0" path="res://implants/Healer1.tres" id="7_a87b3"]
 [ext_resource type="Resource" uid="uid://6wcg2mcfqe1a" path="res://implants/ReflexEnhancer.tres" id="8_fgjfq"]
@@ -147,21 +148,34 @@ theme_override_colors/font_color = Color(0.619608, 0, 0, 1)
 theme_override_font_sizes/font_size = 36
 text = "5"
 
-[node name="HeatDisplay" type="Control" parent="UI/MarginContainer/Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/Control"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -204.0
-offset_top = -45.0
-offset_right = 204.0
+offset_left = -304.0
+offset_top = -58.0
+offset_right = 252.0
 grow_horizontal = 2
 grow_vertical = 0
+alignment = 2
+
+[node name="ConsumableDisplay" type="Label" parent="UI/MarginContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
+text = "5"
+horizontal_alignment = 1
+script = ExtResource("6_hjjw8")
+
+[node name="HeatDisplay" type="Control" parent="UI/MarginContainer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
 script = ExtResource("3_sk1cx")
 
-[node name="Control" type="Control" parent="UI/MarginContainer/Control/HeatDisplay"]
+[node name="Control" type="Control" parent="UI/MarginContainer/Control/HBoxContainer/HeatDisplay"]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -171,7 +185,7 @@ offset_right = 282.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Progress" type="ColorRect" parent="UI/MarginContainer/Control/HeatDisplay/Control"]
+[node name="Progress" type="ColorRect" parent="UI/MarginContainer/Control/HBoxContainer/HeatDisplay/Control"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -183,7 +197,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 0.207843)
 
-[node name="Main" type="ColorRect" parent="UI/MarginContainer/Control/HeatDisplay"]
+[node name="Main" type="ColorRect" parent="UI/MarginContainer/Control/HBoxContainer/HeatDisplay"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -193,7 +207,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.160784)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/Control/HeatDisplay"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/Control/HBoxContainer/HeatDisplay"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -201,19 +215,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Current" type="Label" parent="UI/MarginContainer/Control/HeatDisplay/HBoxContainer"]
+[node name="Current" type="Label" parent="UI/MarginContainer/Control/HBoxContainer/HeatDisplay/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "30"
 horizontal_alignment = 2
 
-[node name="Separator" type="Label" parent="UI/MarginContainer/Control/HeatDisplay/HBoxContainer"]
+[node name="Separator" type="Label" parent="UI/MarginContainer/Control/HBoxContainer/HeatDisplay/HBoxContainer"]
 layout_mode = 2
 text = "/"
 horizontal_alignment = 1
 
-[node name="Thresh" type="Label" parent="UI/MarginContainer/Control/HeatDisplay/HBoxContainer"]
+[node name="Thresh" type="Label" parent="UI/MarginContainer/Control/HBoxContainer/HeatDisplay/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -229,9 +243,6 @@ texture = SubResource("GradientTexture2D_7exxo")
 [node name="Player" parent="." instance=ExtResource("2_3b45f")]
 speed = 500.0
 initial_credits = 10
-
-[node name="Health" parent="Player" index="4"]
-immortal = true
 
 [node name="Heat" parent="Player" index="6"]
 heat_reduction = 10.0
@@ -264,8 +275,9 @@ rotation = -3.11473
 [connection signal="total_ammo_count_changed" from="Player/Sprite/AttackController" to="UI/MarginContainer/Control/Control/AmmoCountDisplay" method="_on_attack_controller_total_ammo_count_changed"]
 [connection signal="changed" from="Player/Health" to="UI/MarginContainer/Control/HealthDisplay" method="_on_health_changed"]
 [connection signal="max_changed" from="Player/Health" to="UI/MarginContainer/Control/HealthDisplay" method="_on_health_max_changed"]
-[connection signal="heat_changed" from="Player/Heat" to="UI/MarginContainer/Control/HeatDisplay" method="_on_heat_heat_changed"]
-[connection signal="thresh_changed" from="Player/Heat" to="UI/MarginContainer/Control/HeatDisplay" method="_on_heat_thresh_changed"]
+[connection signal="heat_changed" from="Player/Heat" to="UI/MarginContainer/Control/HBoxContainer/HeatDisplay" method="_on_heat_heat_changed"]
+[connection signal="thresh_changed" from="Player/Heat" to="UI/MarginContainer/Control/HBoxContainer/HeatDisplay" method="_on_heat_thresh_changed"]
+[connection signal="changed" from="Player/ImplantConsumable" to="UI/MarginContainer/Control/HBoxContainer/ConsumableDisplay" method="_on_implant_consumable_changed"]
 
 [editable path="Player"]
 [editable path="Enemies/Turret1"]

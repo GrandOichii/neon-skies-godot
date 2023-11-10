@@ -52,13 +52,13 @@ var _reload_tween: Tween
 func _ready():
 	_set_bars(false)
 
-func _set_bars(visible: bool):
-	_set_main_bars(visible)
-	hot_bar.visible = visible
+func _set_bars(v: bool):
+	_set_main_bars(v)
+	hot_bar.visible = v
 	
-func _set_main_bars(visible: bool):
-	main_bar.visible = visible
-	progress_bar.visible = visible
+func _set_main_bars(v: bool):
+	main_bar.visible = v
+	progress_bar.visible = v
 	
 func _reset_colors():
 	main_bar.color = bg_color

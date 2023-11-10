@@ -10,5 +10,5 @@ class_name Item
 # methods
 #
 
-func on_pickup(player: Player):
+func on_pickup(_player: Player):
 	print('Pickup!')

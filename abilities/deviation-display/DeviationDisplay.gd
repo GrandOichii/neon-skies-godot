@@ -29,7 +29,7 @@ func activate():
 func deactivate():
 	super.deactivate()
 
-func _process(delta: float):
+func _process(_delta: float):
 	# TOOD bad, can't use in AI
 	var p = parent as Player
 	var start = p.global_position

@@ -27,8 +27,8 @@ enum FireMode { AUTO, FULL_AUTO, PUMP_ACTION }
 @export var hot_reload_interval_end: float
 
 @export_group('Pump-action')
-@export var min_pellets_per_shot: float = 1
-@export var max_pellets_per_shot: float = 1
+@export var min_pellets_per_shot: int = 1
+@export var max_pellets_per_shot: int = 1
 @export var pellet_deviation: float = 0
 
 @export_group('Sound')

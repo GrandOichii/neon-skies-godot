@@ -12,12 +12,12 @@ signal thresh_changed(value: float)
 # exports
 #
 
-@export var health_node: Health
+@export var health_node: ClampedValue
 @export var implants_node: ImplantsController
 @export var overheat_damage: int = 1
 @export var heat_reduction: float
 @export var thresh: float
-@export var max: float
+@export var max_heat: float
 
 #
 # private vars
@@ -48,7 +48,7 @@ var _max: float
 func _ready():
 	_thresh = thresh
 	_heat = thresh
-	_max = max
+	_max = max_heat
 
 func _physics_process(delta):
 	_heat -= delta * heat_reduction
@@ -64,7 +64,7 @@ func _on_implants_ability_added(ability: Ability):
 
 func _add_heat(heat: float):
 	if _heat > _thresh:
-		health_node.health -= overheat_damage
+		health_node.value -= overheat_damage
 	_heat += heat 
 
 #

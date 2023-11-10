@@ -5,8 +5,9 @@ extends ActivatedAbility
 # exports
 #
 
-var heal_after: float
-var heal_amount: int = 1
+@export var heal_after: float
+@export var heal_amount: int = 1
+@export var ic_cost: int = 1
 
 #
 # nodes
@@ -23,6 +24,10 @@ func _ready():
 		heal_after_timer_node.wait_time = heal_after
 
 func start_ability():
+	var c = parent.get_node('ImplantConsumable') as ClampedValue
+	if c.value == 0:
+		return
+	c.value -= ic_cost
 	super.start_ability()
 	if heal_after == 0:
 		end_ability()
@@ -31,7 +36,7 @@ func start_ability():
 	
 func end_ability():
 	super.end_ability()
-	(parent.get_node('Health') as Health).health += 1
+	(parent.get_node('Health') as ClampedValue).value += 1
 
 #
 # signal connections

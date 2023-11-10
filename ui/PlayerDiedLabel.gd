@@ -10,8 +10,6 @@ func _ready():
 #
 # signal connections
 #
-
-
-
+	
 func _on_player_died():
 	visible = true

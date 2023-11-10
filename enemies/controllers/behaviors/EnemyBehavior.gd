@@ -23,5 +23,5 @@ func eb_start():
 func eb_stop():
 	pass
 	
-func eb_process(delta: float):
+func eb_process(_delta: float):
 	pass

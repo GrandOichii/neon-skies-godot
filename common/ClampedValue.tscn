@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://deaspur4nhhwy"]
 
-[ext_resource type="Script" path="res://common/Health.gd" id="1_w0vro"]
+[ext_resource type="Script" path="res://common/ClampedValue.gd" id="1_w0vro"]
 
-[node name="Health" type="Node"]
+[node name="ClampedValue" type="Node"]
 script = ExtResource("1_w0vro")
 initial_value = 5
 initial_max = 5

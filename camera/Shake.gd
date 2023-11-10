@@ -18,11 +18,22 @@ extends Node
 @export var player_hit_amplitude: float
 
 #
+# private vars
+#
+
+var _prev: int = 0
+
+#
 # signal connections
 #
 
-func _on_health_lost_health(amount):
-	camera.shake(player_hit_duration, player_hit_frequency, player_hit_amplitude)
-
 func _on_attack_controller_gun_fired():
 	camera.shake(player_fired_duration, player_fired_frequency, player_fired_amplitude)
+
+func _on_health_changed(to: int):
+	var diff = _prev - to
+	_prev = to
+	if diff < 0:
+		return
+	camera.shake(player_hit_duration, player_hit_frequency, player_hit_amplitude)
+	

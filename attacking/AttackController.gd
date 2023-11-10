@@ -150,7 +150,7 @@ func _on_reload_meter_ejected():
 	_can_advance_reload = true
 	_loaded = false
 
-func _on_reload_meter_reloaded(reload_type):
+func _on_reload_meter_reloaded(_reload_type: ReloadMeter.ReloadType):
 	if gun.fire_mode == Gun.FireMode.PUMP_ACTION:
 		var amount = min(1, total_ammo_count)
 		magazine_ammo_count += amount

@@ -71,7 +71,7 @@ func eb_process(delta: float):
 	var r = turn_speed * delta
 	body.rotate(r)
 
-func _process(delta: float):
+func _process(_delta: float):
 	var p1 = laser_pointer_start.global_position
 	var p2 = laser_pointer_start.global_position + Vector2(range, 0).rotated(body.rotation)
 	raycast_node.position = p1
@@ -80,12 +80,12 @@ func _process(delta: float):
 	laser_line_node.set_point_position(1, p2)
 	if raycast_node.is_colliding():
 		laser_line_node.set_point_position(1, raycast_node.get_collision_point())
-		var body = raycast_node.get_collider() as Node
-		if body == null:
+		var b = raycast_node.get_collider() as Node
+		if b == null:
 			return
-		var is_player = body.is_in_group('player')
+		var is_player = b.is_in_group('player')
 		if is_player and not _found:
-			controller.data['enemy'] = body
+			controller.data['enemy'] = b
 			found_target.emit()
 			_found = true
 		if _found and not is_player:

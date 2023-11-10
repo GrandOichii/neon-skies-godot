@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://enemies/Enemy.gd" id="1_6dtga"]
 [ext_resource type="Texture2D" uid="uid://vkxcq0dwbq7y" path="res://art/player.png" id="1_s5kqk"]
 [ext_resource type="PackedScene" uid="uid://cv0d2m1b0voq" path="res://items/ItemHolder.tscn" id="2_omidv"]
-[ext_resource type="Script" path="res://common/Health.gd" id="3_ysukb"]
+[ext_resource type="Script" path="res://common/ClampedValue.gd" id="3_ysukb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uqfw4"]
 radius = 38.6394
@@ -20,6 +20,7 @@ shape = SubResource("CircleShape2D_uqfw4")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_ysukb")
+initial_value = 2
+initial_max = 2
 
-[connection signal="lost_health" from="Health" to="." method="_on_health_lost_health"]
-[connection signal="reached_zero" from="Health" to="." method="_on_health_reached_zero"]
+[connection signal="changed" from="Health" to="." method="_on_health_changed"]

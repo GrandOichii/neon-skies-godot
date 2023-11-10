@@ -35,10 +35,6 @@ texture = ExtResource("2_pgi6w")
 
 [node name="LaserPointerStart" type="Marker2D" parent="Sprite2D" index="0"]
 
-[node name="Health" parent="." index="2"]
-initial_value = 2
-initial_max = 2
-
 [node name="EnemyController" parent="." index="3" instance=ExtResource("2_x5jbr")]
 initial_state = "look-for-enemy"
 
