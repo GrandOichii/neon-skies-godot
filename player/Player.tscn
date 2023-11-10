@@ -157,7 +157,7 @@ shape = SubResource("CircleShape2D_3rtba")
 [node name="ImplantConsumable" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("16_ump4h")
-initial_value = 3
+initial_value = 5
 initial_max = 5
 
 [connection signal="gun_equipped" from="Sprite/AttackController" to="SoundController" method="_on_attack_controller_gun_equipped"]

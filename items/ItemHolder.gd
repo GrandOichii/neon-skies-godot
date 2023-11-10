@@ -1,4 +1,4 @@
-extends Node2D
+extends Sprite2D
 class_name ItemHolder
 
 #
@@ -10,7 +10,7 @@ var item: Item :
 		return item
 	set(value):
 		item = value
-		# TODO set texture
+		texture = item.texture
 
 #
 # signal connections

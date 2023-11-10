@@ -5,6 +5,7 @@ class_name Item
 # exports
 #
 
+@export var texture: Texture2D
 
 #
 # methods
