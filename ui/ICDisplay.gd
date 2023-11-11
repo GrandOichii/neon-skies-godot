@@ -10,5 +10,5 @@ extends Label
 # signal connections
 #
 
-func _on_implant_consumable_changed(to: int):
+func _on_implant_charges_changed(to: int):
 	text = str(to)

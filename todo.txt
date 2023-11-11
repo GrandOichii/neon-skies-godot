@@ -1,4 +1,4 @@
 - add drag and drop to implant manager
 - add implant for ammo printing
-- create resource for implants like healer1 and other
 - better deviation display - line has to start at muzzle
+- add actual enemies

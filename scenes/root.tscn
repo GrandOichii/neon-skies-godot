@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cy1x6ypvpnhra" path="res://ui/CreditsModLabel.tscn" id="3_jg2lf"]
 [ext_resource type="Script" path="res://ui/HeatDisplay.gd" id="3_sk1cx"]
 [ext_resource type="Resource" uid="uid://b5xixbmjqm6cf" path="res://implants/CoreEnhancer.tres" id="5_wvaef"]
-[ext_resource type="Script" path="res://ui/ConsumableDisplay.gd" id="6_hjjw8"]
+[ext_resource type="Script" path="res://ui/ICDisplay.gd" id="6_030wr"]
 [ext_resource type="Resource" uid="uid://q217aef3wn82" path="res://implants/Dash1.tres" id="6_onblf"]
 [ext_resource type="Resource" uid="uid://qbo6ovg2hus0" path="res://implants/Healer1.tres" id="7_a87b3"]
 [ext_resource type="Resource" uid="uid://6wcg2mcfqe1a" path="res://implants/ReflexEnhancer.tres" id="8_fgjfq"]
@@ -162,13 +162,13 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 2
 
-[node name="ConsumableDisplay" type="Label" parent="UI/MarginContainer/Control/HBoxContainer"]
+[node name="ICDisplay" type="Label" parent="UI/MarginContainer/Control/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 40
 text = "5"
 horizontal_alignment = 1
-script = ExtResource("6_hjjw8")
+script = ExtResource("6_030wr")
 
 [node name="HeatDisplay" type="Control" parent="UI/MarginContainer/Control/HBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
@@ -277,7 +277,7 @@ rotation = -3.11473
 [connection signal="max_changed" from="Player/Health" to="UI/MarginContainer/Control/HealthDisplay" method="_on_health_max_changed"]
 [connection signal="heat_changed" from="Player/Heat" to="UI/MarginContainer/Control/HBoxContainer/HeatDisplay" method="_on_heat_heat_changed"]
 [connection signal="thresh_changed" from="Player/Heat" to="UI/MarginContainer/Control/HBoxContainer/HeatDisplay" method="_on_heat_thresh_changed"]
-[connection signal="changed" from="Player/ImplantConsumable" to="UI/MarginContainer/Control/HBoxContainer/ConsumableDisplay" method="_on_implant_consumable_changed"]
+[connection signal="changed" from="Player/ImplantCharges" to="UI/MarginContainer/Control/HBoxContainer/ICDisplay" method="_on_implant_charges_changed"]
 
 [editable path="Player"]
 [editable path="Enemies/Turret1"]

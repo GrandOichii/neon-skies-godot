@@ -24,7 +24,7 @@ func _ready():
 		heal_after_timer_node.wait_time = heal_after
 
 func start_ability():
-	var c = parent.get_node('ImplantConsumable') as ClampedValue
+	var c = parent.get_node('ImplantCharges') as ClampedValue
 	if c.value == 0:
 		return
 	c.value -= ic_cost

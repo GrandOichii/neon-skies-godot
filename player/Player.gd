@@ -23,7 +23,7 @@ signal consumable_count_changed(value: int)
 @onready var sprite_node: Sprite2D = %Sprite
 @onready var implants_node: ImplantsController = %Implants
 @onready var attack_controller_node: AttackController = %AttackController
-@onready var implant_consumable_node: ClampedValue = %ImplantConsumable
+@onready var implant_consumable_node: ClampedValue = %ImplantCharges
 
 #
 # vars
