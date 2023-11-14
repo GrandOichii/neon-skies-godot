@@ -11,8 +11,13 @@ class_name Enemy
 # exports
 #
 
-@export var controller: EnemyController
 @export var drop_table: LootTable
+
+#
+# nodes
+#
+
+@onready var controller: EnemyController = %Controller
 
 #
 # private vars
@@ -35,7 +40,6 @@ func _create_drop(ih: ItemHolder, item: Item):
 
 func _on_health_changed(to: int):
 	# TODO add logic for multiple drops
-	# TODO choose item
 	
 	if to > 0:
 		return

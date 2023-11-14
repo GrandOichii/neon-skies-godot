@@ -7,10 +7,14 @@ class_name Roam
 
 @export var what: String
 @export var speed: float
-@export var body: CharacterBody2D
-@export var sprite: Sprite2D
-@export var nav_agent: NavigationAgent2D
+
+@export_group('Attacking')
+@export var attack_range: float
+@export var attack_controller: AttackController
+
+@export_group('Lost target')
 @export var on_lost: String
+@export var last_pos_var_name: String
 
 #
 # private vars
@@ -29,6 +33,7 @@ func _ready():
 func eb_start():
 	super.eb_start()
 	_target = controller.data[what]
+	controller.move_target = _target.global_position
 	_active = true
 	
 func eb_stop():
@@ -41,13 +46,15 @@ func eb_process(delta: float):
 func eb_physics_process(delta: float):
 	super.eb_physics_process(delta)
 
-	var loc = nav_agent.get_next_path_position()
-	var dir = body.to_local(loc).normalized()
-
-	var vel = dir * speed
-	body.velocity = vel
-	sprite.look_at(_target.position)
-	body.move_and_slide()
+	var distance = controller.body.global_position.distance_to(_target.global_position)
+	if distance < attack_range:
+		controller.sprite.look_at(_target.position)
+		_attack()
+		return
+	controller.move_towards_target()
+	
+func _attack():
+	attack_controller.fire()
 
 #
 # signal connections
@@ -59,10 +66,11 @@ func _setup_agent():
 func _on_update_path_timer_timeout():
 	if not _active or _target == null:
 		return
-	nav_agent.target_position = _target.global_position
+	controller.move_target = _target.global_position
 
-func _on_vision_cone_lost(body: Node2D):
-	if _target != body:
+func _on_vision_cone_lost(b: Node2D):
+	if _target != b:
 		return
+	controller.data[last_pos_var_name] = _target
 	_target = null
 	controller.set_state(on_lost)

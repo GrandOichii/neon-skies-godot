@@ -48,7 +48,7 @@ func _ready():
 		deg += step
 	collision_node.polygon = p
 	
-func _process(delta: float):
+func _process(_delta: float):
 	if _target == null:
 		return
 	ray_cast_node.target_position = ray_cast_node.to_local(_target.global_position)

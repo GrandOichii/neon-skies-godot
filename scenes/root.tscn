@@ -294,3 +294,4 @@ navigation_polygon = SubResource("NavigationPolygon_48x2i")
 [editable path="Player"]
 [editable path="Enemies/Enemy"]
 [editable path="Enemies/Enemy/Controller"]
+[editable path="Enemies/Enemy/Sprite2D/AttackController"]

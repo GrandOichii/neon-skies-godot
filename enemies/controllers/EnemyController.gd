@@ -6,6 +6,10 @@ class_name EnemyController
 #
 
 @export var initial_state: String
+@export var speed: float
+@export var nav_agent: NavigationAgent2D
+@export var body: CharacterBody2D
+@export var sprite: Sprite2D
 
 #
 # nodes
@@ -18,6 +22,12 @@ class_name EnemyController
 #
 
 var data: Dictionary = {}
+var move_target: Vector2 :
+	get:
+		return move_target
+	set(value):
+		move_target = value
+		nav_agent.target_position = move_target
 
 #
 # private vars
@@ -49,3 +59,12 @@ func set_state(state: String):
 		_behaviors[_current].eb_stop()
 	_current = state
 	_behaviors[_current].eb_start()
+
+func move_towards_target():
+	var loc = nav_agent.get_next_path_position()
+	var dir = body.to_local(loc).normalized()
+	var vel = dir * speed
+	
+	body.velocity = vel
+	sprite.look_at(move_target)
+	body.move_and_slide()
