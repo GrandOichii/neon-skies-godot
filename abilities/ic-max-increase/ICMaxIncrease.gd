@@ -14,7 +14,6 @@ class_name ICMaxIncrease
 func activate():
 	super.activate()
 	var ic = parent.get_node('ImplantCharges') as ClampedValue
-	print(ic.max_value)
 	ic.max_value += increase
 	
 func deactivate():

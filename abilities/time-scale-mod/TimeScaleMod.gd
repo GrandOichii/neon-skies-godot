@@ -22,13 +22,18 @@ func _ready():
 
 func start_ability():
 	super.start_ability()
-	# TODO bad, can't use with AI, think of something different
 	Engine.time_scale = set_time_scale_to
+	
+	# TODO could be the last level of upgrade - everyone is slowed down, except the player's speed
+#	(parent as Player).speed = (parent as Player).speed / set_time_scale_to
+	
 	end_timer_node.start()
 	
 func end_ability():
 	super.end_ability()
 	Engine.time_scale = 1
+	
+#	(parent as Player).speed = (parent as Player).speed * set_time_scale_to
 	
 #
 # signal connections

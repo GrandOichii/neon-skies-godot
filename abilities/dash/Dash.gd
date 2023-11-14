@@ -28,7 +28,7 @@ func start_ability():
 	
 func end_ability():
 	super.end_ability()
-	(parent as Player).speed -= speed_mod	
+	(parent as Player).speed -= speed_mod
 	
 #
 # signal connections

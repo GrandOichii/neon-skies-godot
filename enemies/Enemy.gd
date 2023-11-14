@@ -42,6 +42,9 @@ func _on_health_changed(to: int):
 	if _reached_zero:
 		return
 	_reached_zero = true
+	if drop_table == null:
+		queue_free()
+		return
 	var item = drop_table.single()
 	if item == null:
 		queue_free()

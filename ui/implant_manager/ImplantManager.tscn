@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://3dho52n5hbjn"]
+[gd_scene load_steps=7 format=3 uid="uid://3dho52n5hbjn"]
 
 [ext_resource type="Script" path="res://ui/implant_manager/ImplantManager.gd" id="1_rrrg7"]
 [ext_resource type="PackedScene" uid="uid://fs6i60vc342k" path="res://ui/implant_manager/ImplantDisplay.tscn" id="2_hveoc"]
 [ext_resource type="Texture2D" uid="uid://b1e020oy836qu" path="res://art/body.png" id="2_xpuvm"]
 [ext_resource type="PackedScene" uid="uid://crkkcer1lctc5" path="res://common/ui/SlideFromTop.tscn" id="4_1e6i5"]
 [ext_resource type="PackedScene" uid="uid://0egleja7j75g" path="res://ui/implant_manager/ImplantSlotDisplay.tscn" id="4_bguv8"]
+[ext_resource type="Script" path="res://ui/implant_manager/ImplantFullDisplay.gd" id="5_w1upg"]
 
 [node name="ImplantManager" type="Control"]
 process_mode = 3
@@ -101,6 +102,7 @@ slot = 2
 [node name="Right" type="Control" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Right"]
 layout_mode = 1
@@ -116,6 +118,25 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Right"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 200
+
+[node name="ImplantFullDisplay" type="Control" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Right/MarginContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.478431)
+layout_mode = 2
+script = ExtResource("5_w1upg")
 
 [node name="InstalledSlots" type="Node" parent="."]
 

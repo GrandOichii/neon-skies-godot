@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://p6q12ih3nf8"]
+[gd_scene load_steps=22 format=3 uid="uid://p6q12ih3nf8"]
 
 [ext_resource type="PackedScene" uid="uid://3dho52n5hbjn" path="res://ui/implant_manager/ImplantManager.tscn" id="1_3nm73"]
 [ext_resource type="Script" path="res://ui/CreditsDisplay.gd" id="1_5n062"]
@@ -14,14 +14,14 @@
 [ext_resource type="Resource" uid="uid://qbo6ovg2hus0" path="res://implants/Healer1.tres" id="7_a87b3"]
 [ext_resource type="Resource" uid="uid://6wcg2mcfqe1a" path="res://implants/ReflexEnhancer.tres" id="8_fgjfq"]
 [ext_resource type="Resource" uid="uid://cgmcdvyu2q6sv" path="res://implants/ToxinPurger.tres" id="9_m1tjj"]
-[ext_resource type="PackedScene" uid="uid://dxf6th6r4vs8s" path="res://enemies/variations/Turret.tscn" id="11_or1qc"]
+[ext_resource type="PackedScene" uid="uid://sca2kqs0mfok" path="res://enemies/variations/Basic.tscn" id="15_p3qa3"]
 
 [sub_resource type="Gradient" id="Gradient_p146t"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7exxo"]
 gradient = SubResource("Gradient_p146t")
-width = 1124
-height = 629
+width = 1904
+height = 1174
 
 [sub_resource type="Gradient" id="Gradient_lds8k"]
 
@@ -30,6 +30,11 @@ gradient = SubResource("Gradient_lds8k")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ryff5"]
 size = Vector2(53, 418)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_48x2i"]
+vertices = PackedVector2Array(-396, 4, 292, 386, -954, 383, -531, 3, -954, -850, -530, -487, 311, -855, -404, -488)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(6, 1, 0, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-954, -850, 311, -855, 292, 386, -954, 383), PackedVector2Array(-530, -487, -404, -488, -396, 4, -531, 3)])
 
 [node name="Root" type="Node"]
 
@@ -238,9 +243,11 @@ stored_implants = Array[Resource("res://implants/Implant.gd")]([ExtResource("5_w
 implants = NodePath("../../Player/Implants")
 
 [node name="Floor" type="Sprite2D" parent="."]
+position = Vector2(0, 2)
 texture = SubResource("GradientTexture2D_7exxo")
 
 [node name="Player" parent="." instance=ExtResource("2_3b45f")]
+position = Vector2(-6, -255)
 speed = 500.0
 initial_credits = 10
 
@@ -262,12 +269,17 @@ shape = SubResource("RectangleShape2D_ryff5")
 
 [node name="Enemies" type="Node" parent="."]
 
-[node name="Turret1" parent="Enemies" instance=ExtResource("11_or1qc")]
-position = Vector2(-227, -398)
+[node name="Enemy" parent="Enemies" instance=ExtResource("15_p3qa3")]
+position = Vector2(-638, -297)
 
-[node name="Turret2" parent="Enemies" instance=ExtResource("11_or1qc")]
-position = Vector2(175, -327)
-rotation = -3.11473
+[node name="Sprite2D" parent="Enemies/Enemy" index="1"]
+rotation = -1.17819
+
+[node name="Navigation" type="Node" parent="."]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Navigation"]
+position = Vector2(1, 0)
+navigation_polygon = SubResource("NavigationPolygon_48x2i")
 
 [connection signal="credits_changed" from="Player" to="UI/MarginContainer/Control/VBoxContainer/CreditsDisplay" method="_on_player_credits_changed"]
 [connection signal="died" from="Player" to="UI/MarginContainer/Control/PlayerDiedLabel" method="_on_player_died"]
@@ -280,6 +292,5 @@ rotation = -3.11473
 [connection signal="changed" from="Player/ImplantCharges" to="UI/MarginContainer/Control/HBoxContainer/ICDisplay" method="_on_implant_charges_changed"]
 
 [editable path="Player"]
-[editable path="Enemies/Turret1"]
-[editable path="Enemies/Turret1/EnemyController"]
-[editable path="Enemies/Turret1/EnemyController/Behaviors/LookForEnemy"]
+[editable path="Enemies/Enemy"]
+[editable path="Enemies/Enemy/Controller"]

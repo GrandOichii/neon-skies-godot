@@ -19,6 +19,7 @@ extends Control
 #
 
 @onready var stored_node: Container = %Stored
+@onready var implant_full_display_node: ImplantFullDisplayMode = %ImplantFullDisplay
 
 #
 # private vars
@@ -31,6 +32,8 @@ var _slot_map: Dictionary = {}
 #
 
 func _ready():
+	implant_full_display_node.hide()
+	
 	# create slot dictionary and populate slot displays with implants
 	for child in %Slots.get_children():
 		var slot_display = child as ImplantSlotDisplay
@@ -55,6 +58,7 @@ func _ready():
 		var display = _create_display()
 		stored_node.add_child(display)
 		display.implant = implant
+		display.installed = false
 
 func _create_display():
 	var result = implant_display_ps.instantiate() as ImplantDisplay
@@ -70,7 +74,6 @@ func _pressed_display(display: ImplantDisplay):
 	if display.installed:
 		_move_to_stored(display)
 		return
-		
 	var slot = display.implant.slot
 	var display_slot = _slot_map[slot]
 	if display_slot.has_installed_implant():

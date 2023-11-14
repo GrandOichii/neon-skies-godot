@@ -6,6 +6,8 @@ class_name ImplantDisplay
 #
 
 signal pressed
+signal hover_start
+signal hover_end
 
 #
 # nodes

@@ -40,6 +40,9 @@ func _ready():
 	
 func _process(delta):
 	_behaviors[_current].eb_process(delta)
+	
+func _physics_process(delta):
+	_behaviors[_current].eb_physics_process(delta)
 
 func set_state(state: String):
 	if _current.length() != 0:

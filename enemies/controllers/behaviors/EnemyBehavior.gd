@@ -25,3 +25,6 @@ func eb_stop():
 	
 func eb_process(_delta: float):
 	pass
+	
+func eb_physics_process(delta: float):
+	pass

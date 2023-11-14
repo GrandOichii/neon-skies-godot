@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://sca2kqs0mfok"]
+
+[ext_resource type="PackedScene" uid="uid://cfcer7aeaep8x" path="res://enemies/Enemy.tscn" id="1_ygql8"]
+[ext_resource type="PackedScene" uid="uid://b7txw2bq7igc2" path="res://enemies/controllers/EnemyController.tscn" id="2_wa1e1"]
+[ext_resource type="PackedScene" uid="uid://bw5l4rqeb3qt6" path="res://enemies/controllers/behaviors/variations/Chase.tscn" id="3_xfby1"]
+[ext_resource type="PackedScene" uid="uid://b2enik8bjmhw5" path="res://enemies/common/VisionCone.tscn" id="4_f6j83"]
+[ext_resource type="PackedScene" uid="uid://d26d7aod68kxw" path="res://enemies/controllers/behaviors/variations/Guard.tscn" id="4_ovycj"]
+
+[node name="Basic" node_paths=PackedStringArray("controller") instance=ExtResource("1_ygql8")]
+controller = NodePath("Controller")
+
+[node name="Controller" parent="." index="0" instance=ExtResource("2_wa1e1")]
+initial_state = "guard"
+
+[node name="Chase" parent="Controller/Behaviors" index="0" node_paths=PackedStringArray("body", "sprite", "nav_agent") instance=ExtResource("3_xfby1")]
+what = "enemy"
+speed = 300.0
+body = NodePath("../../..")
+sprite = NodePath("../../../Sprite2D")
+nav_agent = NodePath("../../../NavigationAgent2D")
+on_lost = "guard"
+state = "chase"
+
+[node name="Guard" parent="Controller/Behaviors" index="1" node_paths=PackedStringArray("sprite") instance=ExtResource("4_ovycj")]
+sprite = NodePath("../../../Sprite2D")
+on_spotted = "chase"
+state = "guard"
+
+[node name="VisionCone" parent="Sprite2D" index="0" instance=ExtResource("4_f6j83")]
+look_for_group = "player"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="4"]
+avoidance_enabled = true
+debug_enabled = true
+
+[connection signal="lost" from="Sprite2D/VisionCone" to="Controller/Behaviors/Chase" method="_on_vision_cone_lost"]
+[connection signal="spotted" from="Sprite2D/VisionCone" to="Controller/Behaviors/Guard" method="_on_vision_cone_spotted"]
+
+[editable path="Controller"]
