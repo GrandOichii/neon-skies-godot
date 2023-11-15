@@ -8,6 +8,7 @@ class_name EnemyController
 @export var initial_state: String
 @export var speed: float
 @export var nav_agent: NavigationAgent2D
+@export var consider_reached_distance: float
 @export var body: CharacterBody2D
 @export var sprite: Sprite2D
 
@@ -46,12 +47,20 @@ func _ready():
 		beh.controller = self
 		_behaviors[beh.state] = beh
 		
+	call_deferred('_setup_agent')
+	
+func _setup_agent():
+	await get_tree().process_frame # TODO? found online, is ok
 	set_state(initial_state)
 	
 func _process(delta):
+	if _current.length() == 0:
+		return
 	_behaviors[_current].eb_process(delta)
 	
 func _physics_process(delta):
+	if _current.length() == 0:
+		return
 	_behaviors[_current].eb_physics_process(delta)
 
 func set_state(state: String):
@@ -73,7 +82,9 @@ func move_towards_target():
 
 func reset_target():
 	nav_agent.set_velocity(Vector2.ZERO)
-
+	
+func reached_target() -> bool:
+	return nav_agent.is_target_reached() or nav_agent.distance_to_target() < consider_reached_distance
 #
 # signal connections
 #
@@ -82,3 +93,4 @@ func reset_target():
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2):
 	body.velocity = safe_velocity
 	body.move_and_slide()
+	reset_target()

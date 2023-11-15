@@ -13,7 +13,7 @@ signal found_target
 
 @export var turn_speed: float
 @export var range: float
-@export var body: CharacterBody2D
+@export var body: Node2D
 @export var laser_pointer_start: Node2D
 
 @export_group('Sound')
@@ -74,6 +74,8 @@ func eb_process(delta: float):
 func _process(_delta: float):
 	var p1 = laser_pointer_start.global_position
 	var p2 = laser_pointer_start.global_position + Vector2(range, 0).rotated(body.rotation)
+#	var p1 = Vector2.ZERO
+#	var p2 = Vector2(range, 0)
 	raycast_node.position = p1
 	raycast_node.target_position = Vector2(range, 0).rotated(body.rotation)
 	laser_line_node.set_point_position(0, p1)

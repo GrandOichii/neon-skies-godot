@@ -80,6 +80,8 @@ func _input(event):
 	for ability in activated:
 		if not event.is_action_pressed(ability.player_input):
 			continue
+#		if not offensive_enabled and ability.is_offensive:
+#			continue
 		ability.do()
 		return
 

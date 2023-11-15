@@ -270,19 +270,23 @@ shape = SubResource("RectangleShape2D_ryff5")
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Enemy" parent="Enemies" instance=ExtResource("15_p3qa3")]
-position = Vector2(-638, -297)
+position = Vector2(-621, 208)
+
+[node name="Controller" parent="Enemies/Enemy" index="0"]
+consider_reached_distance = 20.0
+
+[node name="Patrol" parent="Enemies/Enemy/Controller/Behaviors" index="0"]
+initial_patrol_type = 2
+
+[node name="PatrolLine" parent="Enemies/Enemy/Controller/Behaviors/Patrol" index="0"]
+points = PackedVector2Array(-633, -531, -303, -531, -303, 40, -642, 40)
 
 [node name="Sprite2D" parent="Enemies/Enemy" index="1"]
 rotation = -1.17819
 
 [node name="NavigationAgent2D" parent="Enemies/Enemy" index="5"]
+path_desired_distance = 20.0
 radius = 10.6
-
-[node name="Basic" parent="Enemies" instance=ExtResource("15_p3qa3")]
-position = Vector2(-641, -124)
-
-[node name="Sprite2D" parent="Enemies/Basic" index="1"]
-rotation = 0.85587
 
 [node name="Navigation" type="Node" parent="."]
 
@@ -303,7 +307,5 @@ navigation_polygon = SubResource("NavigationPolygon_48x2i")
 [editable path="Player"]
 [editable path="Enemies/Enemy"]
 [editable path="Enemies/Enemy/Controller"]
+[editable path="Enemies/Enemy/Controller/Behaviors/Patrol"]
 [editable path="Enemies/Enemy/Sprite2D/AttackController"]
-[editable path="Enemies/Basic"]
-[editable path="Enemies/Basic/Controller"]
-[editable path="Enemies/Basic/Sprite2D/AttackController"]

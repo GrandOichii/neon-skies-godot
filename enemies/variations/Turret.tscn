@@ -44,7 +44,7 @@ initial_state = "look-for-enemy"
 [node name="LookForEnemy" parent="Controller/Behaviors" index="0" node_paths=PackedStringArray("body", "laser_pointer_start") instance=ExtResource("3_gr7tc")]
 turn_speed = 1.0
 range = 1000.0
-body = NodePath("../../..")
+body = NodePath("../../../Sprite2D")
 laser_pointer_start = NodePath("../../../Sprite2D/LaserPointerStart")
 sound_track_turn_speed = 8.0
 sound_track_duration = 2.0

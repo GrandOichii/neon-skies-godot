@@ -7,6 +7,7 @@ class_name Roam
 
 @export var what: String
 @export var speed: float
+@export var stop_range: float
 
 @export_group('Attacking')
 @export var attack_range: float
@@ -28,7 +29,7 @@ var _target: Node2D = null
 #
 
 func _ready():
-	call_deferred('_setup_agent')
+	pass
 
 func eb_start():
 	super.eb_start()
@@ -48,8 +49,9 @@ func eb_physics_process(delta: float):
 
 	var distance = controller.body.global_position.distance_to(_target.global_position)
 	if distance < attack_range:
-		controller.sprite.look_at(_target.position)
 		_attack()
+	controller.sprite.look_at(_target.position)
+	if distance < stop_range:
 		return
 	controller.move_towards_target()
 	
@@ -59,9 +61,6 @@ func _attack():
 #
 # signal connections
 #
-
-func _setup_agent():
-	await get_tree().process_frame # TODO? found online, is ok
 
 func _on_update_path_timer_timeout():
 	if not _active or _target == null:

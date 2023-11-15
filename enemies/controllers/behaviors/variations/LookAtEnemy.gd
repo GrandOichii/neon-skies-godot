@@ -5,7 +5,7 @@ extends EnemyBehavior
 #
 
 @export var attack_controller: AttackController
-@export var body: CharacterBody2D
+@export var body: Node2D
 @export var lost_target_state: String
 @export var target_lost_timeout: float
 
