@@ -38,6 +38,16 @@ var credits: int :
 			credits = 0
 		credits_changed.emit(credits)
 		
+var offensive_enabled: bool = true :
+	get:
+		return offensive_enabled
+	set(value):
+		offensive_enabled = value
+		var v = Node.PROCESS_MODE_DISABLED
+		if value:
+			v = Node.PROCESS_MODE_INHERIT
+		attack_controller_node.process_mode = v
+		
 #
 # private vars
 #
@@ -62,6 +72,10 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func _input(event):
+	# TODO? add an 'offensive' flag to abilities - if need be
+	
+	if not offensive_enabled:
+		return
 	var activated = implants_node.get_activated_abilities()
 	for ability in activated:
 		if not event.is_action_pressed(ability.player_input):
