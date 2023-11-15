@@ -275,6 +275,9 @@ position = Vector2(-638, -297)
 [node name="Sprite2D" parent="Enemies/Enemy" index="1"]
 rotation = -1.17819
 
+[node name="NavigationAgent2D" parent="Enemies/Enemy" index="5"]
+radius = 10.6
+
 [node name="Navigation" type="Node" parent="."]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Navigation"]

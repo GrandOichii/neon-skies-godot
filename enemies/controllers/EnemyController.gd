@@ -63,8 +63,16 @@ func set_state(state: String):
 func move_towards_target():
 	var loc = nav_agent.get_next_path_position()
 	var dir = body.to_local(loc).normalized()
+	
 	var vel = dir * speed
 	
-	body.velocity = vel
 	sprite.look_at(move_target)
+	nav_agent.set_velocity(vel)
+	
+#
+# signal connections
+#
+
+func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2):
+	body.velocity = safe_velocity
 	body.move_and_slide()
