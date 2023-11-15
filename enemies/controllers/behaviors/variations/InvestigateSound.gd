@@ -25,6 +25,7 @@ func eb_start():
 func eb_physics_process(delta: float):
 	controller.move_towards_target()
 	if controller.nav_agent.is_target_reached() or controller.nav_agent.distance_to_target() < consider_reached_distance:
+		controller.reset_target()
 		controller.set_state(on_reached_point)
 
 #

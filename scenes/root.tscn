@@ -278,6 +278,12 @@ rotation = -1.17819
 [node name="NavigationAgent2D" parent="Enemies/Enemy" index="5"]
 radius = 10.6
 
+[node name="Basic" parent="Enemies" instance=ExtResource("15_p3qa3")]
+position = Vector2(-641, -124)
+
+[node name="Sprite2D" parent="Enemies/Basic" index="1"]
+rotation = 0.85587
+
 [node name="Navigation" type="Node" parent="."]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Navigation"]
@@ -298,3 +304,6 @@ navigation_polygon = SubResource("NavigationPolygon_48x2i")
 [editable path="Enemies/Enemy"]
 [editable path="Enemies/Enemy/Controller"]
 [editable path="Enemies/Enemy/Sprite2D/AttackController"]
+[editable path="Enemies/Basic"]
+[editable path="Enemies/Basic/Controller"]
+[editable path="Enemies/Basic/Sprite2D/AttackController"]

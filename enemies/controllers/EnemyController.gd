@@ -68,11 +68,17 @@ func move_towards_target():
 	
 	sprite.look_at(move_target)
 	nav_agent.set_velocity(vel)
-	
+#	body.velocity = vel
+#	body.move_and_slide()
+
+func reset_target():
+	nav_agent.set_velocity(Vector2.ZERO)
+
 #
 # signal connections
 #
 
+# TODO not yet in use, has to be used with obstacles, although they don't seem to be working for me
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2):
 	body.velocity = safe_velocity
 	body.move_and_slide()

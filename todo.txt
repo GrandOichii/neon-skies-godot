@@ -2,3 +2,5 @@
 - add implant for ammo printing
 - better deviation display - line has to start at muzzle
 - add actual enemies
+
+- figure out why obstacles don't work

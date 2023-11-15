@@ -72,5 +72,6 @@ func _on_vision_cone_lost(b: Node2D):
 	if _target != b:
 		return
 	controller.data[last_pos_var_name] = _target
+#	controller.move_target
 	_target = null
 	controller.set_state(on_lost)

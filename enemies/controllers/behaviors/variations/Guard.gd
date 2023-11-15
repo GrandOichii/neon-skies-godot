@@ -16,6 +16,9 @@ extends EnemyBehavior
 
 func eb_physics_process(delta: float):
 	super.eb_physics_process(delta)
+	
+func eb_start():
+	super.eb_start()
 
 #
 # signal connections
