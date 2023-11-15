@@ -275,11 +275,10 @@ position = Vector2(-621, 208)
 [node name="Controller" parent="Enemies/Enemy" index="0"]
 consider_reached_distance = 20.0
 
-[node name="Patrol" parent="Enemies/Enemy/Controller/Behaviors" index="0"]
-initial_patrol_type = 2
-
 [node name="PatrolLine" parent="Enemies/Enemy/Controller/Behaviors/Patrol" index="0"]
-points = PackedVector2Array(-633, -531, -303, -531, -303, 40, -642, 40)
+position = Vector2(216, -192)
+points = PackedVector2Array(-851, -372, -486, -389, -497, 261, -840, 246)
+width = 2.0
 
 [node name="Sprite2D" parent="Enemies/Enemy" index="1"]
 rotation = -1.17819

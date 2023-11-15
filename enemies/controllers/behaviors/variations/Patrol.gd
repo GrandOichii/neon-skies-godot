@@ -52,7 +52,7 @@ func eb_start():
 		if pd < d or i == 0:
 			d = pd
 			_current = i
-	controller.move_target = patrol_line_node.get_point_position(_current)
+	controller.move_target = patrol_line_node.global_position + patrol_line_node.get_point_position(_current)
 	
 func eb_physics_process(delta: float):
 	super.eb_physics_process(delta)
@@ -70,4 +70,4 @@ func eb_physics_process(delta: float):
 		if _current < 0 or _current >= s:
 			_step *= -1
 			_current += 2 * _step
-	controller.move_target = patrol_line_node.get_point_position(_current)
+	controller.move_target = patrol_line_node.global_position + patrol_line_node.get_point_position(_current)
