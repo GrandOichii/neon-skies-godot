@@ -53,7 +53,7 @@ func eb_physics_process(delta: float):
 	controller.sprite.look_at(_target.position)
 	if distance < stop_range:
 		return
-	controller.move_towards_target()
+	controller.move_towards_target(delta)
 	
 func _attack():
 	attack_controller.fire()

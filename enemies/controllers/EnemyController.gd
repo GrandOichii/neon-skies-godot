@@ -69,13 +69,20 @@ func set_state(state: String):
 	_current = state
 	_behaviors[_current].eb_start()
 
-func move_towards_target():
+func move_towards_target(delta: float):
 	var loc = nav_agent.get_next_path_position()
 	var dir = body.to_local(loc).normalized()
 	
 	var vel = dir * speed
 	
-	sprite.look_at(move_target)
+#	var t = create_tween()
+	var target = (loc - sprite.global_position).angle()
+	var lr = lerp_angle(sprite.global_rotation, target, .1)
+	
+	sprite.global_rotation = lr
+#	create_tween().tween_method(sprite.rotate, sprite.rotation, r, .1)
+#	create_tween().tween_property()
+
 	nav_agent.set_velocity(vel)
 #	body.velocity = vel
 #	body.move_and_slide()

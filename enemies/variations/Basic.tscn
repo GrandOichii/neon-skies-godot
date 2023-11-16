@@ -45,6 +45,7 @@ initial_state = "patrol"
 speed = 300.0
 
 [node name="Patrol" parent="Controller/Behaviors" index="0" instance=ExtResource("5_bl14a")]
+initial_patrol_type = null
 state = "patrol"
 
 [node name="Chase" parent="Controller/Behaviors" index="1" node_paths=PackedStringArray("attack_controller") instance=ExtResource("3_xfby1")]
@@ -64,6 +65,7 @@ on_heard_sound = "investigate"
 state = "guard"
 
 [node name="InvestigateSound" parent="Controller/Behaviors" index="3" instance=ExtResource("5_lskpi")]
+react_after = null
 stay_for = 2.0
 on_reached_point = "patrol"
 state = "investigate"

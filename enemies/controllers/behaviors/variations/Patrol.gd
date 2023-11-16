@@ -57,7 +57,7 @@ func eb_start():
 func eb_physics_process(delta: float):
 	super.eb_physics_process(delta)
 	
-	controller.move_towards_target()
+	controller.move_towards_target(delta)
 	if not controller.reached_target():
 		return
 	var switch = false

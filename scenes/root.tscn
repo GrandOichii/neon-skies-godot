@@ -277,8 +277,11 @@ consider_reached_distance = 20.0
 
 [node name="PatrolLine" parent="Enemies/Enemy/Controller/Behaviors/Patrol" index="0"]
 position = Vector2(216, -192)
-points = PackedVector2Array(-851, -372, -486, -389, -497, 261, -840, 246)
+points = PackedVector2Array(-588, -556, -381, 29, -497, 261, -840, 246)
 width = 2.0
+
+[node name="Chase" parent="Enemies/Enemy/Controller/Behaviors" index="1"]
+attack_controller = null
 
 [node name="Sprite2D" parent="Enemies/Enemy" index="1"]
 rotation = -1.17819

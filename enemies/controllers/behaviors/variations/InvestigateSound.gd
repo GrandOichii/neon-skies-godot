@@ -37,7 +37,7 @@ func eb_physics_process(delta: float):
 	if not wait_timer_node.is_stopped():
 		return
 	
-	controller.move_towards_target()
+	controller.move_towards_target(delta)
 	if controller.reached_target():
 		if stay_for <= 0:
 			_end()

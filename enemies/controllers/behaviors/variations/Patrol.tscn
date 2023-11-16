@@ -4,6 +4,8 @@
 
 [node name="Patrol" type="Node"]
 script = ExtResource("1_rs10d")
+initial_patrol_type = null
+state = null
 
 [node name="PatrolLine" type="Line2D" parent="."]
 unique_name_in_owner = true

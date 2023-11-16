@@ -4,6 +4,10 @@
 
 [node name="InvestigateSound" type="Node"]
 script = ExtResource("1_0tt82")
+react_after = null
+stay_for = null
+on_reached_point = null
+state = null
 
 [node name="WaitTimer" type="Timer" parent="."]
 unique_name_in_owner = true

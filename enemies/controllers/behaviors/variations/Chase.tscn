@@ -4,6 +4,13 @@
 
 [node name="Chase" type="Node"]
 script = ExtResource("1_q13s8")
+what = null
+speed = null
+stop_range = null
+attack_range = null
+on_lost = null
+last_pos_var_name = null
+state = null
 
 [node name="UpdatePathTimer" type="Timer" parent="."]
 wait_time = 0.1
