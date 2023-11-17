@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://p6q12ih3nf8"]
+[gd_scene load_steps=23 format=3 uid="uid://p6q12ih3nf8"]
 
 [ext_resource type="PackedScene" uid="uid://3dho52n5hbjn" path="res://ui/implant_manager/ImplantManager.tscn" id="1_3nm73"]
 [ext_resource type="Script" path="res://ui/CreditsDisplay.gd" id="1_5n062"]
@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://6wcg2mcfqe1a" path="res://implants/ReflexEnhancer.tres" id="8_fgjfq"]
 [ext_resource type="Resource" uid="uid://cgmcdvyu2q6sv" path="res://implants/ToxinPurger.tres" id="9_m1tjj"]
 [ext_resource type="PackedScene" uid="uid://sca2kqs0mfok" path="res://enemies/variations/Basic.tscn" id="15_p3qa3"]
+[ext_resource type="Script" path="res://enemies/common/PatrolLine.gd" id="16_2mlsl"]
 
 [sub_resource type="Gradient" id="Gradient_p146t"]
 
@@ -23,6 +24,11 @@ gradient = SubResource("Gradient_p146t")
 width = 1904
 height = 1174
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_48x2i"]
+vertices = PackedVector2Array(-396, 4, 292, 386, -954, 383, -531, 3, -954, -850, -530, -487, 311, -855, -404, -488)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(6, 1, 0, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-954, -850, 311, -855, 292, 386, -954, 383), PackedVector2Array(-530, -487, -404, -488, -396, 4, -531, 3)])
+
 [sub_resource type="Gradient" id="Gradient_lds8k"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_2610r"]
@@ -30,11 +36,6 @@ gradient = SubResource("Gradient_lds8k")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ryff5"]
 size = Vector2(53, 418)
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_48x2i"]
-vertices = PackedVector2Array(-396, 4, 292, 386, -954, 383, -531, 3, -954, -850, -530, -487, 311, -855, -404, -488)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(6, 1, 0, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-954, -850, 311, -855, 292, 386, -954, 383), PackedVector2Array(-530, -487, -404, -488, -396, 4, -531, 3)])
 
 [node name="Root" type="Node"]
 
@@ -242,9 +243,58 @@ text = "100"
 stored_implants = Array[Resource("res://implants/Implant.gd")]([ExtResource("5_wvaef"), ExtResource("6_onblf"), ExtResource("7_a87b3"), ExtResource("8_fgjfq"), ExtResource("9_m1tjj")])
 implants = NodePath("../../Player/Implants")
 
-[node name="Floor" type="Sprite2D" parent="."]
+[node name="Scene" type="Node2D" parent="."]
+
+[node name="Floor" type="Sprite2D" parent="Scene"]
 position = Vector2(0, 2)
 texture = SubResource("GradientTexture2D_7exxo")
+
+[node name="Navigation" type="Node2D" parent="Scene"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Scene/Navigation"]
+position = Vector2(1, 0)
+navigation_polygon = SubResource("NavigationPolygon_48x2i")
+
+[node name="Enemies" type="Node2D" parent="Scene"]
+
+[node name="Enemy" parent="Scene/Enemies" instance=ExtResource("15_p3qa3")]
+position = Vector2(-621, 208)
+
+[node name="Controller" parent="Scene/Enemies/Enemy" index="0"]
+consider_reached_distance = 20.0
+
+[node name="Patrol" parent="Scene/Enemies/Enemy/Controller/Behaviors" index="0" node_paths=PackedStringArray("patrol_line")]
+initial_patrol_type = 0
+patrol_line = NodePath("../../../../../PatrolLines/PatrolLine")
+
+[node name="InvestigateSound" parent="Scene/Enemies/Enemy/Controller/Behaviors" index="3"]
+react_after = 0.0
+
+[node name="Sprite2D" parent="Scene/Enemies/Enemy" index="1"]
+rotation = -1.17819
+
+[node name="NavigationAgent2D" parent="Scene/Enemies/Enemy" index="5"]
+path_desired_distance = 20.0
+radius = 10.6
+
+[node name="Walls" type="Node2D" parent="Scene"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Scene/Walls" groups=["solid"]]
+position = Vector2(-466, -240)
+
+[node name="Sprite2D" type="Sprite2D" parent="Scene/Walls/StaticBody2D"]
+scale = Vector2(0.821885, 6.52927)
+texture = SubResource("GradientTexture2D_2610r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scene/Walls/StaticBody2D"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_ryff5")
+
+[node name="PatrolLines" type="Node2D" parent="Scene"]
+
+[node name="PatrolLine" type="Line2D" parent="Scene/PatrolLines"]
+points = PackedVector2Array(-627, -591, -257, -600, -230, 87, -612, 78)
+script = ExtResource("16_2mlsl")
 
 [node name="Player" parent="." instance=ExtResource("2_3b45f")]
 position = Vector2(-6, -255)
@@ -253,48 +303,6 @@ initial_credits = 10
 
 [node name="Heat" parent="Player" index="6"]
 heat_reduction = 10.0
-
-[node name="Walls" type="Node" parent="."]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Walls" groups=["solid"]]
-position = Vector2(-466, -240)
-
-[node name="Sprite2D" type="Sprite2D" parent="Walls/StaticBody2D"]
-scale = Vector2(0.821885, 6.52927)
-texture = SubResource("GradientTexture2D_2610r")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_ryff5")
-
-[node name="Enemies" type="Node" parent="."]
-
-[node name="Enemy" parent="Enemies" instance=ExtResource("15_p3qa3")]
-position = Vector2(-621, 208)
-
-[node name="Controller" parent="Enemies/Enemy" index="0"]
-consider_reached_distance = 20.0
-
-[node name="PatrolLine" parent="Enemies/Enemy/Controller/Behaviors/Patrol" index="0"]
-position = Vector2(216, -192)
-points = PackedVector2Array(-588, -556, -381, 29, -497, 261, -840, 246)
-width = 2.0
-
-[node name="Chase" parent="Enemies/Enemy/Controller/Behaviors" index="1"]
-attack_controller = null
-
-[node name="Sprite2D" parent="Enemies/Enemy" index="1"]
-rotation = -1.17819
-
-[node name="NavigationAgent2D" parent="Enemies/Enemy" index="5"]
-path_desired_distance = 20.0
-radius = 10.6
-
-[node name="Navigation" type="Node" parent="."]
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Navigation"]
-position = Vector2(1, 0)
-navigation_polygon = SubResource("NavigationPolygon_48x2i")
 
 [connection signal="credits_changed" from="Player" to="UI/MarginContainer/Control/VBoxContainer/CreditsDisplay" method="_on_player_credits_changed"]
 [connection signal="died" from="Player" to="UI/MarginContainer/Control/PlayerDiedLabel" method="_on_player_died"]
@@ -306,8 +314,8 @@ navigation_polygon = SubResource("NavigationPolygon_48x2i")
 [connection signal="thresh_changed" from="Player/Heat" to="UI/MarginContainer/Control/HBoxContainer/HeatDisplay" method="_on_heat_thresh_changed"]
 [connection signal="changed" from="Player/ImplantCharges" to="UI/MarginContainer/Control/HBoxContainer/ICDisplay" method="_on_implant_charges_changed"]
 
+[editable path="Scene/Enemies/Enemy"]
+[editable path="Scene/Enemies/Enemy/Controller"]
+[editable path="Scene/Enemies/Enemy/Controller/Behaviors/Patrol"]
+[editable path="Scene/Enemies/Enemy/Sprite2D/AttackController"]
 [editable path="Player"]
-[editable path="Enemies/Enemy"]
-[editable path="Enemies/Enemy/Controller"]
-[editable path="Enemies/Enemy/Controller/Behaviors/Patrol"]
-[editable path="Enemies/Enemy/Sprite2D/AttackController"]

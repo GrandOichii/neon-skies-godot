@@ -33,6 +33,9 @@ func _ready():
 
 func eb_start():
 	super.eb_start()
+	
+	controller.speed = speed
+	
 	_target = controller.data[what]
 	controller.move_target = _target.global_position
 	_active = true

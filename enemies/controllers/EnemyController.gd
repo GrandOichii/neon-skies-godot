@@ -6,7 +6,6 @@ class_name EnemyController
 #
 
 @export var initial_state: String
-@export var speed: float
 @export var nav_agent: NavigationAgent2D
 @export var consider_reached_distance: float
 @export var body: CharacterBody2D
@@ -21,6 +20,8 @@ class_name EnemyController
 #
 # vars
 #
+
+var speed: float
 
 var data: Dictionary = {}
 var move_target: Vector2 :

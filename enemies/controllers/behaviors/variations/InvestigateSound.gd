@@ -5,6 +5,8 @@ class_name InvestigateBehavior
 # exports
 #
 
+@export var speed: float
+# TODO not in use currently
 @export var react_after: float = 0
 @export var stay_for: float
 @export var on_reached_point: String
@@ -25,6 +27,8 @@ class_name InvestigateBehavior
 
 func eb_start():
 	super.eb_start()
+	
+	controller.speed = speed
 	
 	controller.move_target = controller.data['sound_area'].global_position
 
