@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d26d7aod68kxw"]
-
-[ext_resource type="Script" path="res://enemies/controllers/behaviors/variations/Guard.gd" id="1_kbivh"]
-
-[node name="Guard" type="Node"]
-script = ExtResource("1_kbivh")

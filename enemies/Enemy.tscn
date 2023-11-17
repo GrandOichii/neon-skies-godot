@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfcer7aeaep8x"]
+[gd_scene load_steps=6 format=3 uid="uid://cfcer7aeaep8x"]
 
 [ext_resource type="Script" path="res://enemies/Enemy.gd" id="1_6dtga"]
 [ext_resource type="Texture2D" uid="uid://vkxcq0dwbq7y" path="res://art/player.png" id="1_s5kqk"]
 [ext_resource type="PackedScene" uid="uid://cv0d2m1b0voq" path="res://items/ItemHolder.tscn" id="2_omidv"]
-[ext_resource type="PackedScene" uid="uid://b7txw2bq7igc2" path="res://enemies/controllers/EnemyController.tscn" id="3_sdhj5"]
 [ext_resource type="Script" path="res://common/ClampedValue.gd" id="3_ysukb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uqfw4"]
@@ -13,14 +12,8 @@ radius = 38.6394
 script = ExtResource("1_6dtga")
 item_holder_ps = ExtResource("2_omidv")
 
-[node name="Controller" parent="." node_paths=PackedStringArray("nav_agent", "body", "sprite") instance=ExtResource("3_sdhj5")]
+[node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-speed = 200.0
-nav_agent = NodePath("../NavigationAgent2D")
-body = NodePath("..")
-sprite = NodePath("../Sprite2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_s5kqk")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
@@ -31,11 +24,15 @@ script = ExtResource("3_ysukb")
 initial_value = 2
 initial_max = 2
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavAgent" type="NavigationAgent2D" parent="."]
+unique_name_in_owner = true
 path_desired_distance = 40.0
 avoidance_enabled = true
 max_speed = 1000.0
 debug_enabled = true
 
+[node name="Behaviors" type="Node" parent="."]
+unique_name_in_owner = true
+
 [connection signal="changed" from="Health" to="." method="_on_health_changed"]
-[connection signal="velocity_computed" from="NavigationAgent2D" to="Controller" method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="velocity_computed" from="NavAgent" to="." method="_on_navigation_agent_2d_velocity_computed"]

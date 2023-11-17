@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dqpa00kwayfee"]
 
-[ext_resource type="Script" path="res://enemies/controllers/behaviors/variations/InvestigateSound.gd" id="1_0tt82"]
+[ext_resource type="Script" path="res://enemies/behaviors/variations/InvestigateSound.gd" id="1_0tt82"]
 
 [node name="InvestigateSound" type="Node"]
 script = ExtResource("1_0tt82")

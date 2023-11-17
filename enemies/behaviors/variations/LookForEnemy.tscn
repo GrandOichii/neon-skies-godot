@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dcnujwx4a1qso"]
 
-[ext_resource type="Script" path="res://enemies/controllers/behaviors/variations/LookForEnemy.gd" id="1_1vngl"]
+[ext_resource type="Script" path="res://enemies/behaviors/variations/LookForEnemy.gd" id="1_1vngl"]
 
 [node name="LookForEnemy" type="Node"]
 script = ExtResource("1_1vngl")

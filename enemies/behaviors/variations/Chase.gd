@@ -50,7 +50,7 @@ func eb_process(delta: float):
 func eb_physics_process(delta: float):
 	super.eb_physics_process(delta)
 
-	var distance = controller.body.global_position.distance_to(_target.global_position)
+	var distance = controller.global_position.distance_to(_target.global_position)
 	if distance < attack_range:
 		_attack()
 	controller.sprite.look_at(_target.position)
@@ -74,6 +74,11 @@ func _on_vision_cone_lost(b: Node2D):
 	if _target != b:
 		return
 	controller.data[last_pos_var_name] = _target
-#	controller.move_target
 	_target = null
-	controller.set_state(on_lost)
+	controller.current_state = on_lost
+
+func _on_vision_cone_spotted(body: Node2D):
+	if controller.current_state == state:
+		return
+	controller.data[what] = body
+	controller.current_state = state

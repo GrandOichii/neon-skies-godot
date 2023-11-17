@@ -51,14 +51,15 @@ func eb_physics_process(delta: float):
 
 func _end():
 	controller.reset_target()
-	controller.set_state(on_reached_point)
+	controller.current_state = on_reached_point
 
 #
 # signal connections
 #
 
 func _on_sound_listener_heard_sound(area: Area2D):
-	controller.move_target = area.global_position
+	controller.data['sound_area'] = area
+	controller.current_state = state
 
 func _on_wait_timer_timeout():
 	_end()

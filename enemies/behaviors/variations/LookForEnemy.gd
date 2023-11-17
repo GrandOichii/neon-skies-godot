@@ -5,7 +5,6 @@ extends EnemyBehavior
 #
 
 signal lost_target
-signal found_target
 
 #
 # exports
@@ -13,6 +12,7 @@ signal found_target
 
 @export var turn_speed: float
 @export var range: float
+@export var found_target_state: String
 @export var body: Node2D
 @export var laser_pointer_start: Node2D
 
@@ -88,8 +88,8 @@ func _process(_delta: float):
 		var is_player = b.is_in_group('player')
 		if is_player and not _found:
 			controller.data['enemy'] = b
-			found_target.emit()
 			_found = true
+			controller.current_state = found_target_state
 		if _found and not is_player:
 			lost_target.emit()
 			_found = false

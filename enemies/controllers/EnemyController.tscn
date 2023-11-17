@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7txw2bq7igc2"]
-
-[ext_resource type="Script" path="res://enemies/controllers/EnemyController.gd" id="1_gj2k5"]
-
-[node name="EnemyController" type="Node"]
-script = ExtResource("1_gj2k5")
-
-[node name="Behaviors" type="Node" parent="."]
-unique_name_in_owner = true

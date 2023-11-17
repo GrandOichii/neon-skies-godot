@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1475hpetfefu"]
+
+[ext_resource type="Script" path="res://enemies/behaviors/variations/Patrol.gd" id="1_h7ajb"]
+
+[node name="Patrol" type="Node"]
+script = ExtResource("1_h7ajb")

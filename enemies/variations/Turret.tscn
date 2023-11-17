@@ -3,13 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://cfcer7aeaep8x" path="res://enemies/Enemy.tscn" id="1_nc50y"]
 [ext_resource type="Script" path="res://items/tables/LootTableRow.gd" id="2_3r8lf"]
 [ext_resource type="Script" path="res://items/tables/LootTable.gd" id="2_8sr51"]
-[ext_resource type="Texture2D" uid="uid://8h2c4vsesupr" path="res://art/turret1.png" id="2_pgi6w"]
-[ext_resource type="PackedScene" uid="uid://dcnujwx4a1qso" path="res://enemies/controllers/behaviors/variations/LookForEnemy.tscn" id="3_gr7tc"]
+[ext_resource type="PackedScene" uid="uid://dcnujwx4a1qso" path="res://enemies/behaviors/variations/LookForEnemy.tscn" id="3_gr7tc"]
 [ext_resource type="Script" path="res://items/variations/ImlantResource.gd" id="4_cyj5d"]
-[ext_resource type="PackedScene" uid="uid://8m1veo8ognf3" path="res://enemies/controllers/behaviors/variations/LookAtEnemy.tscn" id="5_qe46v"]
+[ext_resource type="PackedScene" uid="uid://8m1veo8ognf3" path="res://enemies/behaviors/variations/LookAtEnemy.tscn" id="5_qe46v"]
 [ext_resource type="PackedScene" uid="uid://cgh7skii2sbu" path="res://attacking/AttackController.tscn" id="6_vl3fw"]
 [ext_resource type="Resource" uid="uid://b0dbl1c8gyv82" path="res://guns/Gun1.tres" id="7_aq118"]
 [ext_resource type="PackedScene" uid="uid://nkgl2h57gbmc" path="res://common/SoundListener.tscn" id="8_2nu6a"]
+[ext_resource type="Texture2D" uid="uid://8h2c4vsesupr" path="res://art/turret1.png" id="8_8emg8"]
 
 [sub_resource type="Gradient" id="Gradient_7v25n"]
 colors = PackedColorArray(0, 0, 1, 1, 1, 0, 1, 1)
@@ -37,40 +37,33 @@ rows = Array[ExtResource("2_3r8lf")]([SubResource("Resource_plpq3")])
 
 [node name="Turret" instance=ExtResource("1_nc50y")]
 drop_table = SubResource("Resource_1350l")
-
-[node name="Controller" parent="." index="0"]
 initial_state = "look-for-enemy"
 
-[node name="LookForEnemy" parent="Controller/Behaviors" index="0" node_paths=PackedStringArray("body", "laser_pointer_start") instance=ExtResource("3_gr7tc")]
-turn_speed = 1.0
-range = 1000.0
-body = NodePath("../../../Sprite2D")
-laser_pointer_start = NodePath("../../../Sprite2D/LaserPointerStart")
-sound_track_turn_speed = 8.0
-sound_track_duration = 2.0
-state = "look-for-enemy"
-
-[node name="LookAtEnemy" parent="Controller/Behaviors" index="1" node_paths=PackedStringArray("attack_controller", "body") instance=ExtResource("5_qe46v")]
-attack_controller = NodePath("../../../AttackController")
-body = NodePath("../../..")
-lost_target_state = "look-for-enemy"
-target_lost_timeout = 2.0
-state = "look-at-enemy"
-
-[node name="Sprite2D" parent="." index="1"]
-texture = ExtResource("2_pgi6w")
-
-[node name="LaserPointerStart" type="Marker2D" parent="Sprite2D" index="0"]
-
-[node name="AttackController" parent="." index="3" node_paths=PackedStringArray("rotation_controller") instance=ExtResource("6_vl3fw")]
+[node name="AttackController" parent="." index="0" node_paths=PackedStringArray("rotation_controller") instance=ExtResource("6_vl3fw")]
 starting_gun = ExtResource("7_aq118")
 rotation_controller = NodePath("..")
 initial_total_ammo = 50
 
-[node name="SoundListener" parent="." index="4" instance=ExtResource("8_2nu6a")]
+[node name="SoundListener" parent="." index="1" instance=ExtResource("8_2nu6a")]
 
-[connection signal="found_target" from="Controller/Behaviors/LookForEnemy" to="Controller/Behaviors/LookAtEnemy" method="_on_look_for_enemy_found_target"]
-[connection signal="lost_target" from="Controller/Behaviors/LookForEnemy" to="Controller/Behaviors/LookAtEnemy" method="_on_look_for_enemy_lost_target"]
-[connection signal="heard_sound" from="SoundListener" to="Controller/Behaviors/LookForEnemy" method="_on_sound_listener_heard_sound"]
+[node name="Sprite" parent="." index="2"]
+texture = ExtResource("8_8emg8")
 
-[editable path="Controller"]
+[node name="LaserPointerStart" type="Marker2D" parent="Sprite" index="0"]
+
+[node name="LookForEnemy" parent="Behaviors" index="0" node_paths=PackedStringArray("body", "laser_pointer_start") instance=ExtResource("3_gr7tc")]
+turn_speed = 1.0
+range = 1000.0
+found_target_state = "look-at-enemy"
+body = NodePath("../../Sprite")
+laser_pointer_start = NodePath("../../Sprite/LaserPointerStart")
+sound_track_turn_speed = 1.0
+sound_track_duration = 1.0
+state = "look-for-enemy"
+
+[node name="LookAtEnemy" parent="Behaviors" index="1" node_paths=PackedStringArray("attack_controller", "body") instance=ExtResource("5_qe46v")]
+attack_controller = NodePath("../../AttackController")
+body = NodePath("../../Sprite")
+lost_target_state = "look-for-enemy"
+target_lost_timeout = 2.0
+state = "look-at-enemy"

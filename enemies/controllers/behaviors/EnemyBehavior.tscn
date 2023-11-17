@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dydlnpurry8ev"]
-
-[ext_resource type="Script" path="res://enemies/controllers/behaviors/EnemyBehavior.gd" id="1_iclwy"]
-
-[node name="EnemyBehavior" type="Node"]
-script = ExtResource("1_iclwy")

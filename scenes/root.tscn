@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://p6q12ih3nf8"]
+[gd_scene load_steps=24 format=3 uid="uid://p6q12ih3nf8"]
 
 [ext_resource type="PackedScene" uid="uid://3dho52n5hbjn" path="res://ui/implant_manager/ImplantManager.tscn" id="1_3nm73"]
 [ext_resource type="Script" path="res://ui/CreditsDisplay.gd" id="1_5n062"]
@@ -14,7 +14,8 @@
 [ext_resource type="Resource" uid="uid://qbo6ovg2hus0" path="res://implants/Healer1.tres" id="7_a87b3"]
 [ext_resource type="Resource" uid="uid://6wcg2mcfqe1a" path="res://implants/ReflexEnhancer.tres" id="8_fgjfq"]
 [ext_resource type="Resource" uid="uid://cgmcdvyu2q6sv" path="res://implants/ToxinPurger.tres" id="9_m1tjj"]
-[ext_resource type="PackedScene" uid="uid://sca2kqs0mfok" path="res://enemies/variations/Basic.tscn" id="15_p3qa3"]
+[ext_resource type="PackedScene" uid="uid://dxf6th6r4vs8s" path="res://enemies/variations/Turret.tscn" id="14_aw5vm"]
+[ext_resource type="PackedScene" uid="uid://sca2kqs0mfok" path="res://enemies/variations/Basic.tscn" id="14_oeotq"]
 [ext_resource type="Script" path="res://enemies/common/PatrolLine.gd" id="16_2mlsl"]
 
 [sub_resource type="Gradient" id="Gradient_p146t"]
@@ -257,25 +258,13 @@ navigation_polygon = SubResource("NavigationPolygon_48x2i")
 
 [node name="Enemies" type="Node2D" parent="Scene"]
 
-[node name="Enemy" parent="Scene/Enemies" instance=ExtResource("15_p3qa3")]
-position = Vector2(-621, 208)
+[node name="Turret" parent="Scene/Enemies" instance=ExtResource("14_aw5vm")]
+position = Vector2(159, -668)
 
-[node name="Controller" parent="Scene/Enemies/Enemy" index="0"]
-consider_reached_distance = 20.0
+[node name="Basic" parent="Scene/Enemies" instance=ExtResource("14_oeotq")]
 
-[node name="Patrol" parent="Scene/Enemies/Enemy/Controller/Behaviors" index="0" node_paths=PackedStringArray("patrol_line")]
-initial_patrol_type = 0
-patrol_line = NodePath("../../../../../PatrolLines/PatrolLine")
-
-[node name="InvestigateSound" parent="Scene/Enemies/Enemy/Controller/Behaviors" index="3"]
-react_after = 0.0
-
-[node name="Sprite2D" parent="Scene/Enemies/Enemy" index="1"]
-rotation = -1.17819
-
-[node name="NavigationAgent2D" parent="Scene/Enemies/Enemy" index="5"]
-path_desired_distance = 20.0
-radius = 10.6
+[node name="Patrol" parent="Scene/Enemies/Basic/Behaviors" index="2" node_paths=PackedStringArray("patrol_line")]
+patrol_line = NodePath("../../../../PatrolLines/PatrolLine")
 
 [node name="Walls" type="Node2D" parent="Scene"]
 
@@ -314,8 +303,5 @@ heat_reduction = 10.0
 [connection signal="thresh_changed" from="Player/Heat" to="UI/MarginContainer/Control/HBoxContainer/HeatDisplay" method="_on_heat_thresh_changed"]
 [connection signal="changed" from="Player/ImplantCharges" to="UI/MarginContainer/Control/HBoxContainer/ICDisplay" method="_on_implant_charges_changed"]
 
-[editable path="Scene/Enemies/Enemy"]
-[editable path="Scene/Enemies/Enemy/Controller"]
-[editable path="Scene/Enemies/Enemy/Controller/Behaviors/Patrol"]
-[editable path="Scene/Enemies/Enemy/Sprite2D/AttackController"]
+[editable path="Scene/Enemies/Basic"]
 [editable path="Player"]

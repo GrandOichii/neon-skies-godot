@@ -59,7 +59,7 @@ func _on_look_for_enemy_lost_target():
 	keep_looking_timer_node.start()
 
 func _on_keep_looking_timer_timeout():
-	controller.set_state(lost_target_state)
+	controller.current_state = lost_target_state
 
 func _on_look_for_enemy_found_target():
-	controller.set_state(state)
+	controller.current_state = state

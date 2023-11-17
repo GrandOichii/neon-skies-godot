@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bw5l4rqeb3qt6"]
 
-[ext_resource type="Script" path="res://enemies/controllers/behaviors/variations/Chase.gd" id="1_q13s8"]
+[ext_resource type="Script" path="res://enemies/behaviors/variations/Chase.gd" id="1_vymfe"]
 
 [node name="Chase" type="Node"]
-script = ExtResource("1_q13s8")
+script = ExtResource("1_vymfe")
 
 [node name="UpdatePathTimer" type="Timer" parent="."]
 wait_time = 0.1

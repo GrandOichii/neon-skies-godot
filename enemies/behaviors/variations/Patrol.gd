@@ -46,7 +46,7 @@ func eb_start():
 	var d = 0
 	for i in patrol_line.get_point_count():
 		var ppos = patrol_line.get_point_position(i)
-		var pd = controller.body.global_position.distance_to(ppos)
+		var pd = controller.global_position.distance_to(ppos)
 		if pd < d or i == 0:
 			d = pd
 			_current = i

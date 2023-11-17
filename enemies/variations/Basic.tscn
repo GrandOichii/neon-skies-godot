@@ -1,17 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://sca2kqs0mfok"]
+[gd_scene load_steps=17 format=3 uid="uid://sca2kqs0mfok"]
 
 [ext_resource type="PackedScene" uid="uid://cfcer7aeaep8x" path="res://enemies/Enemy.tscn" id="1_ygql8"]
 [ext_resource type="Script" path="res://items/variations/Credits.gd" id="2_8m0i8"]
 [ext_resource type="Script" path="res://items/tables/LootTableRow.gd" id="3_uxlvg"]
-[ext_resource type="PackedScene" uid="uid://bw5l4rqeb3qt6" path="res://enemies/controllers/behaviors/variations/Chase.tscn" id="3_xfby1"]
 [ext_resource type="PackedScene" uid="uid://b2enik8bjmhw5" path="res://enemies/common/VisionCone.tscn" id="4_f6j83"]
 [ext_resource type="Script" path="res://items/tables/LootTable.gd" id="4_o1dtm"]
-[ext_resource type="PackedScene" uid="uid://d26d7aod68kxw" path="res://enemies/controllers/behaviors/variations/Guard.tscn" id="4_ovycj"]
-[ext_resource type="PackedScene" uid="uid://d1475hpetfefu" path="res://enemies/controllers/behaviors/variations/Patrol.tscn" id="5_bl14a"]
-[ext_resource type="PackedScene" uid="uid://dqpa00kwayfee" path="res://enemies/controllers/behaviors/variations/InvestigateSound.tscn" id="5_lskpi"]
 [ext_resource type="PackedScene" uid="uid://cgh7skii2sbu" path="res://attacking/AttackController.tscn" id="6_88ws8"]
 [ext_resource type="Resource" uid="uid://b0dbl1c8gyv82" path="res://guns/Gun1.tres" id="7_mgpdn"]
+[ext_resource type="PackedScene" uid="uid://bw5l4rqeb3qt6" path="res://enemies/behaviors/variations/Chase.tscn" id="7_x7wy5"]
 [ext_resource type="PackedScene" uid="uid://nkgl2h57gbmc" path="res://common/SoundListener.tscn" id="8_6gljx"]
+[ext_resource type="PackedScene" uid="uid://dqpa00kwayfee" path="res://enemies/behaviors/variations/InvestigateSound.tscn" id="10_enj1n"]
+[ext_resource type="PackedScene" uid="uid://d1475hpetfefu" path="res://enemies/behaviors/variations/Patrol.tscn" id="11_s3tiq"]
 
 [sub_resource type="Gradient" id="Gradient_tuqgn"]
 colors = PackedColorArray(0, 0, 1, 1, 0, 1, 0, 1)
@@ -39,52 +38,40 @@ rows = Array[ExtResource("3_uxlvg")]([SubResource("Resource_okx60")])
 
 [node name="Basic" instance=ExtResource("1_ygql8")]
 drop_table = SubResource("Resource_ibnvt")
-
-[node name="Controller" parent="." index="0"]
+consider_reached = 40.0
 initial_state = "patrol"
 
-[node name="Patrol" parent="Controller/Behaviors" index="0" instance=ExtResource("5_bl14a")]
-patrol_speed = 200.0
-state = "patrol"
+[node name="SoundListener" parent="." index="0" instance=ExtResource("8_6gljx")]
 
-[node name="Chase" parent="Controller/Behaviors" index="1" node_paths=PackedStringArray("attack_controller") instance=ExtResource("3_xfby1")]
-what = "enemy"
-speed = 300.0
-stop_range = 300.0
-attack_range = 500.0
-attack_controller = NodePath("../../../Sprite2D/AttackController")
-on_lost = "investigate"
-last_pos_var_name = "sound_area"
-state = "chase"
-
-[node name="Guard" parent="Controller/Behaviors" index="2" node_paths=PackedStringArray("sprite") instance=ExtResource("4_ovycj")]
-sprite = NodePath("../../../Sprite2D")
-on_spotted = "chase"
-on_heard_sound = "investigate"
-state = "guard"
-
-[node name="InvestigateSound" parent="Controller/Behaviors" index="3" instance=ExtResource("5_lskpi")]
-speed = 300.0
-react_after = 0.0
-stay_for = 2.0
-on_reached_point = "patrol"
-state = "investigate"
-
-[node name="VisionCone" parent="Sprite2D" index="0" instance=ExtResource("4_f6j83")]
-range = 100.0
+[node name="VisionCone" parent="Sprite" index="0" instance=ExtResource("4_f6j83")]
 look_for_group = "player"
 
-[node name="AttackController" parent="Sprite2D" index="1" node_paths=PackedStringArray("rotation_controller") instance=ExtResource("6_88ws8")]
+[node name="AttackController" parent="Sprite" index="1" node_paths=PackedStringArray("rotation_controller") instance=ExtResource("6_88ws8")]
 starting_gun = ExtResource("7_mgpdn")
 rotation_controller = NodePath("..")
 initial_total_ammo = 60
 
-[node name="SoundListener" parent="." index="3" instance=ExtResource("8_6gljx")]
+[node name="Chase" parent="Behaviors" index="0" node_paths=PackedStringArray("attack_controller") instance=ExtResource("7_x7wy5")]
+what = "enemy"
+speed = 300.0
+stop_range = 200.0
+attack_range = 400.0
+attack_controller = NodePath("../../Sprite/AttackController")
+on_lost = "investigate"
+last_pos_var_name = "sound_area"
+state = "chase"
 
-[connection signal="lost" from="Sprite2D/VisionCone" to="Controller/Behaviors/Chase" method="_on_vision_cone_lost"]
-[connection signal="spotted" from="Sprite2D/VisionCone" to="Controller/Behaviors/Guard" method="_on_vision_cone_spotted"]
-[connection signal="heard_sound" from="SoundListener" to="Controller/Behaviors/Guard" method="_on_sound_listener_heard_sound"]
-[connection signal="heard_sound" from="SoundListener" to="Controller/Behaviors/InvestigateSound" method="_on_sound_listener_heard_sound"]
+[node name="InvestigateSound" parent="Behaviors" index="1" instance=ExtResource("10_enj1n")]
+speed = 300.0
+react_after = 0.0
+stay_for = 1.0
+on_reached_point = "patrol"
+state = "investigate"
 
-[editable path="Controller"]
-[editable path="Sprite2D/AttackController"]
+[node name="Patrol" parent="Behaviors" index="2" instance=ExtResource("11_s3tiq")]
+patrol_speed = 100.0
+state = "patrol"
+
+[connection signal="heard_sound" from="SoundListener" to="Behaviors/InvestigateSound" method="_on_sound_listener_heard_sound"]
+[connection signal="lost" from="Sprite/VisionCone" to="Behaviors/Chase" method="_on_vision_cone_lost"]
+[connection signal="spotted" from="Sprite/VisionCone" to="Behaviors/Chase" method="_on_vision_cone_spotted"]

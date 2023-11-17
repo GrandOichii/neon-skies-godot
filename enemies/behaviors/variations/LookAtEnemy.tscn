@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://8m1veo8ognf3"]
 
-[ext_resource type="Script" path="res://enemies/controllers/behaviors/variations/LookAtEnemy.gd" id="1_02dwb"]
+[ext_resource type="Script" path="res://enemies/behaviors/variations/LookAtEnemy.gd" id="1_02dwb"]
 
 [node name="LookAtEnemy" type="Node"]
 script = ExtResource("1_02dwb")
