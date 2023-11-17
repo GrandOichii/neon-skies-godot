@@ -4,3 +4,9 @@
 
 [node name="Patrol" type="Node"]
 script = ExtResource("1_h7ajb")
+
+[node name="WaitAtPointTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="WaitAtPointTimer" to="." method="_on_wait_at_point_timer_timeout"]

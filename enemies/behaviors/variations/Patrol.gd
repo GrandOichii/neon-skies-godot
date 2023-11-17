@@ -1,17 +1,25 @@
 extends EnemyBehavior
 
-enum PatrolType { Clockwise, CounterClockwise, FlipFlop }
-
-# when enabled, find the closest spot to the patrol line and walk there
 #
+# enums
+#
+
+enum PatrolType { Clockwise, CounterClockwise, FlipFlop }
 
 #
 # exports
 #
 
 @export var patrol_speed: float
+@export var wait_at_point_for: float = 0
 @export var initial_patrol_type: PatrolType = PatrolType.Clockwise
 @export var patrol_line: PatrolLine
+
+#
+# nodes
+#
+
+@onready var wait_at_point_timer: Timer = %WaitAtPointTimer
 
 #
 # private vars
@@ -38,6 +46,8 @@ var _current: int
 func _ready():
 #	patrol_line_node.visible = false
 	_pt = initial_patrol_type
+	if wait_at_point_for > 0:
+		wait_at_point_timer.wait_time = wait_at_point_for
 
 func eb_start():
 	super.eb_start()
@@ -52,13 +62,27 @@ func eb_start():
 			_current = i
 	controller.move_target = patrol_line.global_position + patrol_line.get_point_position(_current)
 	
+func eb_stop():
+	super.eb_stop()
+	
+	if not wait_at_point_timer.is_stopped():
+		wait_at_point_timer.stop()
+	
 func eb_physics_process(delta: float):
 	super.eb_physics_process(delta)
+	
+	if not wait_at_point_timer.is_stopped():
+		return
 	
 	controller.move_towards_target(delta)
 	if not controller.reached_target():
 		return
-	var switch = false
+	if wait_at_point_for > 0:
+		wait_at_point_timer.start()
+		return
+	_switch_to_next()
+
+func _switch_to_next():
 	_current += _step
 	var s = patrol_line.get_point_count()
 	if _pt != PatrolType.FlipFlop:
@@ -69,3 +93,11 @@ func eb_physics_process(delta: float):
 			_step *= -1
 			_current += 2 * _step
 	controller.move_target = patrol_line.global_position + patrol_line.get_point_position(_current)
+	
+#
+# signal connections
+#
+
+func _on_wait_at_point_timer_timeout():
+	print('switch')
+	_switch_to_next()

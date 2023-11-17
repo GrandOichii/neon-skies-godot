@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://3dho52n5hbjn" path="res://ui/implant_manager/ImplantManager.tscn" id="1_3nm73"]
 [ext_resource type="Script" path="res://ui/CreditsDisplay.gd" id="1_5n062"]
+[ext_resource type="PackedScene" uid="uid://dqmkf2wew60md" path="res://SceneController.tscn" id="1_dhv3a"]
 [ext_resource type="Script" path="res://ui/AmmoCountDisplay.gd" id="1_es5oo"]
 [ext_resource type="Script" path="res://ui/PlayerDiedLabel.gd" id="1_o6chk"]
 [ext_resource type="PackedScene" uid="uid://bfuudjqoq0ecq" path="res://player/Player.tscn" id="2_3b45f"]
@@ -15,14 +16,8 @@
 [ext_resource type="Resource" uid="uid://6wcg2mcfqe1a" path="res://implants/ReflexEnhancer.tres" id="8_fgjfq"]
 [ext_resource type="Resource" uid="uid://cgmcdvyu2q6sv" path="res://implants/ToxinPurger.tres" id="9_m1tjj"]
 [ext_resource type="PackedScene" uid="uid://sca2kqs0mfok" path="res://enemies/variations/Basic.tscn" id="14_oeotq"]
+[ext_resource type="Texture2D" uid="uid://dtnrp4ha1oofr" path="res://art/generic/basic-tile.png" id="15_4ox6p"]
 [ext_resource type="Script" path="res://enemies/common/PatrolLine.gd" id="16_2mlsl"]
-
-[sub_resource type="Gradient" id="Gradient_p146t"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_7exxo"]
-gradient = SubResource("Gradient_p146t")
-width = 1904
-height = 1174
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_48x2i"]
 vertices = PackedVector2Array(-396, 4, 292, 386, -954, 383, -531, 3, -954, -850, -530, -487, 311, -855, -404, -488)
@@ -38,6 +33,9 @@ gradient = SubResource("Gradient_lds8k")
 size = Vector2(53, 418)
 
 [node name="Root" type="Node"]
+
+[node name="SceneController" parent="." node_paths=PackedStringArray("player_spawn") instance=ExtResource("1_dhv3a")]
+player_spawn = NodePath("../Scene/PlayerSpawn")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -244,10 +242,15 @@ stored_implants = Array[Resource("res://implants/Implant.gd")]([ExtResource("5_w
 implants = NodePath("../../Player/Implants")
 
 [node name="Scene" type="Node2D" parent="."]
+position = Vector2(-970, -1009)
 
-[node name="Floor" type="Sprite2D" parent="Scene"]
-position = Vector2(0, 2)
-texture = SubResource("GradientTexture2D_7exxo")
+[node name="Floor" type="TextureRect" parent="Scene"]
+offset_left = -1741.0
+offset_top = -1167.0
+offset_right = 1155.0
+offset_bottom = 920.0
+texture = ExtResource("15_4ox6p")
+stretch_mode = 1
 
 [node name="Navigation" type="Node2D" parent="Scene"]
 
@@ -258,6 +261,7 @@ navigation_polygon = SubResource("NavigationPolygon_48x2i")
 [node name="Enemies" type="Node2D" parent="Scene"]
 
 [node name="Basic" parent="Scene/Enemies" instance=ExtResource("14_oeotq")]
+position = Vector2(-894, -229)
 
 [node name="Patrol" parent="Scene/Enemies/Basic/Behaviors" index="2" node_paths=PackedStringArray("patrol_line")]
 patrol_line = NodePath("../../../../PatrolLines/PatrolLine")
@@ -281,8 +285,11 @@ shape = SubResource("RectangleShape2D_ryff5")
 points = PackedVector2Array(-627, -591, -257, -600, -230, 87, -612, 78)
 script = ExtResource("16_2mlsl")
 
+[node name="PlayerSpawn" type="Marker2D" parent="Scene"]
+position = Vector2(108, -466)
+
 [node name="Player" parent="." instance=ExtResource("2_3b45f")]
-position = Vector2(-6, -255)
+position = Vector2(-976, -1264)
 speed = 500.0
 initial_credits = 10
 

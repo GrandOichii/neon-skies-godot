@@ -1,6 +1,8 @@
 - add drag and drop to implant manager
 - add implant for ammo printing
 - better deviation display - line has to start at muzzle
-- add actual enemies
+- adding implants is convoluted, fix?
+- add actual levels
+- add hub area
 
 - figure out why obstacles don't work
