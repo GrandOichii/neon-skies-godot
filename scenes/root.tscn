@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://p6q12ih3nf8"]
+[gd_scene load_steps=23 format=3 uid="uid://p6q12ih3nf8"]
 
 [ext_resource type="PackedScene" uid="uid://3dho52n5hbjn" path="res://ui/implant_manager/ImplantManager.tscn" id="1_3nm73"]
 [ext_resource type="Script" path="res://ui/CreditsDisplay.gd" id="1_5n062"]
@@ -14,7 +14,6 @@
 [ext_resource type="Resource" uid="uid://qbo6ovg2hus0" path="res://implants/Healer1.tres" id="7_a87b3"]
 [ext_resource type="Resource" uid="uid://6wcg2mcfqe1a" path="res://implants/ReflexEnhancer.tres" id="8_fgjfq"]
 [ext_resource type="Resource" uid="uid://cgmcdvyu2q6sv" path="res://implants/ToxinPurger.tres" id="9_m1tjj"]
-[ext_resource type="PackedScene" uid="uid://dxf6th6r4vs8s" path="res://enemies/variations/Turret.tscn" id="14_aw5vm"]
 [ext_resource type="PackedScene" uid="uid://sca2kqs0mfok" path="res://enemies/variations/Basic.tscn" id="14_oeotq"]
 [ext_resource type="Script" path="res://enemies/common/PatrolLine.gd" id="16_2mlsl"]
 
@@ -257,9 +256,6 @@ position = Vector2(1, 0)
 navigation_polygon = SubResource("NavigationPolygon_48x2i")
 
 [node name="Enemies" type="Node2D" parent="Scene"]
-
-[node name="Turret" parent="Scene/Enemies" instance=ExtResource("14_aw5vm")]
-position = Vector2(159, -668)
 
 [node name="Basic" parent="Scene/Enemies" instance=ExtResource("14_oeotq")]
 
