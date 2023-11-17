@@ -13,7 +13,7 @@ enum PatrolType { Clockwise, CounterClockwise, FlipFlop }
 @export var patrol_speed: float
 @export var wait_at_point_for: float = 0
 @export var initial_patrol_type: PatrolType = PatrolType.Clockwise
-@export var patrol_line: PatrolLine
+@export var patrol_lines: Array[PatrolLine]
 
 #
 # nodes
@@ -25,6 +25,7 @@ enum PatrolType { Clockwise, CounterClockwise, FlipFlop }
 # private vars
 #
 
+var _pl: PatrolLine
 
 var _pt: PatrolType :
 	get:
@@ -53,14 +54,16 @@ func eb_start():
 	super.eb_start()
 	controller.speed = patrol_speed
 	
-	var d = 0
-	for i in patrol_line.get_point_count():
-		var ppos = patrol_line.get_point_position(i)
-		var pd = controller.global_position.distance_to(ppos)
-		if pd < d or i == 0:
-			d = pd
-			_current = i
-	controller.move_target = patrol_line.global_position + patrol_line.get_point_position(_current)
+	var d = -1
+	for patrol_line in patrol_lines:
+		for i in patrol_line.get_point_count():
+			var ppos = patrol_line.get_point_position(i) + patrol_line.global_position
+			var pd = controller.global_position.distance_to(ppos)
+			if pd < d or d == -1:
+				d = pd
+				_current = i
+				_pl = patrol_line
+	controller.move_target = _pl.global_position + _pl.get_point_position(_current)
 	
 func eb_stop():
 	super.eb_stop()
@@ -84,7 +87,7 @@ func eb_physics_process(delta: float):
 
 func _switch_to_next():
 	_current += _step
-	var s = patrol_line.get_point_count()
+	var s = _pl.get_point_count()
 	if _pt != PatrolType.FlipFlop:
 		_current = wrap(_current, 0, s)
 	else:
@@ -92,12 +95,11 @@ func _switch_to_next():
 		if _current < 0 or _current >= s:
 			_step *= -1
 			_current += 2 * _step
-	controller.move_target = patrol_line.global_position + patrol_line.get_point_position(_current)
+	controller.move_target = _pl.global_position + _pl.get_point_position(_current)
 	
 #
 # signal connections
 #
 
 func _on_wait_at_point_timer_timeout():
-	print('switch')
 	_switch_to_next()

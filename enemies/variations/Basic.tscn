@@ -37,6 +37,7 @@ chance_for_nothing = 10
 rows = Array[ExtResource("3_uxlvg")]([SubResource("Resource_okx60")])
 
 [node name="Basic" instance=ExtResource("1_ygql8")]
+motion_mode = 1
 drop_table = SubResource("Resource_ibnvt")
 consider_reached = 40.0
 initial_state = "patrol"

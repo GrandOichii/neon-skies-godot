@@ -20,9 +20,9 @@
 [ext_resource type="Script" path="res://enemies/common/PatrolLine.gd" id="16_2mlsl"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_48x2i"]
-vertices = PackedVector2Array(-396, 4, 292, 386, -954, 383, -531, 3, -954, -850, -530, -487, 311, -855, -404, -488)
+vertices = PackedVector2Array(-396, 4, 1151, 914, -1735, 897, -531, 3, -1748, -1167, -530, -487, 1142, -1162, -404, -488)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(6, 1, 0, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-954, -850, 311, -855, 292, 386, -954, 383), PackedVector2Array(-530, -487, -404, -488, -396, 4, -531, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1748, -1167, 1142, -1162, 1151, 914, -1735, 897), PackedVector2Array(-530, -487, -404, -488, -396, 4, -531, 3)])
 
 [sub_resource type="Gradient" id="Gradient_lds8k"]
 
@@ -261,10 +261,12 @@ navigation_polygon = SubResource("NavigationPolygon_48x2i")
 [node name="Enemies" type="Node2D" parent="Scene"]
 
 [node name="Basic" parent="Scene/Enemies" instance=ExtResource("14_oeotq")]
-position = Vector2(-894, -229)
+position = Vector2(-937, -610)
 
-[node name="Patrol" parent="Scene/Enemies/Basic/Behaviors" index="2" node_paths=PackedStringArray("patrol_line")]
-patrol_line = NodePath("../../../../PatrolLines/PatrolLine")
+[node name="Patrol" parent="Scene/Enemies/Basic/Behaviors" index="2" node_paths=PackedStringArray("patrol_lines")]
+patrol_speed = 300.0
+wait_at_point_for = 0.0
+patrol_lines = [NodePath("../../../../PatrolLines/PatrolLine"), NodePath("../../../../PatrolLines/PatrolLine2")]
 
 [node name="Walls" type="Node2D" parent="Scene"]
 
@@ -282,7 +284,11 @@ shape = SubResource("RectangleShape2D_ryff5")
 [node name="PatrolLines" type="Node2D" parent="Scene"]
 
 [node name="PatrolLine" type="Line2D" parent="Scene/PatrolLines"]
-points = PackedVector2Array(-627, -591, -257, -600, -230, 87, -612, 78)
+points = PackedVector2Array(-1388, -636, -366, -968, 696, -857)
+script = ExtResource("16_2mlsl")
+
+[node name="PatrolLine2" type="Line2D" parent="Scene/PatrolLines"]
+points = PackedVector2Array(-1353, 408, -348, 736, 728, 347)
 script = ExtResource("16_2mlsl")
 
 [node name="PlayerSpawn" type="Marker2D" parent="Scene"]

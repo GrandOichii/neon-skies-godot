@@ -86,6 +86,7 @@ func _physics_process(delta):
 	_behaviors[current_state].eb_physics_process(delta)
 
 func move_towards_target(_delta: float):
+	
 	var loc = nav_agent_node.get_next_path_position()
 	var dir = to_local(loc).normalized()
 	
