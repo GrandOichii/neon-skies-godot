@@ -70,7 +70,7 @@ on_reached_point = "patrol"
 state = "investigate"
 
 [node name="Patrol" parent="Behaviors" index="2" instance=ExtResource("11_s3tiq")]
-patrol_speed = 100.0
+patrol_speed = 150.0
 wait_at_point_for = 1.0
 state = "patrol"
 

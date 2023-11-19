@@ -92,17 +92,12 @@ func move_towards_target(_delta: float):
 	
 	var vel = dir * speed
 	
-#	var t = create_tween()
 	var target = (loc - sprite.global_position).angle()
 	var lr = lerp_angle(sprite.global_rotation, target, .1)
 	
 	sprite.global_rotation = lr
-#	create_tween().tween_method(sprite.rotate, sprite.rotation, r, .1)
-#	create_tween().tween_property()
 
 	nav_agent_node.set_velocity(vel)
-#	body.velocity = vel
-#	body.move_and_slide()
 
 func reset_target():
 	nav_agent_node.set_velocity(Vector2.ZERO)
