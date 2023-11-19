@@ -38,3 +38,6 @@ func _on_body_entered(body):
 	var is_solid = body.is_in_group('solid')
 	if is_solid:
 		queue_free()
+	if body is TileMap:
+		# TODO for now will do, however need a way to interact with custom layers for more options when hitting tiles
+		queue_free()
