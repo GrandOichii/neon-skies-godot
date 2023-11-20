@@ -2,12 +2,30 @@
 
 [ext_resource type="Script" path="res://scenery/SlideDoor.gd" id="1_wd0d0"]
 [ext_resource type="Texture2D" uid="uid://bsnrrj2e0emkm" path="res://art/Free Industrial Zone Tileset/1 Tiles/IndustrialTile_77.png" id="2_p46og"]
-[ext_resource type="Texture2D" uid="uid://bqlbcddoudo3w" path="res://art/Free Industrial Zone Tileset/1 Tiles/IndustrialTile_78.png" id="3_c8ln5"]
 [ext_resource type="Texture2D" uid="uid://b1oryq6me6d3k" path="res://art/Free Industrial Zone Tileset/1 Tiles/IndustrialTile_79.png" id="4_k7fsg"]
 
-[node name="SlideDoor" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ageaf"]
+size = Vector2(128, 32)
+
+[node name="SlideDoor" type="StaticBody2D" groups=["solid"]]
 script = ExtResource("1_wd0d0")
-length = 4
-start_tex = ExtResource("2_p46og")
-mid_tex = ExtResource("3_c8ln5")
-end_tex = ExtResource("4_k7fsg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(32, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_p46og")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(96, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("4_k7fsg")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(64, 0)
+shape = SubResource("RectangleShape2D_ageaf")
+
+[node name="CloseTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="CloseTimer" to="." method="_on_close_timer_timeout"]

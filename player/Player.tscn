@@ -44,6 +44,7 @@ implant = ExtResource("13_mmp3p")
 [sub_resource type="CircleShape2D" id="CircleShape2D_3rtba"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 5
 script = ExtResource("1_4g8ct")
 
 [node name="Camera" type="Camera2D" parent="."]
