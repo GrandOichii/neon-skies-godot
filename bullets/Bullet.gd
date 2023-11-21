@@ -30,11 +30,10 @@ func _process(delta):
 # signal connections
 #
 
-func _on_body_entered(body):
+func _on_body_entered(body: Node2D):
 	var health = body.get_node_or_null('Health') as ClampedValue
 	if health != null:
 		health.value -= damage
-
 	var is_solid = body.is_in_group('solid')
 	if is_solid:
 		queue_free()

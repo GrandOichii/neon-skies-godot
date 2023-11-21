@@ -7,6 +7,13 @@ extends StaticBody2D
 enum SlideDirection { Left, Right }
 
 #
+# signals
+#
+
+signal opened
+signal closed
+
+#
 # exports
 #
 
@@ -42,12 +49,16 @@ func open(_body: Node2D):
 	create_tween().tween_property(self, 'position', Vector2(_start_x + k * _rect.size.x, position.y), .2).finished.connect(_start_close)
 	
 func _start_close():
+	opened.emit()
+	
 	if close_timeout <= 0:
 		return
 	close_timer_node.start(close_timeout)
 	
 func close():
 	_open = false
+	closed.emit()
+	# TODO? move to finished
 	create_tween().tween_property(self, 'position', Vector2(_start_x, position.y), .2)
 
 #

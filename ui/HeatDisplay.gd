@@ -22,7 +22,7 @@ var _thresh: float
 
 func _on_heat_heat_changed(value: float):
 	_heat = value
-	current_heat_label_node.text = '%.2f' % value
+	current_heat_label_node.text = str(floor(value))
 	
 	# update progress
 	progress_node.position.x = value * main_node.size.x / _thresh - progress_node.size.x
@@ -30,4 +30,4 @@ func _on_heat_heat_changed(value: float):
 
 func _on_heat_thresh_changed(value: float):
 	_thresh = value
-	thresh_heat_label_node.text = '%.2f' % value
+	thresh_heat_label_node.text = str(floor(value))

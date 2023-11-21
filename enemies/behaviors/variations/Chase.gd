@@ -38,10 +38,12 @@ func eb_start():
 	
 	_target = controller.data[what]
 	controller.move_target = _target.global_position
+	controller.rot_with_move = false
 	_active = true
 	
 func eb_stop():
 	super.eb_stop()
+	controller.rot_with_move = true
 	_active = false
 	
 func eb_process(delta: float):
@@ -49,6 +51,9 @@ func eb_process(delta: float):
 
 func eb_physics_process(delta: float):
 	super.eb_physics_process(delta)
+	
+	controller.rot_target = _target.global_position
+	controller.rotate_towards_target(delta)
 
 	var distance = controller.global_position.distance_to(_target.global_position)
 	if distance < attack_range:

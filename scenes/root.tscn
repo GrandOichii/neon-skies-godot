@@ -607,5 +607,6 @@ heat_reduction = 10.0
 [connection signal="changed" from="Player/ImplantCharges" to="UI/MarginContainer/Control/HBoxContainer/ICDisplay" method="_on_implant_charges_changed"]
 
 [editable path="Scene/Enemies/Basic"]
+[editable path="Scene/Doors/SlideDoor"]
 [editable path="Scene/Interaction/InteractArea"]
 [editable path="Player"]

@@ -6,6 +6,10 @@ extends EnemyBehavior
 # exports
 #
 
+@export var from_angle: float = 0
+@export var to_angle: float = 180
+@export var rot_speed: float = 1
+
 @export var sprite: Sprite2D
 @export var on_spotted: String
 @export var on_heard_sound: String
@@ -17,8 +21,11 @@ extends EnemyBehavior
 func eb_physics_process(delta: float):
 	super.eb_physics_process(delta)
 	
+	
+	
 func eb_start():
 	super.eb_start()
+	
 
 #
 # signal connections

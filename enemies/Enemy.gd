@@ -54,6 +54,21 @@ var move_target: Vector2 :
 		move_target = value
 		nav_agent_node.target_position = move_target
 
+var rot_with_move: bool = true
+
+var rot_speed: float = 10
+
+var _old_angle: float
+var _rot_target: float
+var _rot_elapsed: float
+var rot_target: Vector2 :
+	get:
+		return rot_target
+	set(value):
+		rot_target = value
+		_old_angle = sprite.global_rotation
+		_rot_target = (rot_target - sprite.global_position).angle()
+		_rot_elapsed = 0
 #
 # methods
 #
@@ -70,32 +85,38 @@ func _ready():
 		_behaviors[beh.state] = beh
 		
 	call_deferred('_setup_agent')
-	
+
 func _setup_agent():
 	await get_tree().process_frame # TODO? found online, is ok
 	current_state = initial_state
-	
+
 func _process(delta):
 	if current_state.length() == 0:
 		return
 	_behaviors[current_state].eb_process(delta)
-	
+
 func _physics_process(delta):
 	if current_state.length() == 0:
 		return
 	_behaviors[current_state].eb_physics_process(delta)
 
-func move_towards_target(_delta: float):
+func rotate_towards_target(delta: float):
+	if _rot_elapsed > 0:
+		return
+	_rot_elapsed += delta * rot_speed
+	var lr = lerp_angle(_old_angle, _rot_target, _rot_elapsed)
+	sprite.global_rotation = lr
+
+func move_towards_target(delta: float):
 	
 	var loc = nav_agent_node.get_next_path_position()
+	if rot_with_move:
+		rot_target = loc
 	var dir = to_local(loc).normalized()
 	
 	var vel = dir * speed
 	
-	var target = (loc - sprite.global_position).angle()
-	var lr = lerp_angle(sprite.global_rotation, target, .1)
-	
-	sprite.global_rotation = lr
+	rotate_towards_target(delta)
 
 	nav_agent_node.set_velocity(vel)
 
@@ -104,6 +125,9 @@ func reset_target():
 	
 func reached_target() -> bool:
 	return not nav_agent_node.is_target_reachable() or nav_agent_node.is_target_reached() or nav_agent_node.distance_to_target() < consider_reached
+
+func reached_rotation() -> bool:
+	return abs((rot_target - sprite.global_position).angle() - sprite.global_rotation) < 0.01
 
 #
 # signal connections
