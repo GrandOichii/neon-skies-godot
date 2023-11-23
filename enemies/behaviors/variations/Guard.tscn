@@ -4,3 +4,9 @@
 
 [node name="Guard" type="Node"]
 script = ExtResource("1_yfq45")
+
+[node name="WaitTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]

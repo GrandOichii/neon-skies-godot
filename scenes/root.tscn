@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://p6q12ih3nf8"]
+[gd_scene load_steps=29 format=3 uid="uid://p6q12ih3nf8"]
 
 [ext_resource type="PackedScene" uid="uid://3dho52n5hbjn" path="res://ui/implant_manager/ImplantManager.tscn" id="1_3nm73"]
 [ext_resource type="Script" path="res://ui/CreditsDisplay.gd" id="1_5n062"]
@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://cgmcdvyu2q6sv" path="res://implants/ToxinPurger.tres" id="9_m1tjj"]
 [ext_resource type="PackedScene" uid="uid://sca2kqs0mfok" path="res://enemies/variations/Basic.tscn" id="14_oeotq"]
 [ext_resource type="Script" path="res://enemies/common/PatrolLine.gd" id="16_2mlsl"]
+[ext_resource type="PackedScene" uid="uid://de30c10cvlnk0" path="res://enemies/variations/Turret.tscn" id="17_4xc47"]
 [ext_resource type="Texture2D" uid="uid://tkeg70dgild" path="res://art/Free Industrial Zone Tileset/1 Tiles/full.png" id="17_btv0s"]
 [ext_resource type="PackedScene" uid="uid://bylhbas30ap8q" path="res://scenery/SlideDoor.tscn" id="18_jpjju"]
 [ext_resource type="PackedScene" uid="uid://cc55jo1bdybqk" path="res://scenery/InteractArea.tscn" id="19_mb843"]
@@ -547,6 +548,9 @@ layer_1/tile_data = PackedInt32Array(-458758, 65536, 1, -458757, 131072, 1, -458
 
 [node name="Enemies" type="Node2D" parent="Scene"]
 
+[node name="Turret" parent="Scene/Enemies" instance=ExtResource("17_4xc47")]
+position = Vector2(458, -375)
+
 [node name="Basic" parent="Scene/Enemies" instance=ExtResource("14_oeotq")]
 position = Vector2(-181, -647)
 
@@ -607,6 +611,7 @@ heat_reduction = 10.0
 [connection signal="changed" from="Player/ImplantCharges" to="UI/MarginContainer/Control/HBoxContainer/ICDisplay" method="_on_implant_charges_changed"]
 
 [editable path="Scene/Enemies/Basic"]
+[editable path="Scene/Enemies/Basic/Sprite/AttackController"]
 [editable path="Scene/Doors/SlideDoor"]
 [editable path="Scene/Interaction/InteractArea"]
 [editable path="Player"]

@@ -101,7 +101,7 @@ func _physics_process(delta):
 	_behaviors[current_state].eb_physics_process(delta)
 
 func rotate_towards_target(delta: float):
-	if _rot_elapsed > 0:
+	if reached_rotation():
 		return
 	_rot_elapsed += delta * rot_speed
 	var lr = lerp_angle(_old_angle, _rot_target, _rot_elapsed)
@@ -127,7 +127,7 @@ func reached_target() -> bool:
 	return not nav_agent_node.is_target_reachable() or nav_agent_node.is_target_reached() or nav_agent_node.distance_to_target() < consider_reached
 
 func reached_rotation() -> bool:
-	return abs((rot_target - sprite.global_position).angle() - sprite.global_rotation) < 0.01
+	return _rot_elapsed > 1
 
 #
 # signal connections

@@ -5,7 +5,7 @@ class_name DeviationDisplay
 # exports
 #
 
-@export var range: int
+@export var deviation_range: int = 2000
 @export var lines_color: Color
 
 #
@@ -36,6 +36,6 @@ func _process(_delta: float):
 	var h = deg_to_rad(p.attack_controller_node.deviation / 2)
 	line1.set_point_position(0, start)
 	line2.set_point_position(0, start)
-	line1.set_point_position(1, start + Vector2(range, 0).rotated(p.sprite_node.rotation - h))
-	line2.set_point_position(1, start + Vector2(range, 0).rotated(p.sprite_node.rotation + h))
+	line1.set_point_position(1, start + Vector2(deviation_range, 0).rotated(p.sprite_node.rotation - h))
+	line2.set_point_position(1, start + Vector2(deviation_range, 0).rotated(p.sprite_node.rotation + h))
 	

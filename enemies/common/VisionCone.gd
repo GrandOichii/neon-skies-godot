@@ -12,8 +12,8 @@ signal lost(body: Node2D)
 # exports
 #
 
-@export var range: float
-@export var degree: float
+@export var vision_range: float = 800
+@export var degree: float = 90
 @export var precision: int = 2
 @export var look_for_group: String
 
@@ -44,7 +44,7 @@ func _ready():
 	p[0] = Vector2(0, 0)
 	var deg = -step * precision / 2
 	for i in range(precision + 1):
-		p[i + 1] = Vector2(range, 0).rotated(deg)
+		p[i + 1] = Vector2(vision_range, 0).rotated(deg)
 		deg += step
 	collision_node.polygon = p
 	

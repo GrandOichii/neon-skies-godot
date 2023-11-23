@@ -4,7 +4,6 @@
 
 [node name="DeviationDisplay" type="Node"]
 script = ExtResource("1_4paoc")
-range = 2000
 lines_color = Color(0, 0.827451, 0, 1)
 
 [node name="Line1" type="Line2D" parent="."]
