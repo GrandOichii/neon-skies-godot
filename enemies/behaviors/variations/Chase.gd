@@ -8,6 +8,7 @@ class_name Roam
 @export var what: String
 @export var speed: float
 @export var stop_range: float
+@export var rot_speed: float
 
 @export_group('Attacking')
 @export var attack_range: float
@@ -24,6 +25,8 @@ class_name Roam
 var _active: bool = false
 var _target: Node2D = null
 
+var _prev_rot_speed: float = 1
+
 #
 # methods
 #
@@ -33,6 +36,8 @@ func _ready():
 
 func eb_start():
 	super.eb_start()
+	_prev_rot_speed = controller.rot_speed
+	controller.rot_speed = rot_speed
 	
 	controller.speed = speed
 	
@@ -43,6 +48,7 @@ func eb_start():
 	
 func eb_stop():
 	super.eb_stop()
+	controller.rot_speed = _prev_rot_speed
 	controller.rot_with_move = true
 	_active = false
 	
@@ -58,7 +64,6 @@ func eb_physics_process(delta: float):
 	var distance = controller.global_position.distance_to(_target.global_position)
 	if distance < attack_range:
 		_attack()
-	controller.sprite.look_at(_target.position)
 	if distance < stop_range:
 		return
 	controller.move_towards_target(delta)
@@ -78,7 +83,8 @@ func _on_update_path_timer_timeout():
 func _on_vision_cone_lost(b: Node2D):
 	if _target != b:
 		return
-	controller.data[last_pos_var_name] = _target
+	if last_pos_var_name.length() != 0:
+		controller.data[last_pos_var_name] = _target
 	_target = null
 	controller.current_state = on_lost
 

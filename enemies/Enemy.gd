@@ -56,7 +56,7 @@ var move_target: Vector2 :
 
 var rot_with_move: bool = true
 
-var rot_speed: float = 10
+var rot_speed: float = 5
 
 var _old_angle: float
 var _rot_target: float
@@ -103,10 +103,10 @@ func _physics_process(delta):
 func rotate_towards_target(delta: float):
 	if reached_rotation():
 		return
-	_rot_elapsed += delta * rot_speed
-	var lr = lerp_angle(_old_angle, _rot_target, _rot_elapsed)
-	sprite.global_rotation = lr
-
+	var dir = rot_target - global_position
+	var a = sprite.transform.x.angle_to(dir)
+	sprite.rotate(sign(a) * min(delta * rot_speed, abs(a)))
+	
 func move_towards_target(delta: float):
 	
 	var loc = nav_agent_node.get_next_path_position()
@@ -127,7 +127,7 @@ func reached_target() -> bool:
 	return not nav_agent_node.is_target_reachable() or nav_agent_node.is_target_reached() or nav_agent_node.distance_to_target() < consider_reached
 
 func reached_rotation() -> bool:
-	return _rot_elapsed > 1
+	return abs(sprite.transform.x.angle_to(rot_target - global_position)) < 0.00001
 
 #
 # signal connections

@@ -1,24 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://de30c10cvlnk0"]
+[gd_scene load_steps=9 format=3 uid="uid://de30c10cvlnk0"]
 
 [ext_resource type="PackedScene" uid="uid://cfcer7aeaep8x" path="res://enemies/Enemy.tscn" id="1_sx6pq"]
 [ext_resource type="Texture2D" uid="uid://8h2c4vsesupr" path="res://art/turret1.png" id="2_ybnid"]
 [ext_resource type="PackedScene" uid="uid://qskr32g3vh86" path="res://common/LaserPointer.tscn" id="3_kallc"]
 [ext_resource type="PackedScene" uid="uid://d26d7aod68kxw" path="res://enemies/behaviors/variations/Guard.tscn" id="3_sr0y6"]
+[ext_resource type="PackedScene" uid="uid://b2enik8bjmhw5" path="res://enemies/common/VisionCone.tscn" id="4_l8edc"]
+[ext_resource type="PackedScene" uid="uid://cgh7skii2sbu" path="res://attacking/AttackController.tscn" id="5_wtti3"]
+[ext_resource type="PackedScene" uid="uid://bw5l4rqeb3qt6" path="res://enemies/behaviors/variations/Chase.tscn" id="6_b5he5"]
+[ext_resource type="Resource" uid="uid://b0dbl1c8gyv82" path="res://guns/Gun1.tres" id="6_mbvt6"]
 
 [node name="Turret" instance=ExtResource("1_sx6pq")]
 initial_state = "guard"
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2(11, 0)
 texture = ExtResource("2_ybnid")
 
 [node name="LaserPointer" parent="Sprite" index="0" node_paths=PackedStringArray("muzzle_point") instance=ExtResource("3_kallc")]
 position = Vector2(-11, 0)
 color = Color(1, 0, 0, 1)
 laser_range = 1000.0
-muzzle_point = NodePath("../Muzzle")
+muzzle_point = NodePath("../AttackController/Muzzle")
 
-[node name="Muzzle" type="Marker2D" parent="Sprite" index="1"]
+[node name="VisionCone" parent="Sprite" index="1" instance=ExtResource("4_l8edc")]
+degree = 30.0
+look_for_group = "player"
+
+[node name="AttackController" parent="Sprite" index="2" node_paths=PackedStringArray("rotation_controller") instance=ExtResource("5_wtti3")]
+starting_gun = ExtResource("6_mbvt6")
+rotation_controller = NodePath("..")
+initial_total_ammo = 60
+
+[node name="Muzzle" parent="Sprite/AttackController" index="0"]
 position = Vector2(53, 0)
 
 [node name="Collision" parent="." index="1"]
@@ -26,6 +38,18 @@ position = Vector2(-2, 0)
 
 [node name="Guard" parent="Behaviors" index="0" node_paths=PackedStringArray("sprite") instance=ExtResource("3_sr0y6")]
 to_angle = 179.0
-rot_speed = 0.2
+wait_when_reached = 0.0
 sprite = NodePath("../../Sprite")
 state = "guard"
+
+[node name="Chase" parent="Behaviors" index="1" node_paths=PackedStringArray("attack_controller") instance=ExtResource("6_b5he5")]
+what = "enemy"
+attack_range = 1000.0
+attack_controller = NodePath("../../Sprite/AttackController")
+on_lost = "guard"
+state = "chase"
+
+[connection signal="lost" from="Sprite/VisionCone" to="Behaviors/Chase" method="_on_vision_cone_lost"]
+[connection signal="spotted" from="Sprite/VisionCone" to="Behaviors/Chase" method="_on_vision_cone_spotted"]
+
+[editable path="Sprite/AttackController"]
