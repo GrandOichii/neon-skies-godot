@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2mxq5b176qgs"]
+
+[sub_resource type="GDScript" id="GDScript_c41as"]
+script/source = "extends EnemyBehavior
+
+#
+# exports
+#
+
+@export var rot_speed: float = 5
+@export var degree: float
+@export var rot_count: int = 3
+@export var wait_between_rot: float = .5
+@export var on_end: String
+
+#
+# private vars
+#
+
+var _degree: float
+var _rot_count: int
+
+var _prev_rot_speed: float
+
+#
+# nodes
+#
+
+@onready var wait_timer_node: Timer = %WaitTimer
+
+#
+# methods
+#
+
+func _ready():
+	_degree = deg_to_rad(degree)
+
+func eb_start():
+	super.eb_start()
+	_prev_rot_speed = controller.rot_speed
+	controller.rot_speed = rot_speed
+	
+	_rot_count = rot_count
+	
+	# set rotation target to the last known position of the player + the degree
+	# after that decrement the _rot_count and choose a random angle
+	# after each angle reaching, wait for a period of time, then decrement the _rot_count and choose another
+	# when _rot_count reaches zero, change state
+	
+func eb_stop():
+	super.eb_stop()
+	controller.rot_speed = _prev_rot_speed
+	
+	if not wait_timer_node.is_stopped():
+		wait_timer_node.stop()
+
+# lerp_angle(first, second, random)
+#
+# signal connections
+#
+
+func _on_wait_timer_timeout():
+	
+	pass # Replace with function body.
+"
+
+[node name="SearchWhenLost" type="Node"]
+script = SubResource("GDScript_c41as")
+
+[node name="WaitTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]
