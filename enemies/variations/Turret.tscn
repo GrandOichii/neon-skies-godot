@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://de30c10cvlnk0"]
+[gd_scene load_steps=10 format=3 uid="uid://de30c10cvlnk0"]
 
 [ext_resource type="PackedScene" uid="uid://cfcer7aeaep8x" path="res://enemies/Enemy.tscn" id="1_sx6pq"]
 [ext_resource type="Texture2D" uid="uid://8h2c4vsesupr" path="res://art/turret1.png" id="2_ybnid"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cgh7skii2sbu" path="res://attacking/AttackController.tscn" id="5_wtti3"]
 [ext_resource type="PackedScene" uid="uid://bw5l4rqeb3qt6" path="res://enemies/behaviors/variations/Chase.tscn" id="6_b5he5"]
 [ext_resource type="Resource" uid="uid://b0dbl1c8gyv82" path="res://guns/Gun1.tres" id="6_mbvt6"]
+[ext_resource type="PackedScene" uid="uid://c2mxq5b176qgs" path="res://enemies/behaviors/variations/SearchWhenLost.tscn" id="9_lj4db"]
 
 [node name="Turret" instance=ExtResource("1_sx6pq")]
 initial_state = "guard"
@@ -46,8 +47,18 @@ state = "guard"
 what = "enemy"
 attack_range = 1000.0
 attack_controller = NodePath("../../Sprite/AttackController")
-on_lost = "guard"
+on_lost = "search-when-lost"
+last_pos_var_name = "last_pos"
 state = "chase"
+
+[node name="SearchWhenLost" parent="Behaviors" index="2" instance=ExtResource("9_lj4db")]
+rot_speed = 2.0
+degree = 30.0
+rot_count = 4
+wait_between_rot = 1.5
+last_spot_var_name = "last_pos"
+on_end = "guard"
+state = "search-when-lost"
 
 [connection signal="lost" from="Sprite/VisionCone" to="Behaviors/Chase" method="_on_vision_cone_lost"]
 [connection signal="spotted" from="Sprite/VisionCone" to="Behaviors/Chase" method="_on_vision_cone_spotted"]

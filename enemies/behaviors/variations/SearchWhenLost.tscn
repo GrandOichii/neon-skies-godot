@@ -11,6 +11,7 @@ script/source = "extends EnemyBehavior
 @export var degree: float
 @export var rot_count: int = 3
 @export var wait_between_rot: float = .5
+@export var last_spot_var_name: String
 @export var on_end: String
 
 #
@@ -19,6 +20,7 @@ script/source = "extends EnemyBehavior
 
 var _degree: float
 var _rot_count: int
+var _initial_rot: float
 
 var _prev_rot_speed: float
 
@@ -37,11 +39,13 @@ func _ready():
 
 func eb_start():
 	super.eb_start()
+	_initial_rot = controller.sprite.global_rotation
 	_prev_rot_speed = controller.rot_speed
 	controller.rot_speed = rot_speed
 	
 	_rot_count = rot_count
 	
+	controller.rot_target = controller.data[last_spot_var_name].global_position
 	# set rotation target to the last known position of the player + the degree
 	# after that decrement the _rot_count and choose a random angle
 	# after each angle reaching, wait for a period of time, then decrement the _rot_count and choose another
@@ -53,6 +57,16 @@ func eb_stop():
 	
 	if not wait_timer_node.is_stopped():
 		wait_timer_node.stop()
+		
+func eb_physics_process(delta: float):
+	super.eb_physics_process(delta)
+	
+	if not wait_timer_node.is_stopped():
+		return
+	
+	controller.rotate_towards_target(delta)
+	if controller.reached_rotation():
+		wait_timer_node.start(wait_between_rot)
 
 # lerp_angle(first, second, random)
 #
@@ -60,7 +74,13 @@ func eb_stop():
 #
 
 func _on_wait_timer_timeout():
-	
+	# update target
+	_rot_count -= 1
+	if _rot_count <= 0:
+		controller.current_state = on_end
+		return
+	var rot = lerp_angle(_initial_rot - _degree / 2, _initial_rot + _degree / 2, randf())
+	controller.rot_target = controller.global_position + Vector2(100, 0).rotated(rot)
 	pass # Replace with function body.
 "
 

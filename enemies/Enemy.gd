@@ -19,7 +19,7 @@ class_name EnemyController
 # nodes
 #
 
-@onready var sprite = %Sprite
+@onready var sprite: Sprite2D = %Sprite
 @onready var nav_agent_node: NavigationAgent2D = %NavAgent
 @onready var behaviors_container: Node = %Behaviors
 
