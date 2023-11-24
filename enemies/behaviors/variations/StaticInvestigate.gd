@@ -78,15 +78,11 @@ func _on_wait_timer_timeout():
 	if _rot_count <= 0:
 		controller.current_state = on_end
 		return
+
 	controller.rot_target = Vector2(
 		_lp.x + randi_range(0, search_radius) / 2,
 		_lp.y + randi_range(0, search_radius) / 2,
 	)
-#	var rot = randf_range(_initial_rot - _degree / 2, _initial_rot + _degree / 2)
-#	rot = _initial_rot
-##	var rot = lerp_angle(_initial_rot - _degree / 2, _initial_rot + _degree / 2, randf())
-#	print(_initial_rot, ' ', rot)
-#	controller.rot_target = controller.global_position + Vector2(100, 0).rotated(rot)
 
 func _on_sound_listener_heard_sound(area: Area2D):
 	controller.data[last_spot_var_name] = area

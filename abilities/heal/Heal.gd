@@ -1,5 +1,4 @@
 extends ActivatedAbility
-# TODO add some resource consumption
 
 #
 # exports

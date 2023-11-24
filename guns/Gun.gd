@@ -15,6 +15,12 @@ enum FireMode { AUTO, FULL_AUTO, PUMP_ACTION }
 @export var fire_interval: float
 @export var magazine_size: int
 
+@export_group('Ammo')
+@export var pickup_ammo: int
+## Amount added to total ammo count on picking up an ammo item
+@export var ammo_gain: int
+
+
 @export_group('Deviation')
 @export var max_deviation: float
 @export var deviation_decrease_per_second: float

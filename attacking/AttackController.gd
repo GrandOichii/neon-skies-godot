@@ -34,30 +34,19 @@ var total_ammo_count: int = 0 :
 	get:
 		return total_ammo_count
 	set(value):
-		total_ammo_count = value
+		gun_holder.ammo_count = value
+		total_ammo_count = gun_holder.ammo_count
 		total_ammo_count_changed.emit(total_ammo_count)
 		
 var magazine_ammo_count: int = 0 :
 	get:
 		return magazine_ammo_count
 	set(value):
-		magazine_ammo_count = value
+		gun_holder.magazine_count = value
+		magazine_ammo_count = gun_holder.magazine_count
 		magazine_ammo_count_changed.emit(magazine_ammo_count)
 		
 var deviation: float = 0
-
-#
-# private vars
-#
-
-var _can_fire: bool = true
-var _rng = RandomNumberGenerator.new()
-var _loaded: bool = true
-var _can_advance_reload: bool = true
-
-#
-# methods
-#
 
 var gun: Gun :
 	get:
@@ -69,12 +58,35 @@ var gun: Gun :
 		if reload_meter != null:
 			reload_meter.gun = gun
 		gun_equipped.emit(gun)
+
+var gun_holder: GunHolder :
+	get:
+		return gun_holder
+	set(value):
+		gun_holder = value
+		gun = gun_holder.gun
+		total_ammo_count = gun_holder.ammo_count
+		magazine_ammo_count = gun_holder.magazine_count
+
+#
+# private vars
+#
+
+var _can_fire: bool = true
+var _rng = RandomNumberGenerator.new()
+var _loaded: bool = true
+var _can_advance_reload: bool = true
+
+
+#
+# methods
+#
+
 		
 func _ready():
-	gun = starting_gun
-	magazine_ammo_count = gun.magazine_size
-	total_ammo_count = initial_total_ammo
-		
+	if starting_gun != null:
+		gun_holder = GunHolder.new(starting_gun)
+
 func fire():
 	if not _can_fire: return
 	
@@ -138,7 +150,7 @@ func _advance_reload():
 	if total_ammo_count <= 0:
 		return
 	reload_meter.reload()
-
+	
 #
 # signal connections
 #
@@ -159,3 +171,12 @@ func _on_reload_meter_reloaded(_reload_type: ReloadMeter.ReloadType):
 	_loaded = true
 	magazine_ammo_count = min(gun.magazine_size, total_ammo_count)
 	total_ammo_count -= magazine_ammo_count
+
+func _on_weapons_controller_gun_equipped(gh: GunHolder):
+	gun_holder = gh
+	
+func _on_weapons_controller_ammo_added(gh: GunHolder):
+	if gun_holder != gh:
+		return
+		
+	total_ammo_count = gun_holder.ammo_count

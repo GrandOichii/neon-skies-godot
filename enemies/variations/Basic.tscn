@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://sca2kqs0mfok"]
+[gd_scene load_steps=22 format=3 uid="uid://sca2kqs0mfok"]
 
 [ext_resource type="PackedScene" uid="uid://cfcer7aeaep8x" path="res://enemies/Enemy.tscn" id="1_ygql8"]
 [ext_resource type="Script" path="res://items/variations/Credits.gd" id="2_8m0i8"]
 [ext_resource type="Script" path="res://items/tables/LootTableRow.gd" id="3_uxlvg"]
+[ext_resource type="Script" path="res://items/variations/Ammo.gd" id="4_cbmqn"]
 [ext_resource type="PackedScene" uid="uid://b2enik8bjmhw5" path="res://enemies/common/VisionCone.tscn" id="4_f6j83"]
 [ext_resource type="Script" path="res://items/tables/LootTable.gd" id="4_o1dtm"]
 [ext_resource type="PackedScene" uid="uid://cgh7skii2sbu" path="res://attacking/AttackController.tscn" id="6_88ws8"]
@@ -29,12 +30,30 @@ texture = SubResource("GradientTexture2D_vdekc")
 [sub_resource type="Resource" id="Resource_okx60"]
 script = ExtResource("3_uxlvg")
 item = SubResource("Resource_dvw6q")
-chance = 10
+chance = 0
+
+[sub_resource type="Gradient" id="Gradient_0l2n2"]
+colors = PackedColorArray(1, 1, 0, 1, 1, 1, 0.729412, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_elqxh"]
+gradient = SubResource("Gradient_0l2n2")
+width = 16
+height = 16
+
+[sub_resource type="Resource" id="Resource_wy58d"]
+script = ExtResource("4_cbmqn")
+gain_mult = 1
+texture = SubResource("GradientTexture2D_elqxh")
+
+[sub_resource type="Resource" id="Resource_pldxp"]
+script = ExtResource("3_uxlvg")
+item = SubResource("Resource_wy58d")
+chance = 20
 
 [sub_resource type="Resource" id="Resource_ibnvt"]
 script = ExtResource("4_o1dtm")
 chance_for_nothing = 10
-rows = Array[ExtResource("3_uxlvg")]([SubResource("Resource_okx60")])
+rows = Array[ExtResource("3_uxlvg")]([SubResource("Resource_okx60"), SubResource("Resource_pldxp")])
 
 [node name="Basic" instance=ExtResource("1_ygql8")]
 motion_mode = 1
