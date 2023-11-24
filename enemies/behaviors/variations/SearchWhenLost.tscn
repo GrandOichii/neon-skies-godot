@@ -2,6 +2,7 @@
 
 [sub_resource type="GDScript" id="GDScript_c41as"]
 script/source = "extends EnemyBehavior
+class_name StaticInvestigate
 
 #
 # exports
@@ -68,7 +69,6 @@ func eb_physics_process(delta: float):
 	if controller.reached_rotation():
 		wait_timer_node.start(wait_between_rot)
 
-# lerp_angle(first, second, random)
 #
 # signal connections
 #
@@ -81,10 +81,13 @@ func _on_wait_timer_timeout():
 		return
 	var rot = lerp_angle(_initial_rot - _degree / 2, _initial_rot + _degree / 2, randf())
 	controller.rot_target = controller.global_position + Vector2(100, 0).rotated(rot)
-	pass # Replace with function body.
+
+func _on_sound_listener_heard_sound(area: Area2D):
+	controller.data[last_spot_var_name] = area
+	controller.current_state = state
 "
 
-[node name="SearchWhenLost" type="Node"]
+[node name="StaticInvestigate" type="Node"]
 script = SubResource("GDScript_c41as")
 
 [node name="WaitTimer" type="Timer" parent="."]

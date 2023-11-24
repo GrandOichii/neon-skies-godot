@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://de30c10cvlnk0"]
+[gd_scene load_steps=11 format=3 uid="uid://de30c10cvlnk0"]
 
 [ext_resource type="PackedScene" uid="uid://cfcer7aeaep8x" path="res://enemies/Enemy.tscn" id="1_sx6pq"]
 [ext_resource type="Texture2D" uid="uid://8h2c4vsesupr" path="res://art/turret1.png" id="2_ybnid"]
 [ext_resource type="PackedScene" uid="uid://qskr32g3vh86" path="res://common/LaserPointer.tscn" id="3_kallc"]
 [ext_resource type="PackedScene" uid="uid://d26d7aod68kxw" path="res://enemies/behaviors/variations/Guard.tscn" id="3_sr0y6"]
+[ext_resource type="PackedScene" uid="uid://nkgl2h57gbmc" path="res://common/SoundListener.tscn" id="3_vs65o"]
 [ext_resource type="PackedScene" uid="uid://b2enik8bjmhw5" path="res://enemies/common/VisionCone.tscn" id="4_l8edc"]
 [ext_resource type="PackedScene" uid="uid://cgh7skii2sbu" path="res://attacking/AttackController.tscn" id="5_wtti3"]
 [ext_resource type="PackedScene" uid="uid://bw5l4rqeb3qt6" path="res://enemies/behaviors/variations/Chase.tscn" id="6_b5he5"]
@@ -16,17 +17,19 @@ initial_state = "guard"
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_ybnid")
 
-[node name="LaserPointer" parent="Sprite" index="0" node_paths=PackedStringArray("muzzle_point") instance=ExtResource("3_kallc")]
+[node name="SoundListener" parent="Sprite" index="0" instance=ExtResource("3_vs65o")]
+
+[node name="LaserPointer" parent="Sprite" index="1" node_paths=PackedStringArray("muzzle_point") instance=ExtResource("3_kallc")]
 position = Vector2(-11, 0)
 color = Color(1, 0, 0, 1)
 laser_range = 1000.0
 muzzle_point = NodePath("../AttackController/Muzzle")
 
-[node name="VisionCone" parent="Sprite" index="1" instance=ExtResource("4_l8edc")]
+[node name="VisionCone" parent="Sprite" index="2" instance=ExtResource("4_l8edc")]
 degree = 30.0
 look_for_group = "player"
 
-[node name="AttackController" parent="Sprite" index="2" node_paths=PackedStringArray("rotation_controller") instance=ExtResource("5_wtti3")]
+[node name="AttackController" parent="Sprite" index="3" node_paths=PackedStringArray("rotation_controller") instance=ExtResource("5_wtti3")]
 starting_gun = ExtResource("6_mbvt6")
 rotation_controller = NodePath("..")
 initial_total_ammo = 60
@@ -51,7 +54,7 @@ on_lost = "search-when-lost"
 last_pos_var_name = "last_pos"
 state = "chase"
 
-[node name="SearchWhenLost" parent="Behaviors" index="2" instance=ExtResource("9_lj4db")]
+[node name="StaticInvestigate" parent="Behaviors" index="2" instance=ExtResource("9_lj4db")]
 rot_speed = 2.0
 degree = 30.0
 rot_count = 4
@@ -60,6 +63,7 @@ last_spot_var_name = "last_pos"
 on_end = "guard"
 state = "search-when-lost"
 
+[connection signal="heard_sound" from="Sprite/SoundListener" to="Behaviors/StaticInvestigate" method="_on_sound_listener_heard_sound"]
 [connection signal="lost" from="Sprite/VisionCone" to="Behaviors/Chase" method="_on_vision_cone_lost"]
 [connection signal="spotted" from="Sprite/VisionCone" to="Behaviors/Chase" method="_on_vision_cone_spotted"]
 
