@@ -6,10 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://d26d7aod68kxw" path="res://enemies/behaviors/variations/Guard.tscn" id="3_sr0y6"]
 [ext_resource type="PackedScene" uid="uid://nkgl2h57gbmc" path="res://common/SoundListener.tscn" id="3_vs65o"]
 [ext_resource type="PackedScene" uid="uid://b2enik8bjmhw5" path="res://enemies/common/VisionCone.tscn" id="4_l8edc"]
+[ext_resource type="PackedScene" uid="uid://c2mxq5b176qgs" path="res://enemies/behaviors/variations/StaticInvestigate.tscn" id="5_h13ai"]
 [ext_resource type="PackedScene" uid="uid://cgh7skii2sbu" path="res://attacking/AttackController.tscn" id="5_wtti3"]
 [ext_resource type="PackedScene" uid="uid://bw5l4rqeb3qt6" path="res://enemies/behaviors/variations/Chase.tscn" id="6_b5he5"]
 [ext_resource type="Resource" uid="uid://b0dbl1c8gyv82" path="res://guns/Gun1.tres" id="6_mbvt6"]
-[ext_resource type="PackedScene" uid="uid://c2mxq5b176qgs" path="res://enemies/behaviors/variations/SearchWhenLost.tscn" id="9_lj4db"]
 
 [node name="Turret" instance=ExtResource("1_sx6pq")]
 initial_state = "guard"
@@ -54,9 +54,9 @@ on_lost = "search-when-lost"
 last_pos_var_name = "last_pos"
 state = "chase"
 
-[node name="StaticInvestigate" parent="Behaviors" index="2" instance=ExtResource("9_lj4db")]
+[node name="StaticInvestigate" parent="Behaviors" index="2" instance=ExtResource("5_h13ai")]
 rot_speed = 2.0
-degree = 30.0
+search_radius = 500.0
 rot_count = 4
 wait_between_rot = 1.5
 last_spot_var_name = "last_pos"

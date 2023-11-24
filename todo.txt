@@ -7,3 +7,4 @@
 - add noice to doors opening such as they don't interfere with player sounds - add sound priority + a queue to each sound listener to go to one sound source, then the other one. Could also add timer for attention decrease.
 
 - figure out why obstacles don't work
+- fix AI getting stuck on other enemies
