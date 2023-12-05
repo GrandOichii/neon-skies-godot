@@ -554,9 +554,8 @@ position = Vector2(458, -375)
 [node name="Basic" parent="Scene/Enemies" instance=ExtResource("14_oeotq")]
 position = Vector2(-181, -647)
 
-[node name="NavAgent" parent="Scene/Enemies/Basic" index="4"]
-path_desired_distance = 40.0
-target_desired_distance = 10.0
+[node name="Sprite" parent="Scene/Enemies/Basic" index="1"]
+rotation = -1.57079
 
 [node name="Patrol" parent="Scene/Enemies/Basic/Behaviors" index="2" node_paths=PackedStringArray("patrol_lines")]
 wait_at_point_for = 0.0
@@ -610,6 +609,8 @@ heat_reduction = 10.0
 [connection signal="thresh_changed" from="Player/Heat" to="UI/MarginContainer/Control/HBoxContainer/HeatDisplay" method="_on_heat_thresh_changed"]
 [connection signal="changed" from="Player/ImplantCharges" to="UI/MarginContainer/Control/HBoxContainer/ICDisplay" method="_on_implant_charges_changed"]
 
+[editable path="Scene/Enemies/Turret"]
+[editable path="Scene/Enemies/Turret/Sprite/AttackController"]
 [editable path="Scene/Enemies/Basic"]
 [editable path="Scene/Enemies/Basic/Sprite/AttackController"]
 [editable path="Scene/Doors/SlideDoor"]

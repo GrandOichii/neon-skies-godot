@@ -38,7 +38,6 @@ var current: int :
 #
 
 func _ready():
-	print('ready')
 	for i in range(max_guns):
 		guns.push_back(null)
 	

@@ -79,6 +79,10 @@ func _create_drop(ih: ItemHolder, item: Item):
 	ih.item = item
 
 func _ready():
+	# fix rotation
+	sprite.rotation = rotation
+	rotation = 0
+	
 	for b in behaviors_container.get_children():
 		var beh = b as EnemyBehavior
 		beh.controller = self
@@ -154,6 +158,7 @@ func _on_health_changed(to: int):
 	queue_free()
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity):
+	# TODO still doesn't work with 4.1, will have to keep checking newer versions
 	velocity = safe_velocity
 	move_and_slide()
 	reset_target()

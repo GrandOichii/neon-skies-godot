@@ -27,7 +27,7 @@ func _ready():
 	line_node.set_point_position(0, start)
 #	line_node.set_point_position(1, start + Vector2(laser_range, 0))
 
-func _process(delta: float):
+func _process(_delta: float):
 	var point = ray_cast_node.target_position
 	if ray_cast_node.is_colliding():
 		point = to_local(ray_cast_node.get_collision_point())

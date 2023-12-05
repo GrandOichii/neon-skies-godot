@@ -16,7 +16,6 @@ class_name StaticInvestigate
 # private vars
 #
 
-var _degree: float
 var _rot_count: int
 var _initial_rot: float
 
@@ -80,8 +79,8 @@ func _on_wait_timer_timeout():
 		return
 
 	controller.rot_target = Vector2(
-		_lp.x + randi_range(0, search_radius) / 2,
-		_lp.y + randi_range(0, search_radius) / 2,
+		_lp.x + randf_range(0, search_radius) / 2,
+		_lp.y + randf_range(0, search_radius) / 2,
 	)
 
 func _on_sound_listener_heard_sound(area: Area2D):

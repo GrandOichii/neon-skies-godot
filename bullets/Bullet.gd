@@ -38,5 +38,13 @@ func _on_body_entered(body: Node2D):
 	if is_solid:
 		queue_free()
 	if body is TileMap:
+		# TODO sometimes tile is null for some reason
+#		var tile_map = body as TileMap
+#		var coords = tile_map.local_to_map(tile_map.to_local(global_position))
+#		var tile: TileData = tile_map.get_cell_tile_data(1, coords)
+#		print(coords, ' ', tile)
+#		var l = tile.get_custom_data('life')
+#		print(l)
+#		var tile = tile_map.get_cellv(tile_map.world_to_map(global_position))
 		# TODO for now will do, however need a way to interact with custom layers for more options when hitting tiles
 		queue_free()
